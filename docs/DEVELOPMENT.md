@@ -25,7 +25,7 @@ Results are recomputed when settings change. The table, bars, and map use the sa
 
 Within `src/ui/`, [app.rs](../src/ui/app.rs) owns initialization, recomputation, selection reconciliation, and persistence calls. [layout.rs](../src/ui/layout.rs) owns panels, scrolling, and responsive placement. Components receive the settings, data, or selection they need: settings combines culture, weights, constraints, and reference-country controls; ranking, bars, and map render results. Theme and browser persistence have separate modules.
 
-Tests use `#[cfg(test)]` modules pointing to an adjacent file with the source file's name plus `_test`: for example, `src/scoring_test.rs`, `src/model/settings_test.rs`, and `src/ui/layout_test.rs`. Shared test data and the egui harness live in test-only `test_support.rs` modules. The preparation package follows the same convention with `tools/prepare/src/main_test.rs`.
+Tests use `#[cfg(test)]` modules pointing to an adjacent file with the source file's name plus `_test`: for example, `src/scoring_test.rs`, `src/model/settings_test.rs`, and `src/ui/layout_test.rs`. Shared test data and the egui harness live in test-only `test_support.rs` modules. The preparation package follows the same convention with `tools/prepare/src/main/source_test.rs`.
 
 ## Build and checks
 
@@ -57,7 +57,7 @@ The preparation package reads checksummed local inputs, applies catalog mappings
 For a source update:
 
 1. Replace the relevant raw file. Record its source, year, units, rights, and SHA-256 in the catalog after inspecting it (`sha256sum data/raw/FILE`). Record unknown metadata explicitly.
-2. Update column mappings and, if needed, [data/aliases.json](../data/aliases.json), which maps source country names to canonical names in `country_codes_alpha_3.csv`.
+2. Update column mappings as needed. Country names must match those in `country_codes_alpha_3.csv`.
 3. Run preparation. Missing columns, bad numeric values, duplicate countries, invalid values, checksum changes, and unmapped eligible countries fail with an error.
 4. Review the coverage report and generated diff. Dataset maxima affect normalization, so changing one input can change other countries' scores. Missing values remain missing, with exclusion reasons recorded in the coverage report.
 5. Run the checks above. Review expected scoring behavior whenever datasets or formulas change.
