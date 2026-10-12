@@ -52,10 +52,9 @@ mise exec -- trunk build --release --cargo-profile web
 
 The output is `dist/`. [Trunk.toml](../Trunk.toml) sets the public URL to `/terra/`; serve the output under that path over HTTP(S).
 
-The [GitHub workflow](../.github/workflows/deploy.yml) runs checks and produces a `site-preview` artifact.
+The [GitHub workflow](../.github/workflows/deploy.yml) runs checks and produces a `site-preview` artifact. Successful pushes and manual runs on `main` also deploy to GitHub Pages. Pull requests run checks without deploying.
 
 ## Setup for GitHub Pages publication
 
 1. Set **Settings → Pages → Source** to **GitHub Actions**.
-2. Add the Actions repository variable **DEPLOY_PAGES=true**.
-3. Push to `main` or run the workflow on `main`, then verify the published site.
+2. Push to `main` or run the workflow on `main`, then verify the published site.

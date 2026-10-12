@@ -17,7 +17,7 @@ Bevy hosts the application and egui renders settings, ranking, contribution bars
 | [assets](../assets)                                             | Prepared country data, triangulated map geometry, and fonts.                                                   |
 | Adjacent `*_test.rs` files                                      | Unit tests beside the source files they exercise.                                                              |
 | [index.html](../index.html), [web](../web)                      | WASM shell, loading/error handling, and loading-screen fonts.                                                  |
-| [.github/workflows/deploy.yml](../.github/workflows/deploy.yml) | Checks, preview artifact, and optional Pages publication.                                                      |
+| [.github/workflows/deploy.yml](../.github/workflows/deploy.yml) | Checks, preview artifact, and Pages publication from `main`.                                                      |
 
 Model fields name culture dimensions, quality metrics, weights, minimums, range bounds, and coordinates. `serde_tuple` derives serialize and deserialize these named fields as JSON arrays in declaration order. `Arraygen` derives `values()` from all declared fields for numeric iteration, keeping field order and array length automatic.
 
