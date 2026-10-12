@@ -1,0 +1,4 @@
+[tools]
+"cargo:trunk" = "0.21.14"
+python = "3.12.15"
+uv = "0.9.18"

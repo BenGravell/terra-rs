@@ -1,0 +1,46 @@
+[workspace]
+members = ["tools/prepare"]
+default-members = ["."]
+resolver = "3"
+
+[package]
+name = "terra"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+default-run = "terra"
+
+[features]
+default = ["ui"]
+ui = ["dep:bevy", "dep:bevy_egui"]
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_tuple = "1.1"
+bevy = { version = "0.19", optional = true, default-features = false, features = ["default_app", "std", "bevy_winit", "default_font", "webgl2", "x11", "bevy_render", "bevy_core_pipeline", "bevy_camera", "bevy_color", "bevy_picking"] }
+bevy_egui = { version = "0.41", optional = true, default-features = false, features = ["default_fonts", "render", "picking", "accesskit", "open_url"] }
+
+[target.'cfg(target_family = "wasm")'.dependencies]
+web-sys = { version = "0.3", features = ["Window", "Storage", "Document", "Element"] }
+
+[[bin]]
+name = "terra"
+path = "src/main.rs"
+required-features = ["ui"]
+
+[dev-dependencies]
+egui_kittest = "0.35"
+
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+strip = "debuginfo"
+
+[profile.web]
+inherits = "release"
+opt-level = "s"
+
