@@ -1,0 +1,189 @@
+schema_version = 1
+
+# Pinned source files; dataset rights are recorded separately from code licenses.
+
+[[sources]]
+id = "culture"
+file = "culture_dimensions.json"
+url = "https://geerthofstede.com/research-and-vsm/dimension-data-matrix/"
+year = "unknown"
+name = "Hofstede dimensions"
+normalization = "culture"
+sha256 = "d9e9011a88d42481f6c14f02763cac88bd7eadd9faf1f7562390d8f4a719e86e"
+retrieved = "unknown"
+license = "unknown upstream terms; see source URL"
+units = "original index points"
+join_key = "country"
+null_markers = ["", "NA", "NaN"]
+[sources.columns]
+"title" = "country"
+"pdi" = "pdi"
+"idv" = "idv"
+"mas" = "mas"
+"uai" = "uai"
+"lto" = "lto"
+"ind" = "ind"
+
+[[sources]]
+id = "happy"
+file = "happy_planet_index_2019.csv"
+url = "https://happyplanetindex.org/hpi/"
+year = "2019"
+name = "Happy Planet"
+normalization = "max"
+sha256 = "4d1f426d64ca0f1b5895850ec1bb3abf37a6492180abcdc38657c9b5742d51d1"
+retrieved = "unknown"
+license = "unknown upstream terms; see source URL"
+units = "normalized score 0–1"
+join_key = "country"
+null_markers = ["", "NA", "NaN"]
+[sources.columns]
+"country" = "country"
+"HPI" = "hp"
+
+[[sources]]
+id = "social"
+file = "social_progress_index_2022.csv"
+url = "https://en.wikipedia.org/wiki/Social_Progress_Index#2022_Social_Progress_Index_Rankings"
+year = "2022"
+name = "Social Progress"
+normalization = "max"
+sha256 = "c30e13593a6b8bedee213ae6ab210b28d4bf9cdca02e1245a51bc1d3576a64a5"
+retrieved = "unknown"
+license = "unknown upstream terms; see source URL"
+units = "normalized score 0–1"
+join_key = "country"
+null_markers = ["", "NA", "NaN"]
+[sources.columns]
+"country" = "country"
+"Social Progress Score" = "sp"
+
+[[sources]]
+id = "freedom"
+file = "human-freedom-index-2022.csv"
+url = "https://www.cato.org/human-freedom-index/2022"
+year = "2015–2020 (2022 release)"
+name = "Human Freedom"
+normalization = "max_then_year_mean"
+sha256 = "efc3df08193ca5a66a8d745dc2025fb3b31cd7459b92c86d3f32e2455c22a0ab"
+retrieved = "unknown"
+license = "unknown upstream terms; see source URL"
+units = "normalized score 0–1"
+join_key = "country"
+null_markers = ["", "NA", "NaN"]
+year_min = 2015
+year_max = 2020
+[sources.columns]
+"country" = "country"
+"hf_score" = "hf"
+"year" = "year"
+
+[[sources]]
+id = "english"
+file = "english_speaking.csv"
+url = "https://en.wikipedia.org/wiki/List_of_countries_by_English-speaking_population"
+year = "mixed / unknown"
+name = "English-speaking ratio"
+normalization = "none"
+sha256 = "c182dc1470692a360d6a65c81b17a11deed839dce1f11ca8508843a69f942be8"
+retrieved = "unknown"
+license = "unknown upstream terms; see source URL"
+units = "population fraction"
+join_key = "country"
+null_markers = ["", "NA", "NaN"]
+[sources.columns]
+"country" = "country"
+"english_ratio" = "english"
+
+[[sources]]
+id = "temperature"
+file = "country_temperature.csv"
+url = "https://en.wikipedia.org/wiki/List_of_countries_by_average_yearly_temperature"
+year = "1961–1990; Denmark/Norway exceptions"
+name = "Average temperature"
+normalization = "none"
+sha256 = "3134e8f5cbd77a551b10e6038a5d1aa471bf0be910cf67933537e44d768833ad"
+retrieved = "unknown"
+license = "unknown upstream terms; see source URL"
+units = "degrees Celsius"
+join_key = "country"
+null_markers = ["", "NA", "NaN"]
+[sources.columns]
+"country" = "country"
+"average_temperature_celsius" = "temperature"
+
+[[sources]]
+id = "sunshine"
+file = "country_sunshine_hours_per_day.csv"
+url = "https://en.wikipedia.org/wiki/List_of_cities_by_sunshine_duration"
+year = "mixed / unknown"
+name = "Daily sunshine"
+normalization = "none"
+sha256 = "d6e67cf1b9d95391a7cb769cdc16b3e64d4c622f55484be8199b73bcf15f65c8"
+retrieved = "unknown"
+license = "unknown upstream terms; see source URL"
+units = "hours/day"
+join_key = "country"
+null_markers = ["", "NA", "NaN"]
+[sources.columns]
+"country" = "country"
+"year" = "sunshine"
+
+[[sources]]
+id = "coordinates"
+file = "country_coords.csv"
+url = "https://developers.google.com/public-data/docs/canonical/countries_csv"
+year = "unknown"
+name = "Country coordinates"
+normalization = "none"
+sha256 = "6c7953f4fd4eeb1d277aa5771be181d9c8fe6fd7ddbf2e79e3904274e2010f86"
+retrieved = "unknown"
+license = "unknown upstream terms; see source URL"
+units = "longitude/latitude degrees"
+join_key = "country"
+null_markers = ["", "NA", "NaN"]
+[sources.columns]
+"country" = "country"
+"longitude" = "longitude"
+"latitude" = "latitude"
+
+[[sources]]
+id = "continents"
+file = "country_continents.csv"
+url = "https://simple.wikipedia.org/wiki/List_of_countries_by_continents"
+year = "unknown"
+name = "Continents"
+normalization = "none"
+sha256 = "d4b590a095076d10067e5f53942244e33331a21e6397fd9ce805d0407948ac8c"
+retrieved = "unknown"
+license = "unknown upstream terms; see source URL"
+units = "continent name"
+join_key = "country"
+null_markers = ["", "NA", "NaN"]
+[sources.columns]
+"country" = "country"
+"continent" = "continent"
+
+[[sources]]
+id = "codes"
+file = "country_codes_alpha_3.csv"
+url = "https://github.com/BenGravell/terra"
+year = "unknown"
+name = "ISO alpha-3 country codes"
+normalization = "none"
+sha256 = "e859fa34ee97d5515dd689405abbc32ae64dfeeb8896dc687dc78122b1e9ace9"
+retrieved = "unknown"
+license = "unknown upstream terms; see source URL"
+units = "ISO alpha-3"
+join_key = "country"
+null_markers = ["", "NA", "NaN"]
+[sources.columns]
+"country" = "country"
+"country_code_alpha_3" = "id"
+
+[map]
+file = "ne_110m_admin_0_countries.geojson"
+url = "https://github.com/nvkelso/natural-earth-vector/tree/v5.1.2"
+version = "5.1.2 / 1:110m admin-0 countries"
+license = "Public domain"
+sha256 = "6866c877d39cba9c357620878839b336d569f8c662d3cfab4cb1dbe2d39c977f"
