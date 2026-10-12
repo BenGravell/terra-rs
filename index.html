@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101d2b">
+    <meta name="description" content="Explore countries through your preferences, quality of life, and climate constraints.">
+    <title>Terra · Find your place</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ctext y='32' font-size='32'%3E🌍%3C/text%3E%3C/svg%3E">
+    <link data-trunk rel="rust" data-bin="terra" data-wasm-opt="s" data-initializer="web/initializer.js">
+    <link data-trunk rel="copy-dir" href="assets/fonts">
+    <style>
+      @font-face {
+        font-family: "Atkinson Hyperlegible Next";
+        src: url("fonts/AtkinsonHyperlegibleNext/AtkinsonHyperlegibleNext.ttf") format("truetype");
+        font-weight: 200 800;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Space Grotesk";
+        src: url("fonts/SpaceGrotesk/SpaceGrotesk.ttf") format("truetype");
+        font-weight: 300 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #101d2b; color: #eff4ef; font: 18px "Atkinson Hyperlegible Next", sans-serif; }
+      h1 { font-family: "Space Grotesk", "Atkinson Hyperlegible Next", sans-serif; font-weight: 700; }
+      #app { width: 100%; height: 100%; display: block; outline: none; touch-action: none; }
+      #loading { position: fixed; inset: 0; display: grid; place-content: center; padding: 2rem; background: #101d2b; z-index: 2; }
+      #loading[hidden] { display: none; }
+      #loading h1 { letter-spacing: .15em; color: #84d8b2; }
+      #loading p { max-width: 36em; line-height: 1.6; }
+    </style>
+  </head>
+  <body>
+    <canvas id="app" aria-label="Terra country preferences and results" tabindex="0"></canvas>
+    <div id="loading" role="status" aria-live="polite">
+      <h1>TERRA</h1><p id="loading-detail">Opening your world of possibilities…</p>
+    </div>
+    <noscript>Terra needs JavaScript and WebAssembly enabled to run.</noscript>
+    <script>
+      window.terraFailed = (error) => {
+        document.getElementById('loading').hidden = false;
+        document.getElementById('loading-detail').textContent = 'Terra could not start. Check that WebGL2 is enabled, then reload. If this continues, try another browser.';
+        console.error(error);
+      };
+      addEventListener('error', e => window.terraFailed(e.error));
+      addEventListener('unhandledrejection', e => window.terraFailed(e.reason));
+      new MutationObserver(() => {
+        if (document.documentElement.dataset.terraReady && !performance.getEntriesByName('terra-ready').length) {
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            performance.mark('terra-ready');
+            document.getElementById('loading').hidden = true;
+          }));
+        }
+      }).observe(document.documentElement, { attributes: true });
+    </script>
+  </body>
+</html>
