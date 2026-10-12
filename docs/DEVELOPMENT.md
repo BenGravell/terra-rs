@@ -19,13 +19,13 @@ Bevy hosts the application and egui renders settings, ranking, contribution bars
 | [index.html](../index.html), [web](../web)                      | WASM shell, loading/error handling, and loading-screen fonts.                                                  |
 | [.github/workflows/deploy.yml](../.github/workflows/deploy.yml) | Checks, preview artifact, and optional Pages publication.                                                      |
 
-Model fields name culture dimensions, quality metrics, weights, minimums, range bounds, and coordinates. `serde_tuple` derives serialize and deserialize these named fields as JSON arrays in declaration order.
+Model fields name culture dimensions, quality metrics, weights, minimums, range bounds, and coordinates. `serde_tuple` derives serialize and deserialize these named fields as JSON arrays in declaration order. `Arraygen` derives `values()` from all declared fields for numeric iteration, keeping field order and array length automatic.
 
 Results are recomputed when settings change. The table, bars, and map use the same scores and selection. Prepared JSON and cached geometry are embedded in the application; raw data and Polars stay out of the WASM dependency graph. The app runs entirely in the browser.
 
 Within `src/ui/`, [app.rs](../src/ui/app.rs) owns initialization, recomputation, selection reconciliation, and persistence calls. [layout.rs](../src/ui/layout.rs) owns panels, scrolling, and responsive placement. Components receive the settings, data, or selection they need: settings combines culture, weights, constraints, and reference-country controls; ranking, bars, and map render results. Theme and browser persistence have separate modules.
 
-Tests use `#[cfg(test)]` modules pointing to an adjacent file with the source file's name plus `_test`: for example, `src/scoring_test.rs`, `src/model/settings_test.rs`, and `src/ui/layout_test.rs`. Shared test data and the egui harness live in test-only `test_support.rs` modules. The preparation package follows the same convention with `tools/prepare/src/main/source_test.rs`.
+Tests use `#[cfg(test)]` modules pointing to an adjacent file with the source file's name plus `_test`: for example, `src/scoring_test.rs`, `src/model/settings_test.rs`, and `src/ui/layout_test.rs`. Shared test data and the egui harness live in test-only `test_support.rs` modules. The preparation package follows the same convention with `tools/prepare/source_test.rs`.
 
 ## Build and checks
 

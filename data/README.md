@@ -15,4 +15,4 @@ Known source limitations:
 - Missing values stay missing. Countries without complete scoring data remain neutral on the map. At this resolution Malta and Singapore are represented by their coordinates; all eligible countries have a location marker.
 - These are national aggregate indices, not predictions of any individual's life or descriptions of every person in a country.
 
-Prepared country data and triangulated map geometry use schema version 1. The map uses a fixed equirectangular projection. Polygons, holes, and multipolygons are triangulated offline with `earcutr`; the Natural Earth file already splits island polygons at the antimeridian. No online tile service or runtime GIS server is used.
+The map uses a fixed equirectangular projection. Polygons, holes, and multipolygons are triangulated offline with `earcutr`; the Natural Earth file already splits island polygons at the antimeridian. No online tile service or runtime GIS server is used.
