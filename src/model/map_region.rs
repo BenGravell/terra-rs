@@ -44,7 +44,7 @@ impl MapRegion {
         let cross = |u: MapPoint, v: MapPoint, w: MapPoint| {
             (u.x - w.x) * (v.y - w.y) - (v.x - w.x) * (u.y - w.y)
         };
-        self.indices.chunks_exact(3).any(|t| {
+        self.indices.as_chunks::<3>().0.iter().any(|t| {
             let [a, b, c] = [
                 self.points[t[0] as usize],
                 self.points[t[1] as usize],
