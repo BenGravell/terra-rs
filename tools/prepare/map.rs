@@ -64,7 +64,7 @@ fn map_regions(text: &str) -> Result<Vec<MapRegion>> {
             let base = points.len() as u32;
             let triangles = earcutr::earcut(&vertices, &holes, 2)?;
             indices.extend(triangles.iter().map(|i| base + *i as u32));
-            points.extend(vertices.chunks_exact(2).map(|p| MapPoint {
+            points.extend(vertices.as_chunks::<2>().0.iter().map(|p| MapPoint {
                 x: p[0] as f32,
                 y: p[1] as f32,
             }));
