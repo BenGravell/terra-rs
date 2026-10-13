@@ -15,10 +15,10 @@ ROOT = Path(__file__).resolve().parent.parent
 
 class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
-        if not self.path.startswith("/terra/"):
+        if not self.path.startswith("/terra-rs/"):
             self.send_error(404)
             return
-        self.path = self.path[len("/terra"):]
+        self.path = self.path[len("/terra-rs"):]
         super().do_GET()
 
     def log_message(self, *_):
@@ -34,7 +34,7 @@ def main():
     artifacts.mkdir(exist_ok=True)
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(Handler, directory=str(ROOT / "dist")))
     Thread(target=server.serve_forever, daemon=True).start()
-    url = args.url or f"http://127.0.0.1:{server.server_port}/terra/"
+    url = args.url or f"http://127.0.0.1:{server.server_port}/terra-rs/"
     with sync_playwright() as p:
         options = {"headless": True}
         if args.browser == "chromium":
@@ -77,8 +77,12 @@ def main():
             wait_settings("JSON.parse(localStorage.getItem('terra.settings.v1')).settings.culture[0] === 50")
             assert settings() == initial
             # Culture Fit slider drives the other overall weight through the actual UI.
-            page.mouse.click(112, 717, delay=100)
+            page.mouse.move(112, 717)
+            # Let egui hit-test the new pointer position, then hold until it handles the press.
+            page.evaluate("new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+            page.mouse.down()
             wait_settings("JSON.parse(localStorage.getItem('terra.settings.v1')).settings.overall_weights[0] > .5")
+            page.mouse.up()
             weights = settings()["overall_weights"]
             assert abs(sum(weights) - 1) < 1e-9 and all(0 <= w <= 1 for w in weights)
             page.reload()

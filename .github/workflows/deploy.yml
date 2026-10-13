@@ -22,9 +22,14 @@ jobs:
       - run: cargo clippy --locked --target wasm32-unknown-unknown --lib --bin terra -- -D warnings
       - run: cargo test --locked --workspace
       - run: cargo run --locked -p terra-prepare -- --check
-      - run: trunk build --release --cargo-profile web --public-url /terra/
+      - run: trunk build --release --cargo-profile web
       - run: uv run --locked --group browser playwright install --with-deps chromium
       - run: uv run --locked --group browser tools/browser_smoke.py
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-failure
+          path: artifacts
       - uses: actions/upload-artifact@v4
         with:
           name: site-preview

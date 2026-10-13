@@ -100,6 +100,6 @@ mise exec -- uv run --locked --group browser tools/browser_smoke.py --browser fi
 mise exec -- uv run --locked --group browser tools/browser_smoke.py --browser webkit
 ```
 
-The script starts its own local server under `/terra/`. It exercises canvas controls, weight balancing, persistence/reset, corrupt and blocked storage, and desktop/narrow layouts. Chrome is used if installed; otherwise the downloaded Chromium is used. Linux may also need Playwright's system dependencies; CI installs them with `playwright install --with-deps chromium` in the configured browser dependency group.
+The script starts its own local server under `/terra-rs/`. It exercises canvas controls, weight balancing, persistence/reset, corrupt and blocked storage, and desktop/narrow layouts. Chrome is used if installed; otherwise the downloaded Chromium is used. Linux may also need Playwright's system dependencies; CI installs them with `playwright install --with-deps chromium` in the configured browser dependency group.
 
 Screenshots and timing/size measurements are written to ignored `artifacts/`.

@@ -18,7 +18,7 @@ mise install
 mise exec -- trunk serve --open
 ```
 
-Open `http://127.0.0.1:8080/terra/`. Trunk rebuilds the app as source files change.
+Open `http://127.0.0.1:8080/terra-rs/`. Trunk rebuilds the app as source files change.
 
 For the optional native development window:
 
@@ -50,7 +50,7 @@ Build the release site:
 mise exec -- trunk build --release --cargo-profile web
 ```
 
-The output is `dist/`. [Trunk.toml](../Trunk.toml) sets the public URL to `/terra/`; serve the output under that path over HTTP(S).
+The output is `dist/`. [Trunk.toml](../Trunk.toml) sets the public URL to `/terra-rs/`; serve the output under that path over HTTP(S).
 
 The [GitHub workflow](../.github/workflows/deploy.yml) runs checks and produces a `site-preview` artifact. Successful pushes and manual runs on `main` also deploy to GitHub Pages. Pull requests run checks without deploying.
 
