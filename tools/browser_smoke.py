@@ -93,9 +93,7 @@ def main():
             page.set_viewport_size({"width": 390, "height": 844})
             page.wait_for_timeout(400)
             page.screenshot(path=str(artifacts / f"{args.browser}-narrow.png"))
-            page.mouse.click(155, 24, delay=100)  # Settings tab.
-            page.wait_for_timeout(200)
-            page.mouse.click(122, 225, delay=100)
+            page.mouse.click(122, 620, delay=100)
             wait_settings("JSON.parse(localStorage.getItem('terra.settings.v1')).settings.culture[0] > 50")
             page.screenshot(path=str(artifacts / f"{args.browser}-narrow-settings.png"))
             # Malformed storage recovers and persists defaults.

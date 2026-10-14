@@ -53,10 +53,11 @@ fn scores_and_contributions_follow_the_weighted_formulas() {
 }
 
 #[test]
-fn ties_use_competition_ranks_and_filtering_preserves_rank() {
+fn matching_results_have_sequential_ranks_even_with_ties_and_constraints() {
     let mut a = sample();
     a.id = "BBB".into();
-    let b = sample();
+    let mut b = sample();
+    b.temperature = Some(-5.);
     let mut c = sample();
     c.id = "CCC".into();
     c.culture = Some(Culture {
@@ -72,13 +73,29 @@ fn ties_use_competition_ranks_and_filtering_preserves_rank() {
     let results = evaluate(&countries, &settings).unwrap();
     assert_eq!(
         results.iter().map(|s| s.rank).collect::<Vec<_>>(),
-        [1, 1, 3]
+        [1, 2, 3]
     );
     assert_eq!(countries[results[0].country].id, "AAA");
+    settings.temperature = Range { min: 0., max: 30. };
+    let filtered = evaluate(&countries, &settings).unwrap();
+    assert!(!filtered[0].matches);
+    assert_eq!(filtered[0].rank, 0);
+    assert_eq!(
+        filtered
+            .iter()
+            .filter(|score| score.matches)
+            .map(|score| score.rank)
+            .collect::<Vec<_>>(),
+        [1, 2]
+    );
     settings.minimums.culture = 0.5;
     let filtered = evaluate(&countries, &settings).unwrap();
     assert!(!filtered[2].matches);
-    assert_eq!(filtered[2].rank, 3);
+    assert_eq!(filtered[2].rank, 0);
+    assert_eq!(filtered[1].rank, 1);
+    settings.continents.clear();
+    let empty = evaluate(&countries, &settings).unwrap();
+    assert!(empty.iter().all(|score| !score.matches && score.rank == 0));
 }
 
 #[test]

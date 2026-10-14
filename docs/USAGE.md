@@ -2,7 +2,7 @@
 
 ## Preferences and constraints
 
-The settings panel controls how countries are scored and filtered. Results update as you make valid changes. On narrow screens, use the **Settings** and **Results** tabs.
+The settings panel controls how countries are scored and filtered. Results update as you make valid changes. On narrow screens, settings and results share one page: results appear at the top, with settings at the bottom. Scroll the lower settings area to edit preferences while watching the match counts and top three countries above. Collapse setting groups to bring other controls into reach. The two areas scroll independently.
 
 - **Culture fit:** adjust power distance, individualism, masculinity, uncertainty avoidance, long-term orientation, and indulgence. Hover explanations describe each dimension.
 - **Score weights:** choose the balance between Culture Fit and Quality of Life, then the balance of Happy Planet, Social Progress, and Human Freedom within Quality of Life.
@@ -18,19 +18,18 @@ Settings are saved in browser storage. Invalid saved settings fall back to defau
 
 ## Results
 
-The results panel combines three linked views:
+The results panel combines two linked views:
 
 | View                | What it shows                                                                                                                                 |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Country ranking     | All matching countries, ordered by overall score, with their rank and component scores.                                                       |
-| Score contributions | Stacked bars showing how Culture Fit and Quality of Life contribute to overall scores, plus the selected country's Quality of Life breakdown. |
+| Country ranking | A scrollable table of all matching countries, with ranks, flags, country names, overall scores, and stacked contribution bars. Red shows Culture Fit; blue-to-teal segments show Happy Planet, Social Progress, and Human Freedom contributions within Quality of Life. |
 | World map           | Country scores on a 2D map, with a legend, hover details, and selection linked to the table and bars.                                         |
 
-Select a country in any results view to inspect its breakdown. Every matching country is selectable in the ranking, including small countries that are difficult to click on the map. Malta and Singapore use location markers at the map's resolution.
+Select a country in any results view to highlight its ranking and buildup bar. Hover over a bar to inspect its weighted contributions. Every matching country is selectable in the ranking, including small countries that are difficult to click on the map. Malta and Singapore use location markers at the map's resolution.
 
-Ranks are assigned among eligible countries before filtering, so filtered rankings can contain gaps. Tied scores share a rank. Selection stays on the same country while it still matches; otherwise the best remaining match is selected, or selection clears when no countries match.
+Ranks are assigned after filtering, consecutively from 1 with no gaps. Equal scores are ordered by country ID. Selection stays on the same country while it still matches; otherwise the best remaining match is selected, or selection clears when no countries match.
 
-Narrow layouts omit secondary score columns from the table. The selected-country summary and contribution bars retain those scores. Countries without eligible data appear neutral on the map; the legend also distinguishes countries outside the constraints.
+On narrow screens, the full ranking table appears above the settings with smaller text, compact bars, and selectable rows. Long country names are shortened to fit; hover for the full name. Expand **World map** to show the map. Countries without eligible data appear neutral on the map; the legend also distinguishes infeasible countries.
 
 ## Interpreting scores
 

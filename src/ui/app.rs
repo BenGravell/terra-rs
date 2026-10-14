@@ -6,6 +6,13 @@ use crate::{
 use bevy::prelude::*;
 use bevy_egui::{EguiContexts, EguiPlugin, EguiPrimaryContextPass, egui};
 
+#[derive(Default, PartialEq)]
+pub(super) enum Tab {
+    #[default]
+    Results,
+    About,
+}
+
 #[derive(Resource)]
 pub struct TerraApp {
     pub(super) data: Dataset,
@@ -15,8 +22,7 @@ pub struct TerraApp {
     pub(super) scores: Vec<Score>,
     pub(super) selected: Option<usize>,
     pub(super) reference: Option<usize>,
-    pub(super) bar_count: usize,
-    pub(super) settings_tab: bool,
+    pub(super) tab: Tab,
     startup_error: Option<String>,
     pub(super) message: Option<String>,
     styled: bool,
@@ -45,8 +51,7 @@ impl Default for TerraApp {
             scores: vec![],
             selected: None,
             reference: None,
-            bar_count: 10,
-            settings_tab: false,
+            tab: Tab::Results,
             startup_error,
             message,
             styled: false,
@@ -68,7 +73,7 @@ pub fn run() {
             ..default()
         }))
         .add_plugins(EguiPlugin::default())
-        .insert_resource(ClearColor(Color::srgb_u8(16, 29, 43)))
+        .insert_resource(ClearColor(Color::srgb_u8(247, 249, 253)))
         .init_resource::<TerraApp>()
         .add_systems(Startup, |mut commands: Commands| {
             commands.spawn((Camera2d, Msaa::Off));
@@ -93,7 +98,7 @@ impl TerraApp {
             return;
         }
         let mut root = layout::root(ctx);
-        layout::header(&mut root, &mut self.settings_tab);
+        layout::header(&mut root, &mut self.tab);
         if let Some(error) = &self.startup_error {
             layout::startup_error(&mut root, error);
             persistence::ready();

@@ -1,6 +1,6 @@
 use super::theme::ACCENT;
 use crate::model::{Score, Settings};
-use bevy_egui::egui::{self, Color32, RichText};
+use bevy_egui::egui::{self, RichText};
 
 pub(super) fn show(ui: &mut egui::Ui, settings: &Settings, scores: &[Score]) -> bool {
     if let Err(error) = settings.validate() {
@@ -11,19 +11,19 @@ pub(super) fn show(ui: &mut egui::Ui, settings: &Settings, scores: &[Score]) -> 
     }
     let matches = scores.iter().filter(|s| s.matches).count();
     ui.horizontal_wrapped(|ui| {
-        ui.heading("Your world, ranked");
-        ui.label(
-            RichText::new(format!(
-                "{matches} matches · {} eligible countries",
-                scores.len()
-            ))
-            .color(ACCENT),
-        );
+        for (value, label) in [(matches, "Matches"), (scores.len(), "Eligible countries")] {
+            egui::Frame::group(ui.style()).show(ui, |ui| {
+                ui.set_min_width(120.);
+                ui.vertical(|ui| {
+                    ui.label(RichText::new(value.to_string()).size(24.).color(ACCENT));
+                    ui.label(label);
+                });
+            });
+        }
     });
-    ui.label("A comparison based on your preferences and the pinned source datasets.");
     if matches == 0 {
         ui.colored_label(
-            Color32::LIGHT_YELLOW,
+            super::theme::WARNING,
             "No countries match. Try lowering a minimum or allowing more continents.",
         );
     }

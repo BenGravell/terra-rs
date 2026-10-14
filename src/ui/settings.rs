@@ -1,6 +1,6 @@
 use super::{constraints, culture, reference, weights};
 use crate::model::{Country, Settings};
-use bevy_egui::egui::{self, Color32};
+use bevy_egui::egui;
 
 pub(super) fn show(
     ui: &mut egui::Ui,
@@ -19,7 +19,7 @@ pub(super) fn show(
         });
         ui.label("Adjust what matters to you. Results update as you go.");
         if let Some(message) = message {
-            ui.colored_label(Color32::LIGHT_YELLOW, message);
+            ui.colored_label(super::theme::WARNING, message);
         }
         culture::show(ui, &mut settings.culture);
         weights::show(ui, settings);
@@ -36,7 +36,7 @@ pub(super) fn show(
             });
         }
         if let Err(message) = settings.validate() {
-            ui.colored_label(Color32::LIGHT_YELLOW, message);
+            ui.colored_label(super::theme::WARNING, message);
         }
     });
 }

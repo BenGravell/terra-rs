@@ -1,4 +1,8 @@
-use super::{about, app::TerraApp, bars, header, map, ranking, results_summary, settings};
+use super::{
+    about,
+    app::{Tab, TerraApp},
+    header, map, ranking, results_summary, settings,
+};
 use bevy_egui::egui;
 
 fn narrow(ui: &egui::Ui) -> bool {
@@ -13,9 +17,9 @@ pub(super) fn root(ctx: &egui::Context) -> egui::Ui {
     )
 }
 
-pub(super) fn header(root: &mut egui::Ui, settings_tab: &mut bool) {
+pub(super) fn header(root: &mut egui::Ui, tab: &mut Tab) {
     let narrow = narrow(root);
-    egui::Panel::top("header").show(root, |ui| header::show(ui, narrow, settings_tab));
+    egui::Panel::top("header").show(root, |ui| header::show(ui, narrow, tab));
 }
 
 pub(super) fn startup_error(root: &mut egui::Ui, error: &str) {
@@ -26,6 +30,9 @@ pub(super) fn startup_error(root: &mut egui::Ui, error: &str) {
 }
 
 pub(super) fn settings(root: &mut egui::Ui, app: &mut TerraApp) {
+    if app.tab == Tab::About {
+        return;
+    }
     let show = |ui: &mut egui::Ui| {
         settings::show(
             ui,
@@ -45,24 +52,55 @@ pub(super) fn settings(root: &mut egui::Ui, app: &mut TerraApp) {
                     .id_salt("settings_scroll")
                     .show(ui, show);
             });
-    } else if app.settings_tab {
-        egui::CentralPanel::default().show(root, |ui| {
-            egui::ScrollArea::vertical()
-                .id_salt("settings_narrow")
-                .show(ui, show);
-        });
+    } else {
+        let height = (root.available_height() * 0.48).min(420.);
+        egui::Panel::bottom("settings_narrow")
+            .exact_size(height)
+            .resizable(false)
+            .show(root, |ui| {
+                egui::ScrollArea::vertical()
+                    .id_salt("settings_narrow_scroll")
+                    .auto_shrink([false, false])
+                    .show(ui, show);
+            });
     }
 }
 
 pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
-    if narrow(root) && app.settings_tab {
+    if app.tab == Tab::About {
+        egui::CentralPanel::default().show(root, |ui| {
+            egui::ScrollArea::vertical()
+                .id_salt("about_scroll")
+                .show(ui, |ui| about::show(ui, &app.data.sources));
+        });
         return;
     }
+    let narrow = narrow(root);
     egui::CentralPanel::default().show(root, |ui| {
         egui::ScrollArea::vertical()
             .id_salt("results_scroll")
+            .auto_shrink([false, true])
             .show(ui, |ui| {
                 if !results_summary::show(ui, &app.settings, &app.scores) {
+                    return;
+                }
+                if narrow {
+                    ranking::show(
+                        ui,
+                        &app.data.countries,
+                        &app.scores,
+                        &mut app.selected,
+                        app.settings.overall_weights.quality,
+                    );
+                    egui::CollapsingHeader::new("World map").show(ui, |ui| {
+                        map::show(
+                            ui,
+                            &app.data.countries,
+                            &app.map,
+                            &app.scores,
+                            &mut app.selected,
+                        );
+                    });
                     return;
                 }
                 map::show(
@@ -73,41 +111,15 @@ pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
                     &mut app.selected,
                 );
                 ui.add_space(6.);
-                ranking_and_bars(ui, app);
-                ui.add_space(14.);
-                about::show(ui, &app.data.sources);
+                ranking::show(
+                    ui,
+                    &app.data.countries,
+                    &app.scores,
+                    &mut app.selected,
+                    app.settings.overall_weights.quality,
+                );
             });
     });
-}
-
-fn ranking_and_bars(ui: &mut egui::Ui, app: &mut TerraApp) {
-    if ui.available_width() > 850. {
-        ui.columns(2, |cols| {
-            ranking::show(
-                &mut cols[0],
-                &app.data.countries,
-                &app.scores,
-                &mut app.selected,
-            );
-            bars::show(
-                &mut cols[1],
-                &app.data.countries,
-                &app.scores,
-                &mut app.selected,
-                &mut app.bar_count,
-            );
-        });
-    } else {
-        ranking::show(ui, &app.data.countries, &app.scores, &mut app.selected);
-        ui.separator();
-        bars::show(
-            ui,
-            &app.data.countries,
-            &app.scores,
-            &mut app.selected,
-            &mut app.bar_count,
-        );
-    }
 }
 
 #[cfg(test)]

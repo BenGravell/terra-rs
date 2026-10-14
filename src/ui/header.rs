@@ -1,9 +1,9 @@
-use super::theme::ACCENT;
+use super::{app::Tab, theme::ACCENT};
 use bevy_egui::egui::{self, RichText};
 
-pub(super) fn show(ui: &mut egui::Ui, narrow: bool, settings_tab: &mut bool) {
+pub(super) fn show(ui: &mut egui::Ui, narrow: bool, tab: &mut Tab) {
     ui.add_space(6.);
-    ui.horizontal_wrapped(|ui| {
+    ui.horizontal(|ui| {
         ui.label(
             RichText::new("TERRA")
                 .font(egui::FontId::new(
@@ -15,10 +15,15 @@ pub(super) fn show(ui: &mut egui::Ui, narrow: bool, settings_tab: &mut bool) {
         if !narrow {
             ui.label("Find your place in the world");
         }
-        if narrow {
-            ui.selectable_value(settings_tab, true, "Settings");
-            ui.selectable_value(settings_tab, false, "Results");
-        }
+        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+            let (label, destination) = match tab {
+                Tab::Results => ("About", Tab::About),
+                Tab::About => ("Results", Tab::Results),
+            };
+            if ui.button(label).clicked() {
+                *tab = destination;
+            }
+        });
     });
     ui.add_space(6.);
 }

@@ -85,11 +85,11 @@ Semantics:
 - Happy Planet and Social Progress are normalized by their dataset maxima. Human Freedom is normalized against the entire raw dataset maximum **before** averaging 2015–2020.
 - Eligibility requires complete culture, quality-of-life, temperature, sunshine, and continent data even when the corresponding constraint is inactive. English data is required only when its minimum is active.
 - A score/language minimum is active above `EPS = 0.001`; active comparisons use strict `>`/`<`. Climate constraints activate when either bound moves inward from the default temperature `[-10, 30]` or sunshine `[3, 10]` range.
-- Competition ranks (`1, 2, 2, 4`) are calculated among eligible countries before constraints. Equal scores sort deterministically by country ID. Filtering does not renumber ranks.
+- Sequential ranks (`1, 2, 3, 4`) are assigned only to matching countries after constraints. Equal scores sort deterministically by country ID. Infeasible countries retain rank 0 internally and have no displayed rank.
 
 ## Testing
 
-Rust tests exercise scoring formulas and contributions with hand-calculated examples, strict filter boundaries, missing data, competition ranks, weight balancing, settings serialization, and validation. Geometry tests cover holes, antimeridian islands, corrupt indices, and marker coverage. UI tests cover keyboard changes, weight balancing, reset, invalid settings, empty results, selection, and narrow-screen navigation.
+Rust tests exercise scoring formulas and contributions with hand-calculated examples, strict filter boundaries, missing data, sequential ranks after filtering, weight balancing, settings serialization, and validation. Geometry tests cover holes, antimeridian islands, corrupt indices, and marker coverage. UI tests cover keyboard changes, weight balancing, reset, invalid settings, empty results, selection, and simultaneous settings and live results on narrow screens.
 
 After building the release site, run browser checks:
 

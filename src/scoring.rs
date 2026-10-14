@@ -4,7 +4,7 @@ pub fn evaluate(countries: &[Country], settings: &Settings) -> Result<Vec<Score>
     settings.validate()?;
     let mut results = score_eligible_countries(countries, settings);
     sort_by_overall_score(&mut results, countries);
-    assign_competition_ranks(&mut results);
+    assign_matching_ranks(&mut results);
     Ok(results)
 }
 
@@ -114,13 +114,9 @@ fn sort_by_overall_score(results: &mut [Score], countries: &[Country]) {
     });
 }
 
-fn assign_competition_ranks(results: &mut [Score]) {
-    let mut rank = 1;
-    for i in 0..results.len() {
-        if i > 0 && results[i].overall != results[i - 1].overall {
-            rank = i + 1;
-        }
-        results[i].rank = rank;
+fn assign_matching_ranks(results: &mut [Score]) {
+    for (index, score) in results.iter_mut().filter(|score| score.matches).enumerate() {
+        score.rank = index + 1;
     }
 }
 
