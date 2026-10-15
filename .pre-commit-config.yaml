@@ -1,0 +1,42 @@
+fail_fast: true
+
+repos:
+  - repo: https://github.com/hukkin/mdformat
+    rev: 1.0.0
+    hooks:
+      - id: mdformat
+        entry: bash -c 'mdformat --number --wrap=no --no-wrap-sentences "$@" && mdformat --number --slw-markers=.!? --slw-wrap=120 "$@"' --
+        exclude: ^\.agents/
+        additional_dependencies:
+          - mdformat-gfm==1.0.0
+          - mdformat-slw==0.2.0
+
+  - repo: local
+    hooks:
+      - id: cargo-fmt
+        name: cargo fmt
+        entry: cargo fmt --all
+        language: system
+        always_run: true
+        pass_filenames: false
+
+      - id: cargo-clippy-fix
+        name: cargo clippy fix and check
+        entry: mise run hook-clippy-fix
+        language: system
+        always_run: true
+        pass_filenames: false
+
+      - id: cargo-test
+        name: cargo test
+        entry: mise run hook-test
+        language: system
+        always_run: true
+        pass_filenames: false
+
+      - id: cargo-machete
+        name: cargo machete
+        entry: mise exec -- cargo machete
+        language: system
+        always_run: true
+        pass_filenames: false

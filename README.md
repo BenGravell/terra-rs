@@ -14,4 +14,5 @@ See [docs/USAGE.md](docs/USAGE.md) for preferences, automatic weight balancing, 
 
 ## Development
 
-See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for architecture, checks, data updates, scoring contract, and verification notes.
+See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for architecture, checks, data updates, scoring contract, and
+verification notes.
