@@ -1,8 +1,7 @@
 # Terra
 
-Terra is an app designed to help you use data to answer the question *"which country is right **for me**?"*
-
-Terra takes your personal preferences and requirements into account and recommends one or more countries that match.
+Terra is a country recommendation app designed to help you *find your place in the world* by using data to answer
+*"which country is right for me?"*
 
 ## Setup
 
