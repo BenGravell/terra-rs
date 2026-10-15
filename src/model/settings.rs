@@ -6,8 +6,10 @@ use std::collections::HashSet;
 #[serde(deny_unknown_fields)]
 pub struct Settings {
     pub culture: Culture,
-    pub overall_weights: Overall,
-    pub quality_weights: Quality,
+    #[serde(alias = "overall_weights")]
+    pub overall_importances: Overall,
+    #[serde(alias = "quality_weights")]
+    pub quality_importances: Quality,
     pub minimums: Minimums,
     pub english_min: f64,
     pub temperature: Range,
@@ -26,14 +28,14 @@ impl Default for Settings {
                 long_term_orientation: 50.,
                 indulgence: 50.,
             },
-            overall_weights: Overall {
-                culture: 0.5,
-                quality: 0.5,
+            overall_importances: Overall {
+                culture: 5.,
+                quality: 5.,
             },
-            quality_weights: Quality {
-                happy_planet: 0.3,
-                social_progress: 0.4,
-                human_freedom: 0.3,
+            quality_importances: Quality {
+                happy_planet: 3.,
+                social_progress: 4.,
+                human_freedom: 3.,
             },
             minimums: Minimums {
                 culture: 0.,
@@ -54,6 +56,10 @@ impl Default for Settings {
 }
 
 impl Settings {
+    pub fn quality_weight(&self) -> f64 {
+        self.overall_importances.quality / self.overall_importances.values().iter().sum::<f64>()
+    }
+
     pub fn validate(&self) -> Result<(), String> {
         let bounded = |values: &[f64], low, high| {
             values
@@ -64,11 +70,16 @@ impl Settings {
             return Err("Culture preferences must be between 0 and 100.".into());
         }
         for (name, weights) in [
-            ("Overall", &self.overall_weights.values()[..]),
-            ("Quality of Life", &self.quality_weights.values()[..]),
+            ("Overall", &self.overall_importances.values()[..]),
+            ("Quality of Life", &self.quality_importances.values()[..]),
         ] {
-            if !bounded(weights, 0., 1.) || (weights.iter().sum::<f64>() - 1.).abs() > 1e-9 {
-                return Err(format!("{name} weights must add up to 100%."));
+            if !bounded(weights, 0., 10.)
+                || weights.iter().any(|w| w.fract() != 0.)
+                || weights.iter().sum::<f64>() == 0.
+            {
+                return Err(format!(
+                    "{name} importances must be integers from 0 to 10, with at least one above zero."
+                ));
             }
         }
         if !bounded(&self.minimums.values(), 0., 1.) || !bounded(&[self.english_min], 0., 1.) {

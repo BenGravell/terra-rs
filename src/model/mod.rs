@@ -14,7 +14,6 @@ mod saved_settings;
 mod score;
 mod settings;
 mod source;
-mod weights;
 
 pub use country::Country;
 pub use culture::Culture;
@@ -30,7 +29,6 @@ pub use saved_settings::SavedSettings;
 pub use score::Score;
 pub use settings::Settings;
 pub use source::Source;
-pub use weights::adjust_weight;
 
 pub const EPS: f64 = 1e-3;
 pub const CONTINENTS: [&str; 6] = [

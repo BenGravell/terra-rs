@@ -5,7 +5,7 @@ use egui_kittest::kittest::Queryable;
 fn invalid_weights_hide_results_and_recovery_restores_them() {
     let mut h = harness(1400.);
     h.run();
-    h.state_mut().settings.overall_weights = crate::model::Overall {
+    h.state_mut().settings.overall_importances = crate::model::Overall {
         culture: 0.,
         quality: 0.,
     };

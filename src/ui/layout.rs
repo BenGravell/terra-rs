@@ -90,7 +90,7 @@ pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
                         &app.data.countries,
                         &app.scores,
                         &mut app.selected,
-                        app.settings.overall_weights.quality,
+                        app.settings.quality_weight(),
                     );
                     egui::CollapsingHeader::new("World map").show(ui, |ui| {
                         map::show(
@@ -116,7 +116,7 @@ pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
                     &app.data.countries,
                     &app.scores,
                     &mut app.selected,
-                    app.settings.overall_weights.quality,
+                    app.settings.quality_weight(),
                 );
             });
     });

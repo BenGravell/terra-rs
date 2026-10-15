@@ -12,7 +12,7 @@ fn settings_changes_update_results_and_reset_restores_defaults() {
     slider.focus();
     h.key_press(egui::Key::ArrowRight);
     h.run();
-    assert_eq!(h.state().settings.culture.power_distance, 51.);
+    assert_eq!(h.state().settings.culture.power_distance, 60.);
     assert_ne!(h.state().scores[0].overall, original);
     h.get_by_label("Reset").click_accesskit();
     h.run();

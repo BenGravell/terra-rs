@@ -25,14 +25,14 @@ fn scores_and_contributions_follow_the_weighted_formulas() {
         human_freedom: 0.9,
     });
     let settings = Settings {
-        overall_weights: Overall {
-            culture: 0.25,
-            quality: 0.75,
+        overall_importances: Overall {
+            culture: 1.,
+            quality: 3.,
         },
-        quality_weights: Quality {
-            happy_planet: 0.2,
-            social_progress: 0.3,
-            human_freedom: 0.5,
+        quality_importances: Quality {
+            happy_planet: 2.,
+            social_progress: 3.,
+            human_freedom: 5.,
         },
         ..Settings::default()
     };

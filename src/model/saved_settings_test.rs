@@ -5,25 +5,25 @@ use serde_json::json;
 fn corrupt_or_unsupported_saved_settings_are_rejected() {
     assert!(SavedSettings::decode("broken JSON").is_err());
     let mut saved = SavedSettings {
-        version: 1,
+        version: 2,
         settings: Settings::default(),
     };
     assert_eq!(
         SavedSettings::decode(&serde_json::to_string(&saved).unwrap()).unwrap(),
         saved.settings
     );
-    saved.version = 2;
+    saved.version = 3;
     assert!(SavedSettings::decode(&serde_json::to_string(&saved).unwrap()).is_err());
 }
 
 #[test]
 fn settings_round_trip_preserves_field_meanings_and_json_shape() {
     let original = json!({
-        "version": 1,
+        "version": 2,
         "settings": {
             "culture": [10., 20., 30., 40., 50., 60.],
-            "overall_weights": [0.25, 0.75],
-            "quality_weights": [0.2, 0.3, 0.5],
+            "overall_importances": [1., 3.],
+            "quality_importances": [2., 3., 5.],
             "minimums": [0.1, 0.2, 0.3, 0.4, 0.5],
             "english_min": 0.6,
             "temperature": [-5., 25.],
@@ -44,18 +44,18 @@ fn settings_round_trip_preserves_field_meanings_and_json_shape() {
         }
     );
     assert_eq!(
-        settings.overall_weights,
+        settings.overall_importances,
         Overall {
-            culture: 0.25,
-            quality: 0.75
+            culture: 1.,
+            quality: 3.
         }
     );
     assert_eq!(
-        settings.quality_weights,
+        settings.quality_importances,
         Quality {
-            happy_planet: 0.2,
-            social_progress: 0.3,
-            human_freedom: 0.5,
+            happy_planet: 2.,
+            social_progress: 3.,
+            human_freedom: 5.,
         }
     );
     assert_eq!(
@@ -73,12 +73,12 @@ fn settings_round_trip_preserves_field_meanings_and_json_shape() {
     for (field, values) in [
         ("culture", settings.culture.values().to_vec()),
         (
-            "overall_weights",
-            settings.overall_weights.values().to_vec(),
+            "overall_importances",
+            settings.overall_importances.values().to_vec(),
         ),
         (
-            "quality_weights",
-            settings.quality_weights.values().to_vec(),
+            "quality_importances",
+            settings.quality_importances.values().to_vec(),
         ),
         ("minimums", settings.minimums.values().to_vec()),
         ("temperature", settings.temperature.values().to_vec()),
@@ -88,7 +88,7 @@ fn settings_round_trip_preserves_field_meanings_and_json_shape() {
     }
     assert_eq!(
         serde_json::to_value(SavedSettings {
-            version: 1,
+            version: 2,
             settings
         })
         .unwrap(),
@@ -97,8 +97,8 @@ fn settings_round_trip_preserves_field_meanings_and_json_shape() {
 
     for field in [
         "culture",
-        "overall_weights",
-        "quality_weights",
+        "overall_importances",
+        "quality_importances",
         "minimums",
         "temperature",
         "sunshine",
@@ -117,4 +117,23 @@ fn settings_round_trip_preserves_field_meanings_and_json_shape() {
             );
         }
     }
+}
+
+#[test]
+fn legacy_weights_migrate_to_integer_importances() {
+    let mut saved = serde_json::to_value(SavedSettings {
+        version: 1,
+        settings: Settings::default(),
+    })
+    .unwrap();
+    let settings = saved["settings"].as_object_mut().unwrap();
+    settings.remove("overall_importances");
+    settings.remove("quality_importances");
+    settings.insert("overall_weights".into(), json!([0., 1.]));
+    settings.insert("quality_weights".into(), json!([0.3, 0.4, 0.3]));
+    let migrated = SavedSettings::decode(&saved.to_string()).unwrap();
+    assert_eq!(migrated.overall_importances.values(), [0., 10.]);
+    assert_eq!(migrated.quality_importances.values(), [8., 10., 8.]);
+    saved["settings"]["overall_weights"] = json!([0., 0.]);
+    assert!(SavedSettings::decode(&saved.to_string()).is_err());
 }

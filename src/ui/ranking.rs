@@ -5,8 +5,7 @@ use super::{
 use crate::model::{Country, Score};
 use bevy_egui::egui;
 
-const FLAG_IDS: &str = include_str!("../../assets/flags/countries.txt");
-const FLAG_PIXELS: &[u8] = include_bytes!("../../assets/flags/atlas.rgba");
+use super::flags::{FLAG_IDS, FLAG_PIXELS};
 
 pub(super) fn show(
     ui: &mut egui::Ui,
@@ -30,23 +29,7 @@ pub(super) fn show(
                 ui.colored_label(color, format!("■ {name}"));
             }
         });
-        let flag_texture_id = egui::Id::new("country_flags");
-        let flags = ui
-            .ctx()
-            .data_mut(|data| data.get_temp::<egui::TextureHandle>(flag_texture_id))
-            .unwrap_or_else(|| {
-                let texture = ui.ctx().load_texture(
-                    "country_flags",
-                    egui::ColorImage::from_rgba_unmultiplied(
-                        [32, FLAG_PIXELS.len() / (32 * 4)],
-                        FLAG_PIXELS,
-                    ),
-                    egui::TextureOptions::LINEAR,
-                );
-                ui.ctx()
-                    .data_mut(|data| data.insert_temp(flag_texture_id, texture.clone()));
-                texture
-            });
+        let flags = super::flags::texture(ui);
         let capitals = ui.painter().layout_no_wrap(
             "H".into(),
             egui::TextStyle::Body.resolve(ui.style()),
@@ -213,8 +196,8 @@ pub(super) fn show(
 }
 
 fn flag_width(uv: egui::Rect, height: f32) -> f32 {
-    let atlas_height = (FLAG_PIXELS.len() / (32 * 4)) as f32;
-    height * (uv.width() * 32.) / (uv.height() * atlas_height)
+    let atlas_height = (FLAG_IDS.lines().count().div_ceil(2) * 24) as f32;
+    height * (uv.width() * 64.) / (uv.height() * atlas_height)
 }
 
 fn flag_uv(index: usize) -> egui::Rect {
@@ -223,10 +206,11 @@ fn flag_uv(index: usize) -> egui::Rect {
     let visible = |row: &[u8; 32 * 4]| row.as_chunks::<4>().0.iter().any(|pixel| pixel[3] != 0);
     let top = rows.iter().position(visible).unwrap_or(0);
     let bottom = 24 - rows.iter().rev().position(visible).unwrap_or(0);
-    let height = (FLAG_PIXELS.len() / (32 * 4)) as f32;
+    let height = (FLAG_IDS.lines().count().div_ceil(2) * 24) as f32;
+    let cell = super::flags::cell_uv(index);
     egui::Rect::from_min_max(
-        egui::pos2(0., (index * 24 + top) as f32 / height),
-        egui::pos2(1., (index * 24 + bottom) as f32 / height),
+        egui::pos2(cell.left(), cell.top() + top as f32 / height),
+        egui::pos2(cell.right(), cell.top() + bottom as f32 / height),
     )
 }
 

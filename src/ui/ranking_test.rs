@@ -27,8 +27,8 @@ fn buildup_segments_sum_to_overall_with_zero_and_mixed_weights() {
     let data = crate::model::Dataset::parse(include_str!("../../assets/countries.json")).unwrap();
     for quality_weight in [0., 0.5, 1.] {
         let mut settings = crate::model::Settings::default();
-        settings.overall_weights.quality = quality_weight;
-        settings.overall_weights.culture = 1. - quality_weight;
+        settings.overall_importances.quality = quality_weight * 10.;
+        settings.overall_importances.culture = (1. - quality_weight) * 10.;
         for score in crate::scoring::evaluate(&data.countries, &settings).unwrap() {
             let parts = super::contributions(&score, quality_weight);
             assert!((parts.iter().sum::<f64>() - score.overall).abs() < 1e-12);
@@ -149,8 +149,8 @@ fn rendered_flags_preserve_the_source_aspect_ratio() {
             } else {
                 flag_left = Some(rect.left());
             }
-            let source_ratio =
-                uv.width() * 32. / (uv.height() * (super::FLAG_PIXELS.len() / (32 * 4)) as f32);
+            let source_ratio = uv.width() * 64.
+                / (uv.height() * (super::FLAG_IDS.lines().count().div_ceil(2) * 24) as f32);
             assert!((rect.aspect_ratio() - source_ratio).abs() < 0.001);
             count += 1;
         }

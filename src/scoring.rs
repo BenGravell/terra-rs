@@ -21,10 +21,10 @@ fn score_eligible_countries(countries: &[Country], settings: &Settings) -> Vec<S
 fn score_country(index: usize, country: &Country, settings: &Settings) -> Score {
     let culture = culture_fit(country.culture.unwrap(), settings.culture);
     let quality_contributions =
-        quality_contributions(country.quality.unwrap(), settings.quality_weights);
+        quality_contributions(country.quality.unwrap(), settings.quality_importances);
     let quality = quality_contributions.values().iter().sum();
     let components = Overall { culture, quality };
-    let overall_contributions = overall_contributions(components, settings.overall_weights);
+    let overall_contributions = overall_contributions(components, settings.overall_importances);
     Score {
         country: index,
         rank: 0,

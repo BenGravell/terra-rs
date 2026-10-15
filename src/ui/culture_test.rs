@@ -85,3 +85,28 @@ fn help_buttons_are_small_and_beside_labels() {
         }
     }
 }
+
+#[test]
+fn culture_sliders_use_integer_zero_to_ten_values() {
+    let mut h = Harness::builder()
+        .with_size(egui::vec2(400., 800.))
+        .build_ui_state(super::show, crate::model::Settings::default().culture);
+    h.run();
+    h.get_by_label("Power distance").focus();
+    h.run();
+    h.key_press(egui::Key::ArrowRight);
+    h.run();
+    assert_eq!(h.state().power_distance, 60.);
+    for _ in 0..12 {
+        h.key_press(egui::Key::ArrowRight);
+        h.run();
+    }
+    assert_eq!(h.state().power_distance, 100.);
+    assert!(h.query_by_value("10").is_some());
+    for _ in 0..12 {
+        h.key_press(egui::Key::ArrowLeft);
+        h.run();
+    }
+    assert_eq!(h.state().power_distance, 0.);
+    assert!(h.query_by_value("0").is_some());
+}

@@ -33,7 +33,7 @@ pub(super) fn restore() -> (Settings, Option<String>) {
 #[cfg(target_family = "wasm")]
 pub(super) fn persist(settings: &Settings) -> Result<(), String> {
     let saved = serde_json::to_string(&SavedSettings {
-        version: 1,
+        version: 2,
         settings: settings.clone(),
     })
     .map_err(|e| e.to_string())?;

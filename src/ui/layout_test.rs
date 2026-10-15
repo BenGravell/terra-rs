@@ -28,7 +28,7 @@ fn narrow_layout_places_live_results_above_settings() {
         h.get_by_label("Power distance").focus();
         h.key_press(egui::Key::ArrowRight);
         h.run();
-        assert_eq!(h.state().settings.culture.power_distance, 51.);
+        assert_eq!(h.state().settings.culture.power_distance, 60.);
         assert_ne!(h.state().scores[0].overall, original);
         let best = &h.state().scores[0];
         let name = h.state().data.countries[best.country].name.clone();
@@ -49,7 +49,7 @@ fn narrow_layout_handles_empty_and_invalid_results() {
             .is_some()
     );
     assert!(h.state().selected.is_none());
-    h.state_mut().settings.overall_weights.culture = -1.;
+    h.state_mut().settings.overall_importances.culture = -1.;
     h.run();
     assert!(h.query_by_label("Check your settings").is_some());
     h.get_by_label("Reset").click();

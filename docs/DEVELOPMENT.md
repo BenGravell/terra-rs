@@ -10,7 +10,7 @@ Scoring and filtering are ordinary Rust functions independent of the UI.
 
 | Location                                                        | Responsibility                                                                                                 |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| [src/model](../src/model)                                       | Named domain values, countries, settings, scores, map geometry, validation, and weight redistribution.         |
+| [src/model](../src/model)                                       | Named domain values, countries, settings, scores, map geometry, validation, and importance settings.           |
 | [src/scoring.rs](../src/scoring.rs)                             | Score calculation, contributions, constraint evaluation, and ranking.                                          |
 | [src/ui](../src/ui)                                             | User interface: app orchestration, responsive layout, settings controls, result views, theme, and persistence. |
 | [tools/prepare](../tools/prepare)                               | Data preparation.                                                                                              |
@@ -155,10 +155,10 @@ The Quality of Life breakdown shows its three internal weighted terms; applying 
 would also require multiplying by `w_ql`.
 Display rounding never affects calculations.
 
-Weight controls maintain a 100% total by redistributing changes equally across the remaining weights, respecting
-zero/100% bounds.
-Validation checks the actual sum with floating-point tolerance.
-Regression cases live in [src/model/weights_test.rs](../src/model/weights_test.rs).
+Importance controls accept integers from 0 to 10 without adjusting peers.
+Validation rejects all-zero groups; scoring divides each importance by its group's sum.
+Culture controls display integer 0–10 values, converted to the underlying 0–100 scale when edited.
+Regression cases live in [src/ui/weights_test.rs](../src/ui/weights_test.rs).
 
 Semantics:
 

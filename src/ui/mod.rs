@@ -5,6 +5,7 @@ mod app;
 mod bars;
 mod constraints;
 mod culture;
+mod flags;
 mod header;
 mod layout;
 mod map;

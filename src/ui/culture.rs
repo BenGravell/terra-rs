@@ -38,8 +38,11 @@ pub(super) fn show(ui: &mut egui::Ui, culture: &mut Culture) {
                     });
                     label
                 }).inner;
-                super::slider::show(ui, value, 0.0..=100.0, label.id, "")
-                .on_hover_text(help);
+                let mut importance = (*value / 10.).round();
+                if super::slider::show(ui, &mut importance, 0.0..=10.0, label.id, "")
+                    .on_hover_text(help).changed() {
+                    *value = importance * 10.;
+                }
             }
         });
 }

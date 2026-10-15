@@ -12,16 +12,17 @@ The two areas scroll independently.
 - **Culture fit:** adjust power distance, individualism, masculinity, uncertainty avoidance, long-term orientation, and
   indulgence.
   Hover explanations describe each dimension.
-- **Score weights:** choose the balance between Culture Fit and Quality of Life, then the balance of Happy Planet, Social
-  Progress, and Human Freedom within Quality of Life.
+- **Score importances:** choose the balance between Culture Fit and Quality of Life, then the balance of Happy Planet,
+  Social Progress, and Human Freedom within Quality of Life.
 - **Constraints:** set minimum scores, a minimum English-speaking ratio, temperature and sunshine ranges, and allowed
   continents.
 - **Start from a country:** copy a reference country's cultural preferences or quality-of-life minimums.
 - **Reset:** restore all default settings.
 
-Changing a weight redistributes its change equally among the other weights in its group, keeping the total at 100%.
-For example, increasing Happy Planet from 30% to 35% changes a 30/40/30 split to 35/37.5/27.5.
-When another weight reaches zero, the remaining reduction comes from the other available weights.
+Importances are independent integers from 0 to 10.
+Changing one leaves the others unchanged.
+Each group must have at least one nonzero importance; the last nonzero slider stops at 1.
+The scoring model normalizes each group internally (for example, 2/3/5 becomes 20%/30%/50%).
 
 Active minimum constraints require a value strictly above the minimum.
 Active temperature and sunshine ranges require values strictly inside the bounds.
