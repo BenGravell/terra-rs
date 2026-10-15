@@ -12,15 +12,19 @@ pub(super) fn show(ui: &mut egui::Ui, settings: &mut Settings) {
             ("Social Progress minimum", &mut minimums.social_progress),
             ("Human Freedom minimum", &mut minimums.human_freedom),
         ] {
-            percentage(ui, label, value, 5.);
+            percentage(ui, label, value);
         }
-        percentage(ui, "English-speaking minimum", &mut settings.english_min, 5.);
+        percentage(ui, "English-speaking minimum", &mut settings.english_min);
         ui.label("Annual average temperature (°C)");
-        ui.add(egui::Slider::new(&mut settings.temperature.min, -10.0..=30.0).step_by(0.5).text("Minimum °C"));
-        ui.add(egui::Slider::new(&mut settings.temperature.max, -10.0..=30.0).step_by(0.5).text("Maximum °C"));
+        for (name, value) in [("Minimum °C", &mut settings.temperature.min), ("Maximum °C", &mut settings.temperature.max)] {
+            let label = ui.label(name);
+            super::slider::show(ui, value, -10.0..=30.0, label.id, "");
+        }
         ui.label("Daily sunshine (hours)");
-        ui.add(egui::Slider::new(&mut settings.sunshine.min, 3.0..=10.0).step_by(0.1).text("Minimum hours"));
-        ui.add(egui::Slider::new(&mut settings.sunshine.max, 3.0..=10.0).step_by(0.1).text("Maximum hours"));
+        for (name, value) in [("Minimum hours", &mut settings.sunshine.min), ("Maximum hours", &mut settings.sunshine.max)] {
+            let label = ui.label(name);
+            super::slider::show(ui, value, 3.0..=10.0, label.id, "");
+        }
         ui.label("Continents");
         for continent in CONTINENTS {
             let mut active = settings.continents.iter().any(|c| c == continent);
@@ -32,18 +36,10 @@ pub(super) fn show(ui: &mut egui::Ui, settings: &mut Settings) {
     });
 }
 
-fn percentage(ui: &mut egui::Ui, label: &str, value: &mut f64, step: f64) {
+fn percentage(ui: &mut egui::Ui, label: &str, value: &mut f64) {
     let label = ui.label(label);
     let mut pct = *value * 100.;
-    if ui
-        .add(
-            egui::Slider::new(&mut pct, 0.0..=100.0)
-                .step_by(step)
-                .suffix("%"),
-        )
-        .labelled_by(label.id)
-        .changed()
-    {
+    if super::slider::show(ui, &mut pct, 0.0..=100.0, label.id, "%").changed() {
         *value = pct / 100.;
     }
 }

@@ -13,6 +13,7 @@ mod ranking;
 mod reference;
 mod results_summary;
 mod settings;
+mod slider;
 mod theme;
 mod weights;
 

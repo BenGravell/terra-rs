@@ -46,18 +46,17 @@ pub(super) fn show(ui: &mut egui::Ui, settings: &mut Settings) {
 fn weight_slider(ui: &mut egui::Ui, label: &str, selected: &mut f64, peers: &mut [&mut f64]) {
     let label = ui.label(label);
     let mut pct = *selected * 100.;
-    if ui
-        .add(
-            egui::Slider::new(&mut pct, 0.0..=100.0)
-                .step_by(5.)
-                // Redistribution may leave peers between steps; don't round them on idle frames.
-                .clamping(egui::SliderClamping::Edits)
-                .suffix("%"),
-        )
-        .labelled_by(label.id)
-        .changed()
-    {
+    if super::slider::show(ui, &mut pct, 0.0..=100.0, label.id, "%").changed() {
         adjust_weight(selected, peers, pct / 100.).expect("UI weight values are bounded");
+        // Round cumulative shares so the displayed integer percentages still total 100.
+        let mut cumulative = pct;
+        let mut rounded = pct;
+        for peer in peers {
+            cumulative += **peer * 100.;
+            let next = cumulative.round();
+            **peer = (next - rounded) / 100.;
+            rounded = next;
+        }
     }
 }
 

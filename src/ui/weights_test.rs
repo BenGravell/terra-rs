@@ -17,7 +17,7 @@ fn weight_sliders_balance_peers_without_hiding_results_or_drifting() {
         .overall_weights
         .values()
         .iter()
-        .zip([0.55, 0.45])
+        .zip([0.51, 0.49])
     {
         assert!((actual - expected).abs() < 1e-12);
     }
@@ -31,13 +31,13 @@ fn weight_sliders_balance_peers_without_hiding_results_or_drifting() {
         .quality_weights
         .values()
         .iter()
-        .zip([0.35, 0.375, 0.275])
+        .zip([0.31, 0.40, 0.29])
     {
         assert!((actual - expected).abs() < 1e-12);
     }
     let settings = h.state().settings.clone();
-    assert!(h.query_by_value("38%").is_some());
-    assert!(h.query_by_value("28%").is_some());
+    assert!(h.query_by_value("40%").is_some());
+    assert!(h.query_by_value("29%").is_some());
     for _ in 0..10 {
         h.run();
         for readout in
@@ -50,10 +50,13 @@ fn weight_sliders_balance_peers_without_hiding_results_or_drifting() {
         assert!(h.query_by_label("Check your settings").is_none());
         assert!(h.query_by_label("Total: 100% / 100%").is_none());
     }
-    for _ in 0..20 {
+    for _ in 0..100 {
         h.key_press(egui::Key::ArrowRight);
         h.run();
         h.state().settings.validate().unwrap();
+        for weight in h.state().settings.quality_weights.values() {
+            assert!((weight * 100. - (weight * 100.).round()).abs() < 1e-10);
+        }
         assert_eq!(h.state().scores.len(), 85);
     }
     assert_eq!(
