@@ -219,14 +219,10 @@ fn flag_width(uv: egui::Rect, height: f32) -> f32 {
 
 fn flag_uv(index: usize) -> egui::Rect {
     let rows = &FLAG_PIXELS[index * 32 * 24 * 4..(index + 1) * 32 * 24 * 4];
-    let visible = |row: &[u8]| row.chunks_exact(4).any(|pixel| pixel[3] != 0);
-    let top = rows.chunks_exact(32 * 4).position(visible).unwrap_or(0);
-    let bottom = 24
-        - rows
-            .chunks_exact(32 * 4)
-            .rev()
-            .position(visible)
-            .unwrap_or(0);
+    let rows = rows.as_chunks::<{ 32 * 4 }>().0;
+    let visible = |row: &[u8; 32 * 4]| row.as_chunks::<4>().0.iter().any(|pixel| pixel[3] != 0);
+    let top = rows.iter().position(visible).unwrap_or(0);
+    let bottom = 24 - rows.iter().rev().position(visible).unwrap_or(0);
     let height = (FLAG_PIXELS.len() / (32 * 4)) as f32;
     egui::Rect::from_min_max(
         egui::pos2(0., (index * 24 + top) as f32 / height),
