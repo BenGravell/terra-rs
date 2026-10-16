@@ -5,13 +5,12 @@ Terra is a country recommendation app designed to help you *find your place in t
 
 ## Setup
 
-See [docs/SETUP.md](docs/SETUP.md) for tool installation, how to run locally, and configure static hosting.
+See [docs/SETUP.md](docs/SETUP.md) for tool installation and static hosting configuration.
 
 ## Usage
 
-See [docs/USAGE.md](docs/USAGE.md) for preferences, automatic weight balancing, constraints, and results.
+See [docs/USAGE.md](docs/USAGE.md) for running the app locally and how to use the app.
 
 ## Development
 
-See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for architecture, checks, data updates, scoring contract, and
-verification notes.
+See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for internal development guidance.

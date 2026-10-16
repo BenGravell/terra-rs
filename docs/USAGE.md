@@ -1,5 +1,22 @@
 # Usage
 
+## Run
+
+Run the web app:
+
+```sh
+mise exec -- trunk serve --open
+```
+
+Open `http://127.0.0.1:8080/terra-rs/`.
+Trunk rebuilds the app as source files change.
+
+Run the native app:
+
+```sh
+cargo run --locked
+```
+
 ## Preferences and constraints
 
 The settings panel controls how countries are scored and filtered.

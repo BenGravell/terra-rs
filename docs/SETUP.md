@@ -19,23 +19,6 @@ Verify the setup with `mise exec -- pre-commit run --all-files`.
 The first run downloads the Markdown formatter and may compile Rust dependencies.
 See [Development](DEVELOPMENT.md#build-and-checks) for hook behavior and retry instructions.
 
-## Run
-
-```sh
-mise exec -- trunk serve --open
-```
-
-Open `http://127.0.0.1:8080/terra-rs/`.
-Trunk rebuilds the app as source files change.
-
-For the optional native development window:
-
-```sh
-cargo run --locked
-```
-
-Browser settings persist across reloads; the native window starts with defaults.
-
 ## Version configuration
 
 | File                                                    | Purpose                                                                       |
