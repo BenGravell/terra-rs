@@ -15,12 +15,13 @@ fn narrow_layout_places_live_results_above_settings() {
         assert!((title.center().y - about.center().y).abs() < 1.);
         assert!(about.right() > width - 20. && about.right() <= width);
         assert!(h.query_by_label("Reset").is_some());
-        assert!(h.query_by_label("Matches").is_some());
-        assert!(h.query_by_label("Eligible countries").is_some());
+        assert!(h.query_by_label("Matches").is_none());
+        assert!(h.query_by_label("Eligible countries").is_none());
         assert!(h.query_by_label("Country").is_some());
         assert!(h.query_by_label("Full country ranking").is_none());
         let slider = h.get_by_label("Power distance").rect();
-        let results = h.get_by_label("Matches").rect();
+        let results = h.get_by_label("Country").rect();
+        assert!(results.top() > title.bottom());
         assert!(results.bottom() < slider.top());
         assert!(slider.bottom() < height);
         assert!(results.bottom() < height);
@@ -89,7 +90,7 @@ fn top_right_button_switches_pages_on_wide_and_narrow_layouts() {
         assert!(h.state().tab == super::Tab::Results);
         assert!(h.query_by_label("Results").is_none());
         assert!(h.query_by_label("About").is_some());
-        assert!(h.query_by_label("Matches").is_some());
+        assert!(h.query_by_label("Matches").is_none());
     }
 }
 
@@ -147,4 +148,39 @@ fn ranking_uses_the_full_results_width() {
             "Unused width {unused} at page width {width}"
         );
     }
+}
+
+#[test]
+fn mobile_results_tabs_switch_views_and_preserve_selection() {
+    for width in [320., 390., 844.] {
+        let mut h = harness(width);
+        h.run();
+        let selected = h.state().selected;
+        let selected_label = format!(
+            "Selected: {}",
+            h.state().data.countries[selected.unwrap()].name
+        );
+        let table = h.get_by_label("Table").rect();
+        let map = h.get_by_label("Map").rect();
+        assert!((table.width() - map.width()).abs() < 1.);
+        assert!(table.bottom() < h.get_by_label("Country").rect().top());
+        assert!(h.query_by_label(&selected_label).is_none());
+        h.get_by_label("Map").click();
+        h.run();
+        assert!(h.query_by_label("Country").is_none());
+        assert!(h.query_by_label(&selected_label).is_some());
+        h.get_by_label("Weights").click();
+        h.run();
+        assert!(h.query_by_label(&selected_label).is_some());
+        h.get_by_label("Table").click();
+        h.run();
+        assert!(h.query_by_label("Country").is_some());
+        assert!(h.query_by_label(&selected_label).is_none());
+        assert_eq!(h.state().selected, selected);
+    }
+    let mut h = harness(1440.);
+    h.run();
+    assert!(h.query_by_label("Table").is_none());
+    assert!(h.query_by_label("Map").is_none());
+    assert!(h.query_by_label("Country").is_some());
 }

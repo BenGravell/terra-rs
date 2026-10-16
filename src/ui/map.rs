@@ -179,8 +179,8 @@ pub(super) fn show(
         }
     }
     for (offset, color, label) in [
-        (0., NO_ELIGIBLE_DATA, "Data unavailable"),
-        (26., INFEASIBLE, "Infeasible"),
+        (0., INFEASIBLE, "Infeasible"),
+        (26., NO_ELIGIBLE_DATA, "Data missing"),
     ] {
         let pos = egui::pos2(rect.right() - 78., rect.bottom() - 49. + offset);
         painter.rect_filled(egui::Rect::from_min_size(pos, EVec2::splat(10.)), 2., color);

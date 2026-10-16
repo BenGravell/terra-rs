@@ -10,7 +10,7 @@ fn slider_fills_width_and_keeps_value_box_fixed_when_editing() {
                 |ui, value| {
                     crate::ui::theme::apply(ui.ctx());
                     let label = ui.label("Value");
-                    super::show(ui, value, 0.0..=100.0, label.id, "%");
+                    super::show(ui, value, 0.0..=100.0, label.id, "%", false);
                 },
                 9.,
             );

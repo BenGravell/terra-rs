@@ -9,6 +9,7 @@ pub(super) fn show(
     range: RangeInclusive<f64>,
     label: egui::Id,
     suffix: &str,
+    signed: bool,
 ) -> egui::Response {
     ui.scope(|ui| {
         ui.spacing_mut().slider_width =
@@ -18,13 +19,20 @@ pub(super) fn show(
             ui.text_style_height(&ui.style().drag_value_text_style)
                 + 2. * ui.spacing().button_padding.y,
         );
-        ui.add(
-            egui::Slider::new(value, range)
-                .integer()
-                .clamping(egui::SliderClamping::Edits)
-                .suffix(suffix),
-        )
-        .labelled_by(label)
+        let mut slider = egui::Slider::new(value, range)
+            .integer()
+            .clamping(egui::SliderClamping::Edits)
+            .suffix(suffix);
+        if signed {
+            slider = slider.custom_formatter(|value, _| {
+                if value > 0. {
+                    format!("+{value:.0}")
+                } else {
+                    format!("{value:.0}")
+                }
+            });
+        }
+        ui.add(slider).labelled_by(label)
     })
     .inner
 }

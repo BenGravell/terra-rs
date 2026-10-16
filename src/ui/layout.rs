@@ -9,6 +9,30 @@ fn narrow(ui: &egui::Ui) -> bool {
     ui.ctx().content_rect().width() < 850.
 }
 
+pub(super) fn tab_selector(ui: &mut egui::Ui, tab: &mut usize, labels: &[&str]) {
+    ui.allocate_ui_with_layout(
+        egui::vec2(ui.available_width(), 44.),
+        egui::Layout::left_to_right(egui::Align::Center),
+        |ui| {
+            ui.spacing_mut().button_padding.x = 4.;
+            let width = (ui.available_width()
+                - (labels.len() - 1) as f32 * ui.spacing().item_spacing.x)
+                / labels.len() as f32;
+            for (index, label) in labels.iter().enumerate() {
+                if ui
+                    .add_sized(
+                        [width, 44.],
+                        egui::Button::selectable(*tab == index, *label),
+                    )
+                    .clicked()
+                {
+                    *tab = index;
+                }
+            }
+        },
+    );
+}
+
 pub(super) fn root(ctx: &egui::Context) -> egui::Ui {
     egui::Ui::new(
         ctx.clone(),
@@ -57,12 +81,7 @@ pub(super) fn settings(root: &mut egui::Ui, app: &mut TerraApp) {
         egui::Panel::bottom("settings_narrow")
             .exact_size(height)
             .resizable(false)
-            .show(root, |ui| {
-                egui::ScrollArea::vertical()
-                    .id_salt("settings_narrow_scroll")
-                    .auto_shrink([false, false])
-                    .show(ui, show);
-            });
+            .show(root, show);
     }
 }
 
@@ -77,14 +96,35 @@ pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
     }
     let narrow = narrow(root);
     egui::CentralPanel::default().show(root, |ui| {
+        let id = ui.id().with("results_tab");
+        let mut tab = ui
+            .ctx()
+            .data_mut(|data| data.get_temp::<usize>(id).unwrap_or(0));
+        if narrow {
+            tab_selector(ui, &mut tab, &["Table", "Map"]);
+            ui.separator();
+            ui.ctx().data_mut(|data| data.insert_temp(id, tab));
+        }
         egui::ScrollArea::vertical()
-            .id_salt("results_scroll")
+            .id_salt(("results_scroll", narrow, tab))
             .auto_shrink([false, true])
             .show(ui, |ui| {
                 if !results_summary::show(ui, &app.settings, &app.scores) {
                     return;
                 }
-                if narrow {
+                if !narrow || tab == 1 {
+                    map::show(
+                        ui,
+                        &app.data.countries,
+                        &app.map,
+                        &app.scores,
+                        &mut app.selected,
+                    );
+                }
+                if !narrow {
+                    ui.add_space(6.);
+                }
+                if !narrow || tab == 0 {
                     ranking::show(
                         ui,
                         &app.data.countries,
@@ -92,32 +132,7 @@ pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
                         &mut app.selected,
                         app.settings.quality_weight(),
                     );
-                    egui::CollapsingHeader::new("World map").show(ui, |ui| {
-                        map::show(
-                            ui,
-                            &app.data.countries,
-                            &app.map,
-                            &app.scores,
-                            &mut app.selected,
-                        );
-                    });
-                    return;
                 }
-                map::show(
-                    ui,
-                    &app.data.countries,
-                    &app.map,
-                    &app.scores,
-                    &mut app.selected,
-                );
-                ui.add_space(6.);
-                ranking::show(
-                    ui,
-                    &app.data.countries,
-                    &app.scores,
-                    &mut app.selected,
-                    app.settings.quality_weight(),
-                );
             });
     });
 }
