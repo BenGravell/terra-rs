@@ -14,8 +14,10 @@ mise exec -- pre-commit install
 ```
 
 Hook installation is local to each clone; repeat it after cloning the repository elsewhere.
+The install command enables both pre-commit and pre-push hooks; rerun it to update an existing clone.
 Keep `mise` and Cargo available on the PATH used by Git, including when committing from an editor.
 Verify the setup with `mise exec -- pre-commit run --all-files`.
+Run the additional pre-push checks with `mise exec -- pre-commit run --hook-stage pre-push --all-files`.
 The first run downloads the Markdown formatter and may compile Rust dependencies.
 See [Development](DEVELOPMENT.md#build-and-checks) for hook behavior and retry instructions.
 
@@ -24,7 +26,7 @@ See [Development](DEVELOPMENT.md#build-and-checks) for hook behavior and retry i
 | File                                                    | Purpose                                                                       |
 | ------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | [mise.toml](../mise.toml)                               | Trunk, Python, uv, pre-commit, and cargo-machete versions; cached hook tasks. |
-| [.pre-commit-config.yaml](../.pre-commit-config.yaml)   | Commit hooks and pinned Markdown formatter versions.                          |
+| [.pre-commit-config.yaml](../.pre-commit-config.yaml)   | Commit and push hooks, and pinned Markdown formatter versions.                |
 | [rust-toolchain.toml](../rust-toolchain.toml)           | Rust channel, rustfmt/Clippy components, and WASM target.                     |
 | [Cargo.toml](../Cargo.toml)                             | App and workspace Rust dependency configuration.                              |
 | [tools/prepare/Cargo.toml](../tools/prepare/Cargo.toml) | Data preparation Rust dependencies.                                           |

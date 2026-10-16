@@ -47,7 +47,8 @@ The preparation package follows the same convention with `tools/prepare/source_t
 ## Build and checks
 
 Install the Git hooks once per clone with `mise exec -- pre-commit install`.
-The hooks in [.pre-commit-config.yaml](../.pre-commit-config.yaml) run in this order:
+This installs both pre-commit and pre-push hooks; rerun it in existing clones to enable pre-push.
+The pre-commit hooks in [.pre-commit-config.yaml](../.pre-commit-config.yaml) run in this order:
 
 1. Format Markdown with mdformat, excluding `.agents/`.
 2. Format Rust with `cargo fmt --all`.
@@ -64,10 +65,16 @@ Cache inputs include workspace sources, assets, data, configuration, toolchain v
 variables.
 Markdown-only changes reuse successful Rust results when the other inputs are unchanged.
 
-Run all hooks manually:
+The pre-push hook runs the remaining CI checks in order: deterministic asset regeneration, a release WASM build,
+Chromium installation if needed, and the browser smoke test.
+These checks run on every push without mise result caching and stop the push on failure.
+They check the current working tree; commit the intended changes before pushing.
+
+Run either hook stage manually:
 
 ```sh
 mise exec -- pre-commit run --all-files
+mise exec -- pre-commit run --hook-stage pre-push --all-files
 ```
 
 Run either cached task directly, or force fresh results:
@@ -102,7 +109,7 @@ cargo test --locked --no-default-features
 ```
 
 CI runs Rust checks, deterministic asset regeneration checks, a release WASM build, and Chromium smoke tests.
-Asset regeneration, the release build, and browser smoke tests remain separate from the commit hooks.
+Asset regeneration, the release build, and browser smoke tests run in the pre-push hook via `mise run hook-pre-push`.
 Build and deployment details are in [Setup](SETUP.md#static-hosting).
 
 ## Maintain the data

@@ -51,3 +51,12 @@ description = "Run the full Rust test suite, reusing successful results for iden
 run = "cargo test --locked --workspace"
 sources = ["@group:rust"]
 outputs = []
+
+[tasks.hook-pre-push]
+description = "Run CI checks not covered by pre-commit before pushing"
+run = [
+    "cargo run --locked -p terra-prepare -- --check",
+    "trunk build --release --cargo-profile web",
+    "uv run --locked --group browser playwright install chromium",
+    "uv run --locked --group browser tools/browser_smoke.py",
+]
