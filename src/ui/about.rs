@@ -11,13 +11,10 @@ pub(super) fn show(ui: &mut egui::Ui, sources: &[Source]) {
                 ui.set_width(width);
                 ui.style_mut().wrap_mode = Some(egui::TextWrapMode::Wrap);
                 ui.add_space(24.);
-                egui::Frame::group(ui.style()).inner_margin(16.).show(ui, |ui| {
-                    ui.set_width(ui.available_width());
-                    ui.heading("Start exploring");
-                    ui.label("1. Set your culture preferences, or choose a reference country.");
-                    ui.label("2. Adjust your weights and constraints to reflect what matters to you.");
-                    ui.label("3. Compare the ranking and map, then select a country to explore its scores.");
-                });
+                ui.heading("Start exploring");
+                ui.label("1. Set your culture preferences, or choose a reference country.");
+                ui.label("2. Adjust your weights and constraints to reflect what matters to you.");
+                ui.label("3. Compare the ranking and map, then select a country to explore its scores.");
                 ui.add_space(16.);
                 ui.heading("Understand your results");
                 ui.label("Open a topic to learn how Terra compares countries.");
