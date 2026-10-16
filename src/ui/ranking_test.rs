@@ -157,3 +157,29 @@ fn rendered_flags_preserve_the_source_aspect_ratio() {
     }
     assert!(count > 1);
 }
+
+#[test]
+fn stacked_bars_leave_only_a_thin_gap_at_row_edges() {
+    use bevy_egui::egui::Shape;
+    for width in [390., 1400.] {
+        let mut h = harness(width);
+        h.run();
+        let name = &h.state().data.countries[h.state().scores[1].country].name;
+        let row = h.get_by_label(&format!("Select {name}")).rect();
+        let bar = h
+            .output()
+            .shapes
+            .iter()
+            .find_map(|shape| match &shape.shape {
+                Shape::Rect(rect)
+                    if rect.fill == super::CULTURE && row.contains(rect.rect.center()) =>
+                {
+                    Some(rect.rect)
+                }
+                _ => None,
+            })
+            .unwrap();
+        assert!((bar.top() - row.top() - 2.).abs() < 0.1);
+        assert!((row.bottom() - bar.bottom() - 2.).abs() < 0.1);
+    }
+}

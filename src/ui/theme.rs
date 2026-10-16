@@ -1,13 +1,24 @@
 use bevy_egui::egui::{self, Color32, Vec2 as EVec2};
+use std::sync::Arc;
 
-pub(super) const ACCENT: Color32 = Color32::from_rgb(30, 99, 233);
-pub(super) const CULTURE: Color32 = Color32::from_rgb(180, 35, 73);
-pub(super) const WARNING: Color32 = Color32::from_rgb(143, 82, 16);
-pub(super) const PARTS: [Color32; 3] = [
-    Color32::from_rgb(30, 99, 233),
-    Color32::from_rgb(25, 145, 190),
-    Color32::from_rgb(10, 119, 126),
-];
+// Muted blue and warm earth tones; neutral surfaces keep attention on the data.
+pub(super) const ACCENT: Color32 = Color32::from_rgb(48, 86, 110);
+pub(super) const CULTURE: Color32 = Color32::from_rgb(163, 77, 53);
+pub(super) const WARNING: Color32 = Color32::from_rgb(137, 96, 35);
+pub(super) fn quality_colors() -> [Color32; 3] {
+    // Fixed samples span indigo, blue-teal, and green on the shared map scale.
+    [0.90, 0.55, 0.25].map(score_color)
+}
+
+pub(super) const BACKGROUND: Color32 = Color32::from_rgb(248, 247, 244);
+pub(super) const SURFACE: Color32 = Color32::from_rgb(253, 252, 249);
+pub(super) const TEXT: Color32 = Color32::from_rgb(48, 54, 58);
+pub(super) const TRACK: Color32 = Color32::from_rgb(226, 227, 224);
+pub(super) const BORDER: Color32 = Color32::from_rgb(202, 207, 207);
+pub(super) const MAP_BACKGROUND: Color32 = Color32::from_rgb(239, 242, 241);
+pub(super) const INFEASIBLE: Color32 = Color32::from_rgb(164, 157, 146);
+pub(super) const NO_ELIGIBLE_DATA: Color32 = Color32::from_rgb(218, 217, 212);
+
 pub(super) const QUALITY_NAMES: [&str; 3] = ["Happy Planet", "Social Progress", "Human Freedom"];
 
 pub(super) fn apply(ctx: &egui::Context) {
@@ -52,13 +63,50 @@ pub(super) fn apply(ctx: &egui::Context) {
     // Format slider readouts without rounding their stored values.
     style.number_formatter = egui::style::NumberFormatter::new(|value, _| format!("{value:.0}"));
     style.visuals = egui::Visuals::light();
-    style.visuals.panel_fill = Color32::from_rgb(247, 249, 253);
-    style.visuals.window_fill = Color32::from_rgb(255, 255, 255);
-    style.visuals.extreme_bg_color = Color32::from_rgb(237, 242, 250);
-    style.visuals.override_text_color = Some(Color32::from_rgb(30, 41, 63));
-    style.visuals.selection.bg_fill = Color32::from_rgb(218, 231, 255);
+    style.visuals.panel_fill = BACKGROUND;
+    style.visuals.window_fill = SURFACE;
+    style.visuals.extreme_bg_color = MAP_BACKGROUND;
+    style.visuals.faint_bg_color = Color32::from_rgb(239, 238, 234);
+    style.visuals.override_text_color = Some(TEXT);
+    style.visuals.weak_text_color = Some(Color32::from_rgb(101, 108, 110));
+    style.visuals.selection.bg_fill = Color32::from_rgb(216, 229, 234);
     style.visuals.selection.stroke = egui::Stroke::new(1., ACCENT);
     style.visuals.hyperlink_color = ACCENT;
+    style.visuals.warn_fg_color = WARNING;
+    style.visuals.error_fg_color = CULTURE;
+    style.visuals.window_stroke = egui::Stroke::new(1., BORDER);
+    for (widget, fill, stroke) in [
+        (
+            &mut style.visuals.widgets.noninteractive,
+            BACKGROUND,
+            BORDER,
+        ),
+        (
+            &mut style.visuals.widgets.inactive,
+            TRACK,
+            Color32::from_rgb(125, 137, 142),
+        ),
+        (
+            &mut style.visuals.widgets.hovered,
+            Color32::from_rgb(224, 234, 237),
+            ACCENT,
+        ),
+        (
+            &mut style.visuals.widgets.active,
+            Color32::from_rgb(202, 221, 229),
+            ACCENT,
+        ),
+        (
+            &mut style.visuals.widgets.open,
+            Color32::from_rgb(224, 234, 237),
+            ACCENT,
+        ),
+    ] {
+        widget.bg_fill = fill;
+        widget.weak_bg_fill = fill;
+        widget.bg_stroke.color = stroke;
+        widget.fg_stroke.color = TEXT;
+    }
     style.spacing.item_spacing = EVec2::new(10., 8.);
     style.spacing.button_padding = EVec2::new(10., 6.);
     style
@@ -82,15 +130,33 @@ pub(super) fn percent(value: f64) -> String {
     format!("{:.0}%", value * 100.)
 }
 pub(super) fn score_color(score: f64) -> Color32 {
-    // Orchid keeps the red-to-blue transition colorful instead of muddy.
-    let stops = [[180., 35., 73.], [171., 67., 190.], [30., 99., 233.]];
-    let t = score.clamp(0., 1.) as f32 * 2.;
-    let segment = (t as usize).min(1);
-    let fraction = t - segment as f32;
-    let rgb = std::array::from_fn::<_, 3, _>(|i| {
-        (stops[segment][i] + (stops[segment + 1][i] - stops[segment][i]) * fraction) as u8
+    const DEEP: [[u8; 3]; 256] = include!("../../assets/colormaps/deep.rs");
+    let position = (0.10 + 0.80 * score.clamp(0., 1.)) * 255.;
+    let index = position.floor() as usize;
+    let fraction = position.fract();
+    let rgb: [u8; 3] = std::array::from_fn(|channel| {
+        let start = f64::from(DEEP[index][channel]);
+        let end = f64::from(DEEP[index + 1][channel]);
+        (start + (end - start) * fraction).round() as u8
     });
     Color32::from_rgb(rgb[0], rgb[1], rgb[2])
+}
+
+pub(super) fn title(ui: &mut egui::Ui) -> egui::Response {
+    let mut title = ui.painter().layout_no_wrap(
+        "TERRA".into(),
+        egui::FontId::new(25., egui::FontFamily::Name("caps".into())),
+        egui::Color32::WHITE,
+    );
+    let bounds = title.mesh_bounds;
+    for row in &mut Arc::make_mut(&mut title).rows {
+        let offset = row.pos.x;
+        for vertex in &mut Arc::make_mut(&mut row.row).visuals.mesh.vertices {
+            let t = ((offset + vertex.pos.x - bounds.left()) / bounds.width()).clamp(0., 1.);
+            vertex.color = score_color(0.45 + 0.35 * f64::from(t));
+        }
+    }
+    ui.label(title)
 }
 
 #[cfg(test)]

@@ -1,6 +1,6 @@
 use super::{
     bars,
-    theme::{CULTURE, PARTS, QUALITY_NAMES, percent},
+    theme::{CULTURE, QUALITY_NAMES, percent, quality_colors},
 };
 use crate::model::{Country, Score};
 use bevy_egui::egui;
@@ -14,6 +14,7 @@ pub(super) fn show(
     selected: &mut Option<usize>,
     quality_weight: f64,
 ) {
+    let parts = quality_colors();
     ui.scope(|ui| {
         ui.spacing_mut().scroll.floating = false;
         let compact = ui.available_width() < 600.;
@@ -24,9 +25,18 @@ pub(super) fn show(
             ui.spacing_mut().item_spacing.x = 6.;
         }
         ui.horizontal_wrapped(|ui| {
-            ui.colored_label(CULTURE, "■ Culture Fit");
-            for (name, color) in QUALITY_NAMES.iter().zip(PARTS) {
-                ui.colored_label(color, format!("■ {name}"));
+            for (name, color) in std::iter::once(("Culture Fit", CULTURE))
+                .chain(QUALITY_NAMES.into_iter().zip(parts))
+            {
+                let mut label = egui::text::LayoutJob::default();
+                let font = egui::TextStyle::Body.resolve(ui.style());
+                label.append("■ ", 0., egui::TextFormat::simple(font.clone(), color));
+                label.append(
+                    name,
+                    0.,
+                    egui::TextFormat::simple(font, ui.visuals().text_color()),
+                );
+                ui.label(label);
             }
         });
         let flags = super::flags::texture(ui);
@@ -69,10 +79,10 @@ pub(super) fn show(
             .min(available - fixed_width - minimum_bar_width)
             .max(flag_slot_width + ui.spacing().item_spacing.x);
         let bar_width = (available - fixed_width - country_width).max(minimum_bar_width);
-        let table_height = if compact {
+        let table_height = if ui.ctx().content_rect().width() < 850. {
             (ui.available_height() - 34.).clamp(100., 340.)
         } else {
-            340.
+            ui.available_height().max(0.)
         };
         egui::ScrollArea::both()
             .id_salt("ranking")
@@ -136,11 +146,17 @@ pub(super) fn show(
                             let overall =
                                 ui.add(egui::Label::new(percent(s.overall)).selectable(false));
                             let values = contributions(s, quality_weight);
+                            let row_height = rank
+                                .rect
+                                .height()
+                                .max(country_cell.response.rect.height())
+                                .max(overall.rect.height())
+                                .max(if compact { 28. } else { 18. });
                             let bar = bars::stacked_bar(
                                 ui,
-                                egui::vec2(bar_width, if compact { 12. } else { 16. }),
+                                egui::vec2(bar_width, row_height),
                                 &values,
-                                &[CULTURE, PARTS[0], PARTS[1], PARTS[2]],
+                                &[CULTURE, parts[0], parts[1], parts[2]],
                                 *selected == Some(s.country),
                                 &[
                                     "Culture Fit",

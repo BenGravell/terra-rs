@@ -1,9 +1,9 @@
-use super::theme::{ACCENT, percent, score_color};
+use super::theme::{
+    ACCENT, BORDER, INFEASIBLE, MAP_BACKGROUND, NO_ELIGIBLE_DATA, SURFACE, TEXT, percent,
+    score_color,
+};
 use crate::model::{Country, MapPoint, MapRegion, Score};
-use bevy_egui::egui::{self, Color32, RichText, Stroke, Vec2 as EVec2};
-
-const INFEASIBLE: Color32 = Color32::from_rgb(188, 163, 150);
-const NO_ELIGIBLE_DATA: Color32 = Color32::from_rgb(211, 220, 232);
+use bevy_egui::egui::{self, RichText, Stroke, Vec2 as EVec2};
 
 pub(super) fn show(
     ui: &mut egui::Ui,
@@ -11,11 +11,12 @@ pub(super) fn show(
     regions: &[MapRegion],
     scores: &[Score],
     selected: &mut Option<usize>,
+    max_height: f32,
 ) {
     ui.add_space(8.);
     let width = ui.available_width();
     let map_area_width = (width - 92.).max(1.);
-    let height = (map_area_width / 2.).max(100.);
+    let height = (map_area_width / 2.).max(100.).min(max_height);
     let range = visible_range(
         scores
             .iter()
@@ -29,7 +30,7 @@ pub(super) fn show(
     let map_color = |value| score_color(normalize(value, range));
     let (rect, response) = ui.allocate_exact_size(EVec2::new(width, height), egui::Sense::click());
     let painter = ui.painter_at(rect);
-    painter.rect_filled(rect, 6., Color32::from_rgb(237, 244, 252));
+    painter.rect_filled(rect, 6., MAP_BACKGROUND);
     let map_width = (height * 2.).min(map_area_width);
     let view = egui::Rect::from_center_size(
         egui::pos2(rect.left() + map_area_width / 2., rect.center().y),
@@ -45,14 +46,14 @@ pub(super) fn show(
         let x = view.left() + view.width() * x as f32 / 6.;
         painter.line_segment(
             [egui::pos2(x, view.top()), egui::pos2(x, view.bottom())],
-            Stroke::new(0.5, Color32::from_rgb(212, 224, 239)),
+            Stroke::new(0.5, BORDER),
         );
     }
     for y in 1..4 {
         let y = view.top() + view.height() * y as f32 / 4.;
         painter.line_segment(
             [egui::pos2(view.left(), y), egui::pos2(view.right(), y)],
-            Stroke::new(0.5, Color32::from_rgb(212, 224, 239)),
+            Stroke::new(0.5, BORDER),
         );
     }
     let pointer = response.hover_pos();
@@ -88,10 +89,17 @@ pub(super) fn show(
         }
         painter.add(egui::Shape::mesh(mesh));
         for ring in &region.rings {
-            painter.add(egui::Shape::closed_line(
-                ring.iter().map(|i| positions[*i as usize]).collect(),
-                Stroke::new(0.4, Color32::from_rgb(255, 255, 255)),
-            ));
+            // Separate edges avoid unbounded miter joins at near-reversing coastlines.
+            for (a, b) in ring
+                .iter()
+                .zip(ring.iter().cycle().skip(1))
+                .take(ring.len())
+            {
+                painter.line_segment(
+                    [positions[*a as usize], positions[*b as usize]],
+                    Stroke::new(0.4, SURFACE),
+                );
+            }
         }
     }
     // Markers keep tiny countries selectable even when 1:110m boundaries omit them.
@@ -103,7 +111,7 @@ pub(super) fn show(
             });
             let is_selected = Some(s.country) == *selected;
             if is_selected {
-                painter.circle_stroke(p, 7., Stroke::new(2., Color32::from_rgb(30, 41, 63)));
+                painter.circle_stroke(p, 7., Stroke::new(2., TEXT));
             }
             painter.circle_filled(
                 p,
@@ -111,7 +119,7 @@ pub(super) fn show(
                 if s.matches {
                     map_color(s.overall)
                 } else {
-                    Color32::from_rgb(133, 102, 87)
+                    INFEASIBLE
                 },
             );
             if pointer.is_some_and(|mouse| mouse.distance(p) < 6.) {
@@ -216,6 +224,37 @@ fn normalize(value: f64, range: Option<(f64, f64)>) -> f64 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn country_outlines_do_not_generate_spikes_outside_the_map() {
+        let regions = MapRegion::parse(include_str!("../../assets/map.json")).unwrap();
+        for size in [egui::vec2(1100., 500.), egui::vec2(700., 400.)] {
+            let ctx = egui::Context::default();
+            let output = ctx.run_ui(
+                egui::RawInput {
+                    screen_rect: Some(egui::Rect::from_min_size(egui::Pos2::ZERO, size)),
+                    ..Default::default()
+                },
+                |ui| {
+                    egui::CentralPanel::default().show(ui, |ui| {
+                        show(ui, &[], &regions, &[], &mut None, 320.);
+                    });
+                },
+            );
+            for primitive in ctx.tessellate(output.shapes, output.pixels_per_point) {
+                if let egui::epaint::Primitive::Mesh(mesh) = primitive.primitive {
+                    for vertex in mesh.vertices {
+                        assert!(
+                            primitive.clip_rect.expand(2.).contains(vertex.pos),
+                            "Outline spike at {:?}, outside {:?}",
+                            vertex.pos,
+                            primitive.clip_rect
+                        );
+                    }
+                }
+            }
+        }
+    }
 
     #[test]
     fn colorbar_scales_to_data_and_handles_empty_or_constant_ranges() {

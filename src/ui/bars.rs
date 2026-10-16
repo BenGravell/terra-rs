@@ -10,22 +10,25 @@ pub(super) fn stacked_bar(
     names: &[&str],
 ) -> egui::Response {
     let (rect, response) = ui.allocate_exact_size(size, egui::Sense::hover());
-    ui.painter()
-        .rect_filled(rect, 2., Color32::from_rgb(228, 234, 244));
+    // Fill the row's spacing too, leaving two points of breathing room on each edge.
+    let rect = rect.expand2(EVec2::new(
+        0.,
+        (ui.spacing().item_spacing.y * 0.5 - 2.).max(0.),
+    ));
     let mut x = rect.left();
     for (value, color) in values.iter().zip(colors) {
         let w = rect.width() * *value as f32;
         ui.painter().rect_filled(
             egui::Rect::from_min_size(egui::pos2(x, rect.top()), EVec2::new(w, rect.height())),
-            1.,
+            0.,
             *color,
         );
         x += w;
     }
     if selected {
         ui.painter().rect_stroke(
-            rect,
-            2.,
+            egui::Rect::from_min_max(rect.min, egui::pos2(x, rect.bottom())),
+            0.,
             Stroke::new(1., ui.visuals().text_color()),
             egui::StrokeKind::Outside,
         );

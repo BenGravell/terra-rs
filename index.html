@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f7f9fd">
+    <meta name="theme-color" content="#f8f7f4">
     <meta name="description" content="Explore countries through your preferences, quality of life, and climate constraints.">
     <title>Terra · Find your place</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ctext y='32' font-size='32'%3E🌍%3C/text%3E%3C/svg%3E">
@@ -24,24 +24,31 @@
         font-style: normal;
         font-display: swap;
       }
-      html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; color-scheme: light; background: #f7f9fd; color: #1e293f; font: 18px "Atkinson Hyperlegible Next", sans-serif; }
+      html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; color-scheme: light; background: #f8f7f4; color: #30363a; font: 18px "Atkinson Hyperlegible Next", sans-serif; }
       h1 { font-family: "Space Grotesk", "Atkinson Hyperlegible Next", sans-serif; font-weight: 700; }
       #app { width: 100%; height: 100%; display: block; outline: none; touch-action: none; }
-      #loading { position: fixed; inset: 0; display: grid; place-content: center; padding: 2rem; background: radial-gradient(ellipse at 15% 20%, #dceaff, transparent 60%), radial-gradient(ellipse at 85% 80%, #f4dce8, transparent 60%), #f7f9fd; z-index: 2; }
+      #loading { position: fixed; inset: 0; display: grid; place-content: center; justify-items: center; text-align: center; padding: 2rem; background: #f8f7f4; z-index: 2; }
       #loading[hidden] { display: none; }
-      #loading h1 { letter-spacing: .15em; color: #1e63e9; background: linear-gradient(110deg, #1e63e9, #ab43be, #b42349); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      #loading h1 { margin: 0; font-size: clamp(64px, 12vw, 128px); line-height: 1.1; letter-spacing: normal; color: #30566e; background: linear-gradient(90deg, #4c99a0, #407598, #404f8d); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      #loading-spinner { width: 28px; height: 28px; margin-top: 24px; border: 3px solid #d8e5ea; border-top-color: #407598; border-radius: 50%; animation: loading-spin .9s linear infinite; }
+      #loading-spinner[hidden] { display: none; }
+      @keyframes loading-spin { to { transform: rotate(360deg); } }
+      @media (prefers-reduced-motion: reduce) { #loading-spinner { animation: none; } }
       #loading p { max-width: 36em; line-height: 1.6; }
     </style>
   </head>
   <body>
     <canvas id="app" aria-label="Terra country preferences and results" tabindex="0"></canvas>
     <div id="loading" role="status" aria-live="polite">
-      <h1>TERRA</h1><p id="loading-detail">Opening your world of possibilities…</p>
+      <h1>TERRA</h1>
+      <div id="loading-spinner" aria-hidden="true"></div>
+      <p id="loading-detail">Opening your world of possibilities…</p>
     </div>
     <noscript>Terra needs JavaScript and WebAssembly enabled to run.</noscript>
     <script>
       window.terraFailed = (error) => {
         document.getElementById('loading').hidden = false;
+        document.getElementById('loading-spinner').hidden = true;
         document.getElementById('loading-detail').textContent = 'Terra could not start. Check that WebGL2 is enabled, then reload. If this continues, try another browser.';
         console.error(error);
       };

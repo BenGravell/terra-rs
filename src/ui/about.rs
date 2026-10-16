@@ -1,10 +1,9 @@
-use super::theme;
 use crate::model::Source;
 use bevy_egui::egui;
 
 pub(super) fn show(ui: &mut egui::Ui, sources: &[Source]) {
-    let width = ui.available_width().min(800.);
-    ui.with_layout(egui::Layout::top_down(egui::Align::Center), |ui| {
+    let width = ui.available_width();
+    ui.with_layout(egui::Layout::top_down(egui::Align::Min), |ui| {
         ui.allocate_ui_with_layout(
             egui::vec2(width, 0.),
             egui::Layout::top_down(egui::Align::Min),
@@ -12,25 +11,6 @@ pub(super) fn show(ui: &mut egui::Ui, sources: &[Source]) {
                 ui.set_width(width);
                 ui.style_mut().wrap_mode = Some(egui::TextWrapMode::Wrap);
                 ui.add_space(24.);
-                ui.label(egui::RichText::new("ABOUT TERRA").small().color(theme::ACCENT));
-                ui.heading("Which country feels like home?");
-                let mut blurb = egui::text::LayoutJob::default();
-                let format = egui::TextFormat {
-                    font_id: egui::TextStyle::Body.resolve(ui.style()),
-                    color: ui.visuals().text_color(),
-                    ..Default::default()
-                };
-                for (text, italics) in [
-                    ("Terra is a country recommendation app designed to help you ", false),
-                    ("find your place in the world", true),
-                    (" by using data to answer ", false),
-                    ("\"which country is right for me?\"", true),
-                ] {
-                    blurb.append(text, 0., egui::TextFormat { italics, ..format.clone() });
-                }
-                ui.label(blurb);
-                ui.add_space(16.);
-
                 egui::Frame::group(ui.style()).inner_margin(16.).show(ui, |ui| {
                     ui.set_width(ui.available_width());
                     ui.heading("Start exploring");

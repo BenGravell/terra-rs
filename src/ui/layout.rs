@@ -105,35 +105,68 @@ pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
             ui.separator();
             ui.ctx().data_mut(|data| data.insert_temp(id, tab));
         }
-        egui::ScrollArea::vertical()
-            .id_salt(("results_scroll", narrow, tab))
-            .auto_shrink([false, true])
-            .show(ui, |ui| {
-                if !results_summary::show(ui, &app.settings, &app.scores) {
-                    return;
-                }
-                if !narrow || tab == 1 {
-                    map::show(
-                        ui,
-                        &app.data.countries,
-                        &app.map,
-                        &app.scores,
-                        &mut app.selected,
-                    );
-                }
-                if !narrow {
-                    ui.add_space(6.);
-                }
-                if !narrow || tab == 0 {
+        let mut show = |ui: &mut egui::Ui| {
+            if !results_summary::show(ui, &app.settings, &app.scores) {
+                return;
+            }
+            if !narrow && ui.available_width() >= 1440. && ui.available_height() >= 720. {
+                ui.columns(2, |columns| {
                     ranking::show(
-                        ui,
+                        &mut columns[0],
                         &app.data.countries,
                         &app.scores,
                         &mut app.selected,
                         app.settings.quality_weight(),
                     );
-                }
-            });
+                    let map_height = (columns[1].available_height() - 40.).max(0.);
+                    map::show(
+                        &mut columns[1],
+                        &app.data.countries,
+                        &app.map,
+                        &app.scores,
+                        &mut app.selected,
+                        map_height,
+                    );
+                });
+                return;
+            }
+            if !narrow || tab == 1 {
+                // Reserve most of the desktop height for the legend and ranking.
+                let map_height = if narrow {
+                    f32::INFINITY
+                } else {
+                    ui.available_height() * 0.45
+                };
+                map::show(
+                    ui,
+                    &app.data.countries,
+                    &app.map,
+                    &app.scores,
+                    &mut app.selected,
+                    map_height,
+                );
+            }
+            if !narrow {
+                ui.add_space(6.);
+            }
+            if !narrow || tab == 0 {
+                ranking::show(
+                    ui,
+                    &app.data.countries,
+                    &app.scores,
+                    &mut app.selected,
+                    app.settings.quality_weight(),
+                );
+            }
+        };
+        if narrow {
+            egui::ScrollArea::vertical()
+                .id_salt(("results_scroll", narrow, tab))
+                .auto_shrink([false, true])
+                .show(ui, show);
+        } else {
+            show(ui);
+        }
     });
 }
 

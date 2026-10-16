@@ -73,7 +73,11 @@ pub fn run() {
             ..default()
         }))
         .add_plugins(EguiPlugin::default())
-        .insert_resource(ClearColor(Color::srgb_u8(247, 249, 253)))
+        .insert_resource(ClearColor(Color::srgb_u8(
+            theme::BACKGROUND.r(),
+            theme::BACKGROUND.g(),
+            theme::BACKGROUND.b(),
+        )))
         .init_resource::<TerraApp>()
         .add_systems(Startup, |mut commands: Commands| {
             commands.spawn((Camera2d, Msaa::Off));

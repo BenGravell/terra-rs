@@ -1,7 +1,14 @@
 use bevy_egui::egui;
+use std::sync::LazyLock;
 
 pub(super) const FLAG_IDS: &str = include_str!("../../assets/flags/countries.txt");
-pub(super) const FLAG_PIXELS: &[u8] = include_bytes!("../../assets/flags/atlas.rgba");
+pub(super) static FLAG_PIXELS: LazyLock<Vec<u8>> = LazyLock::new(|| {
+    const PIXELS: &[u32] = include!("../../assets/flags/atlas.rs");
+    PIXELS
+        .iter()
+        .flat_map(|pixel| pixel.to_be_bytes())
+        .collect()
+});
 
 pub(super) fn texture(ui: &egui::Ui) -> egui::TextureHandle {
     let flag_texture_id = egui::Id::new("country_flags");

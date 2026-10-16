@@ -136,9 +136,21 @@ fn ranking_uses_the_full_results_width() {
         h.run();
         let name = &h.state().data.countries[h.state().scores[0].country].name;
         let row = h.get_by_label(&format!("Select {name}")).rect();
-        let unused = width - row.right();
+        let results_right = if width >= 1800. {
+            let selected = h.state().selected.unwrap();
+            let map_label = h
+                .get_by_label(&format!(
+                    "Selected: {}",
+                    h.state().data.countries[selected].name
+                ))
+                .rect();
+            map_label.left() - 10.
+        } else {
+            width
+        };
+        let unused = results_right - row.right();
         assert!(
-            (8. ..=24.).contains(&unused),
+            (0. ..=24.).contains(&unused),
             "Unused width {unused} at page width {width}"
         );
     }
@@ -186,12 +198,89 @@ fn about_topics_expand_within_phone_and_desktop_widths() {
         h.run();
         h.get_by_label("About").click();
         h.run();
-        let heading = h.get_by_label("Which country feels like home?").rect();
+        assert!(h.query_by_label("ABOUT TERRA").is_none());
+        assert!(h.query_by_label("Which country feels like home?").is_none());
+        let heading = h.get_by_label("Start exploring").rect();
         assert!(heading.left() >= 0. && heading.right() <= width);
         h.get_by_label("Overall score & ranking").click();
         h.run();
         let explanation = h.get_by_label("The overall score combines Culture Fit and Quality of Life using your weights. Ranks number matching countries consecutively after constraints. Equal scores are ordered by country ID.").rect();
         assert!(explanation.left() >= 0. && explanation.right() <= width);
-        assert!(explanation.width() <= 800.);
+        assert!(explanation.left() < 40.);
+        if width >= 1440. {
+            assert!(explanation.width() > 800.);
+        }
+    }
+}
+
+#[test]
+fn desktop_map_leaves_room_for_ranking_at_wide_and_short_sizes() {
+    for (width, height) in [
+        (850., 600.),
+        (1366., 768.),
+        (1440., 600.),
+        (1600., 1080.),
+        (2560., 720.),
+    ] {
+        let mut h = harness(width);
+        h.set_size(egui::vec2(width, height));
+        h.run();
+        let selected = h.state().selected.unwrap();
+        let selected_label = format!("Selected: {}", h.state().data.countries[selected].name);
+        let map_bottom = h.get_by_label(&selected_label).rect().bottom();
+        let heading = h.get_by_label("Country").rect();
+        assert!(
+            map_bottom < height * 0.65,
+            "map crowds out table at {width} × {height}"
+        );
+        assert!(heading.top() > map_bottom);
+        for score in h
+            .state()
+            .scores
+            .iter()
+            .filter(|score| score.matches)
+            .take(3)
+        {
+            let name = &h.state().data.countries[score.country].name;
+            let row = h.get_by_label(&format!("Select {name}")).rect();
+            assert!(
+                row.bottom() < height,
+                "ranking hidden at {width} × {height}"
+            );
+        }
+    }
+}
+
+#[test]
+fn large_screens_place_map_beside_table_and_resize_back_to_stacked() {
+    let mut h = harness(1920.);
+    h.run();
+    let selected = h.state().selected;
+    let selected_label = format!(
+        "Selected: {}",
+        h.state().data.countries[selected.unwrap()].name
+    );
+    for (width, height, side_by_side) in [
+        (1920., 1080., true),
+        (2560., 1440., true),
+        (1440., 1080., false),
+        (2560., 720., false),
+        (1920., 1080., true),
+    ] {
+        h.set_size(egui::vec2(width, height));
+        h.run();
+        let map_label = h.get_by_label(&selected_label).rect();
+        let table = h.get_by_label("Country").rect();
+        if side_by_side {
+            assert!(table.right() < map_label.left());
+            assert!(table.top() < map_label.top());
+        } else {
+            assert!(table.top() > map_label.bottom());
+        }
+        assert!(table.bottom() < height);
+        assert_eq!(h.state().selected, selected);
+        let name = &h.state().data.countries[h.state().scores[0].country].name;
+        let row = h.get_by_label(&format!("Select {name}")).rect();
+        assert!(row.right() <= width && row.bottom() < height);
     }
 }
