@@ -13,6 +13,7 @@ fn rejects_corrupt_sources_and_normalizes_before_grouping() {
         name: String::new(),
         url: String::new(),
         year: String::new(),
+        license: String::new(),
         normalization: "max_then_year_mean".into(),
         columns: BTreeMap::from([
             ("country".into(), "country".into()),

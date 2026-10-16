@@ -3,7 +3,7 @@
 Country inputs are pinned in `data/raw/`.
 Each file's hash, source URL, observation year where known, column mapping, units, and transformation are recorded in
 `catalog.toml`.
-`CULTURE-FIT-LICENSE` contains code copyright and license notices; they do not establish a blanket license for upstream
+[LICENSE](../LICENSE) contains code copyright and license notices; they do not establish a blanket license for upstream
 datasets.
 Unknown upstream terms remain marked unknown.
 

@@ -33,9 +33,9 @@ impl Default for Settings {
                 quality: 5.,
             },
             quality_importances: Quality {
-                happy_planet: 3.,
-                social_progress: 4.,
-                human_freedom: 3.,
+                happy_planet: 5.,
+                social_progress: 5.,
+                human_freedom: 5.,
             },
             minimums: Minimums {
                 culture: 0.,

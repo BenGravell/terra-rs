@@ -10,6 +10,7 @@ pub(super) fn build(inputs: &[Input], countries: Vec<Country>) -> Result<Dataset
                 name: s.name.clone(),
                 url: s.url.clone(),
                 year: s.year.clone(),
+                license: s.license.clone(),
             })
             .collect(),
         countries: countries.into_iter().filter(|c| !c.id.is_empty()).collect(),

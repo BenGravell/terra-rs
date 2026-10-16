@@ -167,7 +167,7 @@ null_markers = ["", "NA", "NaN"]
 [[sources]]
 id = "codes"
 file = "country_codes_alpha_3.csv"
-url = "https://github.com/BenGravell/terra"
+url = "https://www.iso.org/iso-3166-country-codes.html"
 year = "unknown"
 name = "ISO alpha-3 country codes"
 normalization = "none"

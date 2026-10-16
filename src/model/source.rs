@@ -5,4 +5,5 @@ pub struct Source {
     pub name: String,
     pub url: String,
     pub year: String,
+    pub license: String,
 }

@@ -7,6 +7,7 @@ mod constraints;
 mod culture;
 mod flags;
 mod header;
+mod help;
 mod layout;
 mod map;
 mod persistence;

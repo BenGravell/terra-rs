@@ -9,6 +9,7 @@ pub(super) struct Input {
     pub name: String,
     pub url: String,
     pub year: String,
+    pub license: String,
     pub normalization: String,
     pub columns: BTreeMap<String, String>,
     pub null_markers: Vec<String>,

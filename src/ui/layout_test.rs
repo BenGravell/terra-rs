@@ -69,10 +69,7 @@ fn top_right_button_switches_pages_on_wide_and_narrow_layouts() {
         let title = h.get_by_label("TERRA").rect();
         assert!((title.center().y - about.center().y).abs() < 1.);
         assert!(about.right() > width - 20. && about.right() <= width);
-        assert!(
-            h.query_by_label("Map: Natural Earth 5.1.2, public domain")
-                .is_none()
-        );
+        assert!(h.query_by_label("Map: Natural Earth 5.1.2").is_none());
         h.get_by_label("About").click();
         h.run();
         assert!(h.state().tab == super::Tab::About);
@@ -80,10 +77,7 @@ fn top_right_button_switches_pages_on_wide_and_narrow_layouts() {
         let results = h.get_by_label("Results").rect();
         assert!((results.right() - about.right()).abs() < 1.);
         assert!((results.center().y - about.center().y).abs() < 1.);
-        assert!(
-            h.query_by_label("Map: Natural Earth 5.1.2, public domain")
-                .is_some()
-        );
+        assert!(h.query_by_label("Map: Natural Earth 5.1.2").is_some());
         assert!(h.query_by_label("Matches").is_none());
         h.get_by_label("Results").click();
         h.run();
@@ -183,4 +177,21 @@ fn mobile_results_tabs_switch_views_and_preserve_selection() {
     assert!(h.query_by_label("Table").is_none());
     assert!(h.query_by_label("Map").is_none());
     assert!(h.query_by_label("Country").is_some());
+}
+
+#[test]
+fn about_topics_expand_within_phone_and_desktop_widths() {
+    for width in [320., 390., 1440.] {
+        let mut h = harness(width);
+        h.run();
+        h.get_by_label("About").click();
+        h.run();
+        let heading = h.get_by_label("Which country feels like home?").rect();
+        assert!(heading.left() >= 0. && heading.right() <= width);
+        h.get_by_label("Overall score & ranking").click();
+        h.run();
+        let explanation = h.get_by_label("The overall score combines Culture Fit and Quality of Life using your weights. Ranks number matching countries consecutively after constraints. Equal scores are ordered by country ID.").rect();
+        assert!(explanation.left() >= 0. && explanation.right() <= width);
+        assert!(explanation.width() <= 800.);
+    }
 }

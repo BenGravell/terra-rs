@@ -43,7 +43,7 @@ fn mobile_tabs_fill_bottom_row_and_switch_sections() {
         h.get_by_label("Weights").click();
         h.run();
         assert!(h.query_by_label("Power distance").is_none());
-        assert!(h.query_by_label("Culture Fit importance").is_some());
+        assert!(h.query_by_label("Culture Fit").is_some());
         h.get_by_label("Limits").click();
         h.run();
         assert!(h.query_by_label("Culture Fit minimum").is_some());
