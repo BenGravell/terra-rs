@@ -8,3 +8,7 @@ browser = ["playwright==1.63.0"]
 
 [tool.uv]
 package = false
+
+[[tool.uv.index]]
+url = "https://pypi.org/simple"
+default = true
