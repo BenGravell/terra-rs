@@ -57,6 +57,16 @@ def main():
         def wait_settings(expression):
             page.wait_for_function(f"{expression}")
 
+        def press_slider(x, y, expression):
+            page.mouse.move(x, y)
+            # Give egui a frame to hit-test, then hold until it handles the press.
+            page.evaluate("new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+            page.mouse.down()
+            try:
+                wait_settings(expression)
+            finally:
+                page.mouse.up()
+
         try:
             page.goto(url)
             ready()
@@ -64,37 +74,29 @@ def main():
             startup = page.evaluate("performance.getEntriesByName('terra-ready')[0].startTime")
             page.screenshot(path=str(artifacts / f"{args.browser}-desktop.png"))
             # Canvas coordinates for Power distance and Reset at the fixed desktop viewport.
-            page.mouse.move(76, 225)
-            page.mouse.down()
-            page.mouse.move(122, 225, steps=8)
-            page.mouse.up()
-            wait_settings("JSON.parse(localStorage.getItem('terra.settings.v1')).settings.culture[0] > 50")
+            press_slider(210, 191, "JSON.parse(localStorage.getItem('terra.settings.v1')).settings.culture[0] > 50")
             changed = settings()
             page.reload()
             ready()
             assert settings() == changed
-            page.mouse.click(210, 75, delay=100)
+            page.mouse.click(38, 75, delay=100)
             wait_settings("JSON.parse(localStorage.getItem('terra.settings.v1')).settings.culture[0] === 50")
             assert settings() == initial
-            # Culture Fit slider drives the other overall weight through the actual UI.
-            page.mouse.move(112, 717)
-            # Let egui hit-test the new pointer position, then hold until it handles the press.
-            page.evaluate("new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
-            page.mouse.down()
-            wait_settings("JSON.parse(localStorage.getItem('terra.settings.v1')).settings.overall_weights[0] > .5")
-            page.mouse.up()
-            weights = settings()["overall_weights"]
-            assert abs(sum(weights) - 1) < 1e-9 and all(0 <= w <= 1 for w in weights)
+            # Overall importances are independent integers on a 0–10 scale.
+            press_slider(210, 714, "JSON.parse(localStorage.getItem('terra.settings.v1')).settings.overall_importances[0] > 5")
+            importances = settings()["overall_importances"]
+            assert importances[1] == initial["overall_importances"][1]
+            assert all(0 <= w <= 10 and w == int(w) for w in importances)
             page.reload()
             ready()
-            assert all(abs(a - b) < 1e-9 for a, b in zip(settings()["overall_weights"], weights, strict=True))
-            page.mouse.click(210, 75, delay=100)
-            wait_settings("JSON.parse(localStorage.getItem('terra.settings.v1')).settings.overall_weights[0] === .5")
+            assert settings()["overall_importances"] == importances
+            page.mouse.click(38, 75, delay=100)
+            wait_settings("JSON.parse(localStorage.getItem('terra.settings.v1')).settings.overall_importances[0] === 5")
+            assert settings() == initial
             page.set_viewport_size({"width": 390, "height": 844})
             page.wait_for_timeout(400)
             page.screenshot(path=str(artifacts / f"{args.browser}-narrow.png"))
-            page.mouse.click(122, 620, delay=100)
-            wait_settings("JSON.parse(localStorage.getItem('terra.settings.v1')).settings.culture[0] > 50")
+            press_slider(250, 560, "JSON.parse(localStorage.getItem('terra.settings.v1')).settings.culture[0] > 50")
             page.screenshot(path=str(artifacts / f"{args.browser}-narrow-settings.png"))
             # Malformed storage recovers and persists defaults.
             page.evaluate("localStorage.setItem('terra.settings.v1', 'broken')")
