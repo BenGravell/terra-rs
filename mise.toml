@@ -56,7 +56,7 @@ outputs = []
 description = "Run CI checks not covered by pre-commit before pushing"
 run = [
     "cargo run --locked -p terra-prepare -- --check",
-    "trunk build --release --cargo-profile web",
+    "NO_COLOR=true trunk build --release --cargo-profile web",
     "uv run --locked --group browser playwright install chromium",
     "uv run --locked --group browser tools/browser_smoke.py",
 ]
