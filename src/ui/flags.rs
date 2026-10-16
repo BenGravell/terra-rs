@@ -17,8 +17,13 @@ pub(super) fn texture(ui: &egui::Ui) -> egui::TextureHandle {
         .unwrap_or_else(|| {
             let height = FLAG_IDS.lines().count().div_ceil(2) * 24;
             let mut pixels = vec![0; 64 * height * 4];
-            for (index, cell) in FLAG_PIXELS.chunks_exact(32 * 24 * 4).enumerate() {
-                for (row, source) in cell.chunks_exact(32 * 4).enumerate() {
+            for (index, cell) in FLAG_PIXELS
+                .as_chunks::<{ 32 * 24 * 4 }>()
+                .0
+                .iter()
+                .enumerate()
+            {
+                for (row, source) in cell.as_chunks::<{ 32 * 4 }>().0.iter().enumerate() {
                     let offset = ((index / 2 * 24 + row) * 64 + index % 2 * 32) * 4;
                     pixels[offset..offset + 32 * 4].copy_from_slice(source);
                 }
