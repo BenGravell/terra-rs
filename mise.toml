@@ -19,6 +19,7 @@ command_inputs = [
     "cargo -vV",
     '"${RUSTC:-${CARGO_BUILD_RUSTC:-rustc}}" -vV',
     "cargo clippy --version",
+    "cargo fmt --version",
     "python3 tools/cargo_hook_context.py",
 ]
 
@@ -37,6 +38,7 @@ run = [
     # --fix can succeed with unfixable warnings; cache only a strict pass.
     "cargo clippy --locked --workspace --all-targets -- -D warnings",
     "cargo clippy --locked --target wasm32-unknown-unknown --lib --bin terra -- -D warnings",
+    "cargo fmt --all --check",
 ]
 sources = [
     "@group:rust", "tools/clippy_fix.py",
