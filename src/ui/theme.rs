@@ -62,7 +62,10 @@ pub(super) fn apply(ctx: &egui::Context) {
     ctx.set_fonts(fonts);
     let mut style = (*ctx.style_of(egui::Theme::Light)).clone();
     // Filtering legitimately replaces country identities at the same row position.
-    style.debug.warn_if_rect_changes_id = false;
+    #[cfg(debug_assertions)]
+    {
+        style.debug.warn_if_rect_changes_id = false;
+    }
     // Format slider readouts without rounding their stored values.
     style.number_formatter = egui::style::NumberFormatter::new(|value, _| format!("{value:.0}"));
     style.visuals = egui::Visuals::light();
