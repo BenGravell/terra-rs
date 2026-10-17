@@ -17,28 +17,15 @@ pub(super) fn show(
     let parts = quality_colors();
     ui.scope(|ui| {
         ui.spacing_mut().scroll.floating = false;
-        let compact = ui.available_width() < 600.;
+        let compact = ui.ctx().content_rect().width() < 850. || ui.available_width() < 600.;
         if compact {
             ui.style_mut()
                 .text_styles
                 .insert(egui::TextStyle::Body, egui::FontId::proportional(13.));
             ui.spacing_mut().item_spacing.x = 6.;
+            ui.spacing_mut().item_spacing.y = 2.;
+            ui.spacing_mut().interact_size.y = 18.;
         }
-        ui.horizontal_wrapped(|ui| {
-            for (name, color) in std::iter::once(("Culture Fit", CULTURE))
-                .chain(QUALITY_NAMES.into_iter().zip(parts))
-            {
-                let mut label = egui::text::LayoutJob::default();
-                let font = egui::TextStyle::Body.resolve(ui.style());
-                label.append("■ ", 0., egui::TextFormat::simple(font.clone(), color));
-                label.append(
-                    name,
-                    0.,
-                    egui::TextFormat::simple(font, ui.visuals().text_color()),
-                );
-                ui.label(label);
-            }
-        });
         let flags = super::flags::texture(ui);
         let capitals = ui.painter().layout_no_wrap(
             "H".into(),
@@ -56,61 +43,94 @@ pub(super) fn show(
                 .size()
                 .x
         };
-        let headings = if compact {
-            ["#", "Country", "Score", "Breakdown"]
-        } else {
-            ["Rank", "Country", "Overall", "Score breakdown"]
-        };
         let column_gap = if compact { 6. } else { 16. };
-        let rank_width = text_width(headings[0]).max(text_width(&format!(
-            "{}.",
-            scores.iter().filter(|s| s.matches).count()
-        )));
-        let score_width = text_width(headings[2]).max(text_width("100%"));
-        let available = ui.available_width() - ui.spacing().scroll.allocated_width();
-        let minimum_bar_width = text_width(headings[3]).max(if compact { 60. } else { 180. });
-        let country_text_width = scores
-            .iter()
-            .filter(|score| score.matches)
-            .map(|score| text_width(&countries[score.country].name))
-            .fold(text_width(headings[1]), f32::max);
+        let rank_diameter = ui.text_style_height(&egui::TextStyle::Body) + 6.;
+        let rank_width = rank_diameter;
+        let score_width = text_width("100%");
+        let minimum_bar_width = if compact { 60. } else { 180. };
+        let available = (ui.available_width() - ui.spacing().scroll.allocated_width()).floor();
         let fixed_width = rank_width + score_width + column_gap * 3.;
-        let country_width = (flag_slot_width + ui.spacing().item_spacing.x + country_text_width)
+        let country_width = (available * 0.35)
+            .min(200.)
             .min(available - fixed_width - minimum_bar_width)
             .max(flag_slot_width + ui.spacing().item_spacing.x);
         let bar_width = (available - fixed_width - country_width).max(minimum_bar_width);
-        let table_height = if ui.ctx().content_rect().width() < 850. {
-            (ui.available_height() - 34.).clamp(100., 340.)
-        } else {
-            ui.available_height().max(0.)
-        };
-        egui::ScrollArea::both()
+        ui.horizontal(|ui| {
+            ui.spacing_mut().item_spacing.x = 0.;
+            ui.add_space(fixed_width + country_width);
+            ui.allocate_ui_with_layout(
+                egui::vec2(bar_width, 18.),
+                egui::Layout::left_to_right(egui::Align::Center),
+                |ui| {
+                    ui.set_width(bar_width);
+                    ui.spacing_mut().item_spacing.x = 8.;
+                    let mut legend_font = egui::TextStyle::Body.resolve(ui.style());
+                    let legend_width = ui.available_width() - 3. * ui.spacing().item_spacing.x;
+                    while std::iter::once("Culture Fit")
+                        .chain(QUALITY_NAMES)
+                        .map(|name| {
+                            ui.painter()
+                                .layout_no_wrap(
+                                    format!("■ {name}"),
+                                    legend_font.clone(),
+                                    ui.visuals().text_color(),
+                                )
+                                .size()
+                                .x
+                        })
+                        .sum::<f32>()
+                        > legend_width
+                        && legend_font.size > 1.
+                    {
+                        legend_font.size -= 0.25;
+                    }
+                    ui.horizontal(|ui| {
+                        for (name, color) in std::iter::once(("Culture Fit", CULTURE))
+                            .chain(QUALITY_NAMES.into_iter().zip(parts))
+                        {
+                            let mut label = egui::text::LayoutJob::default();
+                            let font = legend_font.clone();
+                            label.append("■ ", 0., egui::TextFormat::simple(font.clone(), color));
+                            label.append(
+                                name,
+                                0.,
+                                egui::TextFormat::simple(font, ui.visuals().text_color()),
+                            );
+                            ui.add(egui::Label::new(label).wrap_mode(egui::TextWrapMode::Extend));
+                        }
+                    });
+                },
+            );
+        });
+        let table_height = ui.available_height().max(0.);
+        egui::ScrollArea::vertical()
             .id_salt("ranking")
+            .scroll_bar_visibility(egui::scroll_area::ScrollBarVisibility::AlwaysVisible)
             .max_height(table_height)
-            .auto_shrink([false, true])
+            .auto_shrink([false, false])
             .show(ui, |ui| {
                 egui::Grid::new("country_ranking_table")
                     .num_columns(4)
                     .min_col_width(0.)
-                    .spacing(egui::vec2(column_gap, 8.))
-                    .min_row_height(if compact { 28. } else { 18. })
+                    .spacing(egui::vec2(column_gap, if compact { 2. } else { 8. }))
+                    .min_row_height(18.)
                     .striped(true)
                     .show(ui, |ui| {
-                        for heading in headings {
-                            ui.strong(heading);
-                        }
-                        ui.end_row();
                         for s in scores.iter().filter(|s| s.matches) {
                             let row_top = ui.cursor().top();
                             let background = ui.painter().add(egui::Shape::Noop);
-                            let rank =
-                                ui.add(egui::Label::new(format!("{}.", s.rank)).selectable(false));
+                            let rank = super::disk::show(
+                                ui,
+                                &s.rank.to_string(),
+                                rank_diameter,
+                                egui::Sense::hover(),
+                            );
                             let country = &countries[s.country];
                             let country_cell = ui.allocate_ui_with_layout(
                                 egui::vec2(country_width, capitals.size().y),
                                 egui::Layout::left_to_right(egui::Align::Center),
                                 |ui| {
-                                    ui.set_min_width(country_width);
+                                    ui.set_width(country_width);
                                     let (slot, _) = ui.allocate_exact_size(
                                         egui::vec2(flag_slot_width, capitals.size().y),
                                         egui::Sense::hover(),
@@ -143,15 +163,19 @@ pub(super) fn show(
                                     }
                                 },
                             );
-                            let overall =
-                                ui.add(egui::Label::new(percent(s.overall)).selectable(false));
+                            let overall = ui.add_sized(
+                                [score_width, 18.],
+                                egui::Label::new(percent(s.overall))
+                                    .halign(egui::Align::Min)
+                                    .selectable(false),
+                            );
                             let values = contributions(s, quality_weight);
                             let row_height = rank
                                 .rect
                                 .height()
                                 .max(country_cell.response.rect.height())
                                 .max(overall.rect.height())
-                                .max(if compact { 28. } else { 18. });
+                                .max(18.);
                             let bar = bars::stacked_bar(
                                 ui,
                                 egui::vec2(bar_width, row_height),
@@ -171,9 +195,7 @@ pub(super) fn show(
                                 .union(overall.rect)
                                 .union(bar.rect);
                             row_rect.min.y = row_top;
-                            row_rect.max.y = row_rect
-                                .bottom()
-                                .max(row_top + if compact { 28. } else { 18. });
+                            row_rect.max.y = row_rect.bottom().max(row_top + 18.);
                             let row_rect =
                                 row_rect.expand2(egui::vec2(0., ui.spacing().item_spacing.y * 0.5));
                             let response = ui.interact(

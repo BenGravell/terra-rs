@@ -9,7 +9,12 @@ use egui_kittest::{
 fn importances_are_independent_and_only_the_last_nonzero_value_stops_at_one() {
     let mut h = Harness::builder()
         .with_size(egui::vec2(400., 800.))
-        .build_ui_state(super::show, Settings::default());
+        .build_ui_state(
+            |ui, state| {
+                super::show(ui, state);
+            },
+            Settings::default(),
+        );
     h.run();
     h.get_by_label("Culture Fit").focus();
     h.run();
@@ -106,7 +111,12 @@ fn importance_help_opens_in_narrow_layout_without_changing_values() {
     let settings = Settings::default();
     let mut h = Harness::builder()
         .with_size(egui::vec2(320., 800.))
-        .build_ui_state(super::show, settings.clone());
+        .build_ui_state(
+            |ui, state| {
+                super::show(ui, state);
+            },
+            settings.clone(),
+        );
     h.run();
     for (name, target) in [
         ("Culture Fit", "overall"),

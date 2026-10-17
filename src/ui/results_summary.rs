@@ -11,7 +11,7 @@ pub(super) fn show(ui: &mut egui::Ui, settings: &Settings, scores: &[Score]) -> 
     if !scores.iter().any(|score| score.matches) {
         ui.colored_label(
             super::theme::WARNING,
-            "No countries match. Try lowering a minimum or allowing more continents.",
+            "No countries match. Try relaxing the filters.",
         );
     }
     true

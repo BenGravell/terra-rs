@@ -16,8 +16,13 @@ pub(super) fn show(
             .ctx()
             .data_mut(|data| data.get_temp::<usize>(id).unwrap_or(0));
         ui.with_layout(egui::Layout::bottom_up(egui::Align::Min), |ui| {
-            super::layout::tab_selector(ui, &mut tab, &["Culture", "Weights", "Limits", "Preset"]);
+            super::layout::tab_selector(
+                ui,
+                &mut tab,
+                &["Culture", "Weights", "Filters", "Presets"],
+            );
             ui.separator();
+            let reset = reset_button(ui, ["Culture", "Weights", "Filters", "Presets"][tab]);
             ui.with_layout(egui::Layout::top_down(egui::Align::Min), |ui| {
                 egui::ScrollArea::vertical()
                     .id_salt(("preferences_content", tab))
@@ -34,6 +39,15 @@ pub(super) fn show(
                         )
                     });
             });
+            if reset {
+                match tab {
+                    0 => culture::reset(&mut settings.culture),
+                    1 => weights::reset(settings),
+                    2 => constraints::reset(settings),
+                    _ => *reference = None,
+                }
+                *revision += 1;
+            }
         });
         ui.ctx().data_mut(|data| data.insert_temp(id, tab));
     } else {
@@ -52,7 +66,6 @@ fn show_content(
 ) {
     // New IDs discard a focused numeric editor's old buffer after a bulk settings change.
     ui.push_id(*revision, |ui| {
-        let reset = ui.button("Reset").clicked();
         if let Some(message) = message {
             ui.colored_label(super::theme::WARNING, message);
         }
@@ -62,26 +75,37 @@ fn show_content(
             Some(2) => constraints::content(ui, settings),
             Some(_) => reference::content(ui, countries, settings, reference, revision),
             None => {
-                culture::show(ui, &mut settings.culture);
-                weights::show(ui, settings);
-                constraints::show(ui, settings);
+                ui.spacing_mut().indent = 32.;
+                let reset = culture::show(ui, &mut settings.culture)
+                    | weights::show(ui, settings)
+                    | constraints::show(ui, settings);
+                if reset {
+                    *revision += 1;
+                }
                 reference::show(ui, countries, settings, reference, revision);
             }
-        }
-        if reset {
-            *revision += 1;
-            *settings = Settings::default();
-            *reference = None;
-            ui.ctx().memory_mut(|memory| {
-                if let Some(id) = memory.focused() {
-                    memory.surrender_focus(id);
-                }
-            });
         }
         if let Err(message) = settings.validate() {
             ui.colored_label(super::theme::WARNING, message);
         }
     });
+}
+
+pub(super) fn reset_button(ui: &mut egui::Ui, section: &str) -> bool {
+    let reset = ui
+        .add_sized(
+            [ui.available_width(), 33.],
+            egui::Button::new(format!("Reset {section}")),
+        )
+        .clicked();
+    if reset {
+        ui.ctx().memory_mut(|memory| {
+            if let Some(id) = memory.focused() {
+                memory.surrender_focus(id);
+            }
+        });
+    }
+    reset
 }
 
 #[cfg(test)]

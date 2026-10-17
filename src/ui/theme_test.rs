@@ -32,7 +32,7 @@ fn text_colors_have_readable_contrast_on_surfaces() {
     for foreground in [
         TEXT,
         ACCENT,
-        CULTURE,
+        style.visuals.error_fg_color,
         WARNING,
         style.visuals.weak_text_color.unwrap(),
     ] {

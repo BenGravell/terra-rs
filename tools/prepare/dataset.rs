@@ -3,7 +3,6 @@ use terra::model::{Country, Dataset, Source};
 
 pub(super) fn build(inputs: &[Input], countries: Vec<Country>) -> Result<Dataset> {
     let data = Dataset {
-        schema_version: 1,
         sources: inputs
             .iter()
             .map(|s| Source {

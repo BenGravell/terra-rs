@@ -1,5 +1,3 @@
-#[cfg(target_family = "wasm")]
-use crate::model::SavedSettings;
 use crate::model::Settings;
 
 #[cfg(target_family = "wasm")]
@@ -11,10 +9,10 @@ pub(super) fn restore() -> (Settings, Option<String>) {
             .map_err(|_| "Local storage is unavailable; settings last for this visit.")?
             .ok_or("Local storage is unavailable; settings last for this visit.")?;
         let text = storage
-            .get_item("terra.settings.v1")
+            .get_item("terra.settings")
             .map_err(|_| "Could not read saved settings.")?;
         match text {
-            Some(text) => SavedSettings::decode(&text),
+            Some(text) => Settings::decode(&text),
             None => Ok(Settings::default()),
         }
     })();
@@ -32,15 +30,11 @@ pub(super) fn restore() -> (Settings, Option<String>) {
 }
 #[cfg(target_family = "wasm")]
 pub(super) fn persist(settings: &Settings) -> Result<(), String> {
-    let saved = serde_json::to_string(&SavedSettings {
-        version: 2,
-        settings: settings.clone(),
-    })
-    .map_err(|e| e.to_string())?;
+    let saved = serde_json::to_string(settings).map_err(|e| e.to_string())?;
     web_sys::window()
         .and_then(|w| w.local_storage().ok().flatten())
         .ok_or("Local storage is unavailable; settings last for this visit.")?
-        .set_item("terra.settings.v1", &saved)
+        .set_item("terra.settings", &saved)
         .map_err(|_| "Could not save settings; changes last for this visit.".into())
 }
 #[cfg(not(target_family = "wasm"))]

@@ -1,5 +1,3 @@
-schema_version = 1
-
 # Pinned source files; dataset rights are recorded separately from code licenses.
 
 [[sources]]

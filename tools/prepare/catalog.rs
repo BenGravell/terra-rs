@@ -4,16 +4,12 @@ use std::{collections::BTreeSet, fs, path::Path};
 
 #[derive(Deserialize)]
 pub(super) struct Catalog {
-    schema_version: u32,
     pub sources: Vec<Input>,
     pub map: MapInput,
 }
 
 pub(super) fn load(root: &Path) -> Result<Catalog> {
     let catalog: Catalog = toml::from_str(&fs::read_to_string(root.join("data/catalog.toml"))?)?;
-    if catalog.schema_version != 1 {
-        return Err("Unsupported catalog version".into());
-    }
     let mut fields = BTreeSet::new();
     for source in &catalog.sources {
         for field in source

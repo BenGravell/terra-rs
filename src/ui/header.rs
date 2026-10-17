@@ -3,6 +3,9 @@ use bevy_egui::egui;
 
 pub(super) fn show(ui: &mut egui::Ui, narrow: bool, tab: &mut Tab) {
     ui.add_space(6.);
+    if narrow {
+        ui.spacing_mut().interact_size.y = 44.;
+    }
     ui.horizontal(|ui| {
         theme::title(ui);
         if !narrow {
@@ -43,12 +46,29 @@ pub(super) fn show(ui: &mut egui::Ui, narrow: bool, tab: &mut Tab) {
                 ui.label("Find your place in the world");
             }
         }
+        if narrow {
+            let id = egui::Id::new("mobile_results_tab");
+            let mut selected = ui
+                .ctx()
+                .data_mut(|data| data.get_temp::<usize>(id).unwrap_or(0));
+            let mut destination = if *tab == Tab::About { 2 } else { selected };
+            super::layout::tab_selector(ui, &mut destination, &["Table", "Map", "About"]);
+            if destination == 2 {
+                *tab = Tab::About;
+            } else {
+                *tab = Tab::Results;
+                selected = destination;
+            }
+            ui.ctx().data_mut(|data| data.insert_temp(id, selected));
+            return;
+        }
         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
             let (label, destination) = match tab {
                 Tab::Results => ("About", Tab::About),
                 Tab::About => ("Results", Tab::Results),
             };
-            if ui.button(label).clicked() {
+            let icon = super::icons::tab(label, ui.visuals().text_color(), 16.);
+            if ui.add(egui::Button::new((icon, label))).clicked() {
                 *tab = destination;
             }
         });

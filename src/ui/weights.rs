@@ -1,16 +1,22 @@
 use crate::model::Settings;
 use bevy_egui::egui;
 
-pub(super) fn show(ui: &mut egui::Ui, settings: &mut Settings) {
-    egui::CollapsingHeader::new("Score importances")
-        .default_open(true)
+pub(super) fn show(ui: &mut egui::Ui, settings: &mut Settings) -> bool {
+    super::icons::section("Weights", true)
         .show(ui, |ui| {
             content(ui, settings);
-        });
+            let clicked = super::settings::reset_button(ui, "Weights");
+            if clicked {
+                reset(settings);
+            }
+            clicked
+        })
+        .body_returned
+        .unwrap_or(false)
 }
 
 pub(super) fn content(ui: &mut egui::Ui, settings: &mut Settings) {
-    ui.label("Overall score");
+    ui.label("Overall Score");
     let overall = &mut settings.overall_importances;
     weight_slider(
         ui,
@@ -60,8 +66,7 @@ fn weight_slider(
     peers: &mut [&mut f64],
 ) {
     let help = importance_help(name, target);
-    let label = super::help::label(ui, name, &help);
-    if super::slider::show(ui, selected, 0.0..=10.0, label.id, "", false).changed()
+    if super::slider::row(ui, name, &help, selected, 0.0..=10.0, "", false).changed()
         && peers.iter().all(|value| **value == 0.)
     {
         *selected = selected.max(1.);
@@ -70,6 +75,12 @@ fn weight_slider(
 
 fn importance_help(name: &str, target: &str) -> String {
     format!("How much {name} contributes to the {target} score.")
+}
+
+pub(super) fn reset(settings: &mut Settings) {
+    let defaults = Settings::default();
+    settings.overall_importances = defaults.overall_importances;
+    settings.quality_importances = defaults.quality_importances;
 }
 
 #[cfg(test)]

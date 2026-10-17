@@ -4,7 +4,6 @@ use std::collections::HashSet;
 
 #[derive(Deserialize, Serialize)]
 pub struct Dataset {
-    pub schema_version: u32,
     pub sources: Vec<Source>,
     pub countries: Vec<Country>,
 }
@@ -12,9 +11,6 @@ pub struct Dataset {
 impl Dataset {
     pub fn parse(text: &str) -> Result<Self, String> {
         let data: Self = serde_json::from_str(text).map_err(|e| format!("Country data: {e}"))?;
-        if data.schema_version != 1 {
-            return Err("Unsupported country data version.".into());
-        }
         let mut ids = HashSet::new();
         for c in &data.countries {
             if c.id.len() != 3

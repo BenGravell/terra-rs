@@ -33,7 +33,16 @@ fn holes_and_both_sides_of_the_antimeridian_are_preserved() {
 fn corrupt_indices_and_empty_maps_fail_before_rendering() {
     assert!(MapRegion::parse("[]").is_err());
     assert!(
-        MapRegion::parse(r#"[{"id":"X","name":"Broken","points":[[0,0]],"indices":[0,1,2]}]"#)
-            .is_err()
+        MapRegion::parse(
+            r#"[{"id":"X","name":"Broken","points":[[0,0]],"indices":[0,1,2],"rings":[]}]"#
+        )
+        .is_err()
     );
+}
+
+#[test]
+fn map_rings_are_required() {
+    let mut regions = serde_json::to_value(regions()).unwrap();
+    regions[0].as_object_mut().unwrap().remove("rings");
+    assert!(MapRegion::parse(&regions.to_string()).is_err());
 }

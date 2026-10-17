@@ -6,9 +6,7 @@ use std::collections::HashSet;
 #[serde(deny_unknown_fields)]
 pub struct Settings {
     pub culture: Culture,
-    #[serde(alias = "overall_weights")]
     pub overall_importances: Overall,
-    #[serde(alias = "quality_weights")]
     pub quality_importances: Quality,
     pub minimums: Minimums,
     pub english_min: f64,
@@ -56,6 +54,13 @@ impl Default for Settings {
 }
 
 impl Settings {
+    pub fn decode(text: &str) -> Result<Self, String> {
+        let settings: Self =
+            serde_json::from_str(text).map_err(|_| "Saved settings could not be read.")?;
+        settings.validate()?;
+        Ok(settings)
+    }
+
     pub fn quality_weight(&self) -> f64 {
         self.overall_importances.quality / self.overall_importances.values().iter().sum::<f64>()
     }

@@ -14,7 +14,7 @@ fn ranking_selection_updates_the_selected_country() {
     assert!((first.left() - second.left()).abs() < 1.);
     assert!(second.top() > first.bottom());
     for heading in ["Rank", "Country", "Overall", "Score breakdown"] {
-        assert!(h.query_by_label(heading).is_some());
+        assert!(h.query_by_label(heading).is_none());
     }
     h.get_by_label(&name).click();
     h.run();
@@ -179,7 +179,110 @@ fn stacked_bars_leave_only_a_thin_gap_at_row_edges() {
                 _ => None,
             })
             .unwrap();
-        assert!((bar.top() - row.top() - 2.).abs() < 0.1);
-        assert!((row.bottom() - bar.bottom() - 2.).abs() < 0.1);
+        assert!((bar.top() - row.top() - if width < 850. { 1. } else { 2. }).abs() < 0.1);
+        assert!((row.bottom() - bar.bottom() - if width < 850. { 1. } else { 2. }).abs() < 0.1);
+    }
+}
+
+#[test]
+fn column_widths_do_not_change_with_filtered_results() {
+    for width in [320., 390., 844., 1400.] {
+        let mut h = harness(width);
+        h.run();
+        let columns = |h: &egui_kittest::Harness<'_, crate::ui::TerraApp>| {
+            let row = h
+                .query_all_by(|node| {
+                    node.label()
+                        .is_some_and(|label| label.starts_with("Select "))
+                })
+                .next()
+                .unwrap()
+                .rect();
+            let score = h
+                .output()
+                .shapes
+                .iter()
+                .find_map(|shape| {
+                    if let bevy_egui::egui::Shape::Rect(rect) = &shape.shape
+                        && rect.fill == super::CULTURE
+                        && row.contains(rect.rect.center())
+                    {
+                        return Some(rect.rect.left());
+                    }
+                    None
+                })
+                .unwrap();
+            [row.left(), score, row.right()]
+        };
+        let original = columns(&h);
+        for continent in ["Europe", "Oceania", "Asia"] {
+            h.state_mut().settings.continents = vec![continent.into()];
+            h.run();
+            for (before, after) in original.into_iter().zip(columns(&h)) {
+                assert!(
+                    (before - after).abs() < 1.,
+                    "column moved at {width}: {before} -> {after}"
+                );
+            }
+        }
+    }
+}
+
+#[test]
+fn rapidly_changing_limits_do_not_draw_red_diagnostic_boxes() {
+    use bevy_egui::egui::{Color32, Shape};
+    for width in [390., 1400.] {
+        let mut h = harness(width);
+        h.run();
+        for minimum in [0.5, 0.8, 0.2, 0.7, 0., 0.9, 0.4, 0.] {
+            h.state_mut().settings.minimums.culture = minimum;
+            h.step();
+            assert!(
+                !h.output().shapes.iter().any(|shape| {
+                    matches!(&shape.shape, Shape::Rect(rect) if rect.stroke.color == Color32::RED)
+                }),
+                "red diagnostic at width {width}, limit {minimum}"
+            );
+        }
+    }
+}
+
+#[test]
+fn legend_stays_fixed_when_table_scrolls() {
+    use bevy_egui::egui;
+    for width in [390., 1400.] {
+        let mut h = harness(width);
+        h.run();
+        let legend_rects = |h: &egui_kittest::Harness<'_, crate::ui::TerraApp>| {
+            h.output()
+                .shapes
+                .iter()
+                .filter_map(|shape| {
+                    if let egui::Shape::Text(text) = &shape.shape
+                        && text.galley.job.text.starts_with("■ ")
+                    {
+                        return Some(text.galley.rect.translate(text.pos.to_vec2()));
+                    }
+                    None
+                })
+                .collect::<Vec<_>>()
+        };
+        let before = legend_rects(&h);
+        assert_eq!(before.len(), 4);
+        let name = h.state().data.countries[h.state().scores[0].country]
+            .name
+            .clone();
+        let label = format!("Select {name}");
+        let row = h.get_by_label(&label).rect();
+        h.event(egui::Event::PointerMoved(row.center()));
+        h.event(egui::Event::MouseWheel {
+            unit: egui::MouseWheelUnit::Point,
+            phase: egui::TouchPhase::Move,
+            delta: egui::vec2(0., -200.),
+            modifiers: egui::Modifiers::NONE,
+        });
+        h.run();
+        assert!(h.get_by_label(&label).rect().top() < row.top());
+        assert_eq!(legend_rects(&h), before);
     }
 }

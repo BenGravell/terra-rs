@@ -75,3 +75,53 @@ fn about_tagline_starts_immediately_after_title_on_wide_screens() {
         );
     }
 }
+
+#[test]
+fn tab_icons_fit_to_the_left_of_labels_on_small_screens() {
+    use bevy_egui::egui::Shape;
+    use egui_kittest::kittest::Queryable;
+    for width in [320., 390., 844.] {
+        let mut h = harness(width);
+        h.run();
+        for label in [
+            "Table", "Map", "About", "Culture", "Weights", "Filters", "Presets",
+        ] {
+            let button = h.get_by_label(label).rect();
+            let text = h
+                .output()
+                .shapes
+                .iter()
+                .find_map(|shape| {
+                    if let Shape::Text(text) = &shape.shape
+                        && text.galley.job.text == label
+                    {
+                        return Some(text.galley.rect.translate(text.pos.to_vec2()));
+                    }
+                    None
+                })
+                .unwrap();
+            let icon = h
+                .output()
+                .shapes
+                .iter()
+                .find_map(|shape| {
+                    if let Shape::Rect(image) = &shape.shape
+                        && image.brush.is_some()
+                    {
+                        let rect = image.rect;
+                        if button.contains_rect(rect) && rect.right() <= text.left() {
+                            return Some(rect);
+                        }
+                    }
+                    None
+                })
+                .unwrap_or_else(|| panic!("missing icon for {label} at {width}"));
+            assert!(
+                button.contains_rect(text),
+                "label {label} overflows at {width}"
+            );
+            assert!((icon.center().y - text.center().y).abs() < 1.);
+            assert!(button.right() <= width);
+        }
+    }
+}

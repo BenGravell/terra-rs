@@ -8,7 +8,6 @@ pub struct MapRegion {
     /// Equirectangular coordinates normalized to [0, 1].
     pub points: Vec<MapPoint>,
     pub indices: Vec<u32>,
-    #[serde(default)]
     pub rings: Vec<Vec<u32>>,
 }
 

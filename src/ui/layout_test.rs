@@ -14,19 +14,32 @@ fn narrow_layout_places_live_results_above_settings() {
         let about = h.get_by_label("About").rect();
         assert!((title.center().y - about.center().y).abs() < 1.);
         assert!(about.right() > width - 20. && about.right() <= width);
-        assert!(h.query_by_label("Reset").is_some());
+        assert!(h.query_by_label("Reset Culture").is_some());
         assert!(h.query_by_label("Matches").is_none());
         assert!(h.query_by_label("Eligible countries").is_none());
-        assert!(h.query_by_label("Country").is_some());
+        assert!(
+            h.query_all_by(|node| node
+                .label()
+                .is_some_and(|label| label.starts_with("Select ")))
+                .next()
+                .is_some()
+        );
         assert!(h.query_by_label("Full country ranking").is_none());
-        let slider = h.get_by_label("Power distance").rect();
-        let results = h.get_by_label("Country").rect();
+        let slider = h.get_by_label("Power Distance").rect();
+        let results = h
+            .query_all_by(|node| {
+                node.label()
+                    .is_some_and(|label| label.starts_with("Select "))
+            })
+            .next()
+            .unwrap()
+            .rect();
         assert!(results.top() > title.bottom());
         assert!(results.bottom() < slider.top());
         assert!(slider.bottom() < height);
         assert!(results.bottom() < height);
         let original = h.state().scores[0].overall;
-        h.get_by_label("Power distance").focus();
+        h.get_by_label("Power Distance").focus();
         h.key_press(egui::Key::ArrowRight);
         h.run();
         assert_eq!(h.state().settings.culture.power_distance, 60.);
@@ -35,7 +48,7 @@ fn narrow_layout_places_live_results_above_settings() {
         let name = h.state().data.countries[best.country].name.clone();
         assert!(h.query_by_label(&name).is_some());
         assert!(h.get_by_label(&name).rect().bottom() < height);
-        assert!(h.query_by_label("Reset").is_some());
+        assert!(h.query_by_label("Reset Culture").is_some());
     }
 }
 
@@ -46,16 +59,28 @@ fn narrow_layout_handles_empty_and_invalid_results() {
     h.state_mut().settings.continents.clear();
     h.run();
     assert!(
-        h.query_by_label("No countries match. Try lowering a minimum or allowing more continents.")
+        h.query_by_label("No countries match. Try relaxing the filters.")
             .is_some()
     );
     assert!(h.state().selected.is_none());
     h.state_mut().settings.overall_importances.culture = -1.;
     h.run();
     assert!(h.query_by_label("Check your settings").is_some());
-    h.get_by_label("Reset").click();
+    h.get_by_label("Weights").click();
     h.run();
-    assert!(h.query_by_label("Country").is_some());
+    h.get_by_label("Reset Weights").click();
+    h.run();
+    h.get_by_label("Filters").click();
+    h.run();
+    h.get_by_label("Reset Filters").click();
+    h.run();
+    assert!(
+        h.query_all_by(|node| node
+            .label()
+            .is_some_and(|label| label.starts_with("Select ")))
+            .next()
+            .is_some()
+    );
     assert!(h.state().selected.is_some());
 }
 
@@ -73,13 +98,16 @@ fn top_right_button_switches_pages_on_wide_and_narrow_layouts() {
         h.get_by_label("About").click();
         h.run();
         assert!(h.state().tab == super::Tab::About);
-        assert!(h.query_by_label("About").is_none());
-        let results = h.get_by_label("Results").rect();
+        assert_eq!(h.query_by_label("About").is_some(), width < 850.);
+        let results = h
+            .get_by_label(if width < 850. { "About" } else { "Results" })
+            .rect();
         assert!((results.right() - about.right()).abs() < 1.);
         assert!((results.center().y - about.center().y).abs() < 1.);
         assert!(h.query_by_label("Map: Natural Earth 5.1.2").is_some());
         assert!(h.query_by_label("Matches").is_none());
-        h.get_by_label("Results").click();
+        h.get_by_label(if width < 850. { "Table" } else { "Results" })
+            .click();
         h.run();
         assert!(h.state().tab == super::Tab::Results);
         assert!(h.query_by_label("Results").is_none());
@@ -94,7 +122,7 @@ fn phone_ranking_rows_fit_without_horizontal_scrolling() {
         let mut h = harness(width);
         h.run();
         for heading in ["#", "Country", "Score", "Breakdown"] {
-            assert!(h.get_by_label(heading).rect().right() <= width - 8.);
+            assert!(h.query_by_label(heading).is_none());
         }
         assert!(h.query_by_label("Top matches").is_none());
         assert!(h.query_by_label("Full country ranking").is_none());
@@ -113,7 +141,7 @@ fn phone_ranking_rows_fit_without_horizontal_scrolling() {
                 row.right()
             );
             assert!(
-                row.height() >= 28.,
+                row.height() >= 18. && row.height() <= 26.,
                 "{name} height {} at width {width}",
                 row.height()
             );
@@ -169,18 +197,39 @@ fn mobile_results_tabs_switch_views_and_preserve_selection() {
         let table = h.get_by_label("Table").rect();
         let map = h.get_by_label("Map").rect();
         assert!((table.width() - map.width()).abs() < 1.);
-        assert!(table.bottom() < h.get_by_label("Country").rect().top());
+        assert!(
+            table.bottom()
+                < h.query_all_by(|node| node
+                    .label()
+                    .is_some_and(|label| label.starts_with("Select ")))
+                    .next()
+                    .unwrap()
+                    .rect()
+                    .top()
+        );
         assert!(h.query_by_label(&selected_label).is_none());
         h.get_by_label("Map").click();
         h.run();
-        assert!(h.query_by_label("Country").is_none());
+        assert!(
+            h.query_all_by(|node| node
+                .label()
+                .is_some_and(|label| label.starts_with("Select ")))
+                .next()
+                .is_none()
+        );
         assert!(h.query_by_label(&selected_label).is_some());
         h.get_by_label("Weights").click();
         h.run();
         assert!(h.query_by_label(&selected_label).is_some());
         h.get_by_label("Table").click();
         h.run();
-        assert!(h.query_by_label("Country").is_some());
+        assert!(
+            h.query_all_by(|node| node
+                .label()
+                .is_some_and(|label| label.starts_with("Select ")))
+                .next()
+                .is_some()
+        );
         assert!(h.query_by_label(&selected_label).is_none());
         assert_eq!(h.state().selected, selected);
     }
@@ -188,7 +237,13 @@ fn mobile_results_tabs_switch_views_and_preserve_selection() {
     h.run();
     assert!(h.query_by_label("Table").is_none());
     assert!(h.query_by_label("Map").is_none());
-    assert!(h.query_by_label("Country").is_some());
+    assert!(
+        h.query_all_by(|node| node
+            .label()
+            .is_some_and(|label| label.starts_with("Select ")))
+            .next()
+            .is_some()
+    );
 }
 
 #[test]
@@ -228,7 +283,14 @@ fn desktop_map_leaves_room_for_ranking_at_wide_and_short_sizes() {
         let selected = h.state().selected.unwrap();
         let selected_label = format!("Selected: {}", h.state().data.countries[selected].name);
         let map_bottom = h.get_by_label(&selected_label).rect().bottom();
-        let heading = h.get_by_label("Country").rect();
+        let heading = h
+            .query_all_by(|node| {
+                node.label()
+                    .is_some_and(|label| label.starts_with("Select "))
+            })
+            .next()
+            .unwrap()
+            .rect();
         assert!(
             map_bottom < height * 0.65,
             "map crowds out table at {width} × {height}"
@@ -270,7 +332,14 @@ fn large_screens_place_map_beside_table_and_resize_back_to_stacked() {
         h.set_size(egui::vec2(width, height));
         h.run();
         let map_label = h.get_by_label(&selected_label).rect();
-        let table = h.get_by_label("Country").rect();
+        let table = h
+            .query_all_by(|node| {
+                node.label()
+                    .is_some_and(|label| label.starts_with("Select "))
+            })
+            .next()
+            .unwrap()
+            .rect();
         if side_by_side {
             assert!(table.right() < map_label.left());
             assert!(table.top() < map_label.top());
@@ -282,5 +351,134 @@ fn large_screens_place_map_beside_table_and_resize_back_to_stacked() {
         let name = &h.state().data.countries[h.state().scores[0].country].name;
         let row = h.get_by_label(&format!("Select {name}")).rect();
         assert!(row.right() <= width && row.bottom() < height);
+    }
+}
+
+#[test]
+fn mobile_header_and_legend_stay_on_single_rows() {
+    for width in [320., 360., 390., 600., 844.] {
+        let mut h = harness(width);
+        h.run();
+        let title = h.get_by_label("TERRA").rect();
+        for name in ["Table", "Map", "About"] {
+            let button = h.get_by_label(name).rect();
+            assert!((button.center().y - title.center().y).abs() < 1.);
+            assert!(button.right() <= width, "{name} {button:?} at {width}");
+        }
+        let legends: Vec<_> = h
+            .output()
+            .shapes
+            .iter()
+            .filter_map(|shape| {
+                if let egui::Shape::Text(text) = &shape.shape
+                    && text.galley.job.text.starts_with("■ ")
+                {
+                    assert_eq!(text.galley.rows.len(), 1);
+                    let rect = text.galley.rect.translate(text.pos.to_vec2());
+                    assert!(rect.right() <= width - 8.);
+                    return Some(rect);
+                }
+                None
+            })
+            .collect();
+        assert_eq!(legends.len(), 4);
+        let bar_left = h
+            .output()
+            .shapes
+            .iter()
+            .find_map(|shape| {
+                if let egui::Shape::Rect(rect) = &shape.shape
+                    && rect.fill == crate::ui::theme::CULTURE
+                {
+                    return Some(rect.rect.left());
+                }
+                None
+            })
+            .unwrap();
+        let row = h
+            .query_all_by(|node| {
+                node.label()
+                    .is_some_and(|label| label.starts_with("Select "))
+            })
+            .next()
+            .unwrap()
+            .rect();
+        assert!((legends[0].left() - bar_left).abs() < 1.);
+        assert!(legends.last().unwrap().right() <= row.right());
+        assert!(
+            legends
+                .iter()
+                .all(|rect| (rect.center().y - legends[0].center().y).abs() < 1.)
+        );
+    }
+}
+
+#[test]
+fn ranking_fits_after_resizing_and_changing_results() {
+    let mut h = harness(1440.);
+    h.run();
+    for width in [320., 844., 280., 390., 1440., 360.] {
+        h.set_size(egui::vec2(width, 700.));
+        h.state_mut().settings.minimums.culture = 0.;
+        h.run();
+        for row in h.query_all_by(|node| {
+            node.label()
+                .is_some_and(|label| label.starts_with("Select "))
+        }) {
+            assert!(
+                row.rect().right() <= width - 8.,
+                "row {:?} at {width}",
+                row.rect()
+            );
+        }
+        for shape in &h.output().shapes {
+            if let egui::Shape::Rect(rect) = &shape.shape
+                && rect.fill == crate::ui::theme::CULTURE
+            {
+                assert!(
+                    rect.rect.right() <= shape.clip_rect.right(),
+                    "bar exceeds its viewport at {width}"
+                );
+            }
+        }
+        h.state_mut().settings.minimums.culture = 0.7;
+        h.run();
+        for row in h.query_all_by(|node| {
+            node.label()
+                .is_some_and(|label| label.starts_with("Select "))
+        }) {
+            assert!(
+                row.rect().right() <= width - 8.,
+                "filtered row {:?} at {width}",
+                row.rect()
+            );
+        }
+    }
+}
+
+#[test]
+fn mobile_table_fills_results_height() {
+    for (width, height) in [(320., 568.), (390., 844.), (844., 1200.)] {
+        let mut h = harness(width);
+        h.set_size(egui::vec2(width, height));
+        h.run();
+        let settings_top = h.get_by_label("Power Distance").rect().top();
+        let table_bottom = h
+            .output()
+            .shapes
+            .iter()
+            .find_map(|shape| {
+                if let egui::Shape::Rect(rect) = &shape.shape
+                    && rect.fill == crate::ui::theme::CULTURE
+                {
+                    return Some(shape.clip_rect.bottom());
+                }
+                None
+            })
+            .unwrap();
+        assert!(
+            (0. ..=24.).contains(&(settings_top - table_bottom)),
+            "table bottom {table_bottom}, settings top {settings_top} at {width}x{height}"
+        );
     }
 }

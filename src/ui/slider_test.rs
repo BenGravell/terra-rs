@@ -21,7 +21,7 @@ fn slider_fills_width_and_keeps_value_box_fixed_when_editing() {
             (track.center().y - before.center().y).abs() < 1.,
             "track={track:?} value={before:?}"
         );
-        assert!((before.width() - super::VALUE_WIDTH).abs() < 1.);
+        assert!((before.width() - 40.).abs() < 1.);
         assert!((before.right() - (width - 8.)).abs() < 1.);
         h.get_by_value("9%").click();
         h.run();

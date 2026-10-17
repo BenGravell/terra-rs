@@ -6,31 +6,39 @@ fn culture_help_opens_on_click_in_narrow_layout() {
     let culture = crate::model::Settings::default().culture;
     let mut h = Harness::builder()
         .with_size(egui::vec2(320., 800.))
-        .build_ui_state(super::show, culture);
+        .build_ui_state(
+            |ui, state| {
+                super::show(ui, state);
+            },
+            culture,
+        );
     h.run();
 
     for (name, help) in [
         (
-            "Power distance",
-            "Low: shared power. High: acceptance of hierarchy.",
+            "Power Distance",
+            "Negative: shared power. Positive: acceptance of hierarchy.",
         ),
         (
             "Individualism",
-            "Low: strong group ties. High: individual independence.",
+            "Negative: strong group ties. Positive: individual independence.",
         ),
         (
             "Masculinity",
-            "Low: cooperation and care. High: competition and achievement.",
+            "Negative: cooperation and care. Positive: competition and achievement.",
         ),
         (
-            "Uncertainty avoidance",
-            "Low: comfort with ambiguity. High: preference for rules and predictability.",
+            "Uncertainty Avoidance",
+            "Negative: comfort with ambiguity. Positive: preference for rules and predictability.",
         ),
         (
-            "Long-term orientation",
-            "Low: tradition and near-term outcomes. High: adaptation and long-term planning.",
+            "Long-Term Orientation",
+            "Negative: tradition and near-term outcomes. Positive: adaptation and long-term planning.",
         ),
-        ("Indulgence", "Low: restraint. High: freedom to enjoy life."),
+        (
+            "Indulgence",
+            "Negative: restraint. Positive: freedom to enjoy life.",
+        ),
     ] {
         assert!(h.query_by_label(help).is_none());
         let help_label = format!("Help: {name}");
@@ -66,11 +74,11 @@ fn help_buttons_are_small_and_beside_labels() {
             .collect();
         assert_eq!(values.len(), 6);
         for (name, value) in [
-            "Power distance",
+            "Power Distance",
             "Individualism",
             "Masculinity",
-            "Uncertainty avoidance",
-            "Long-term orientation",
+            "Uncertainty Avoidance",
+            "Long-Term Orientation",
             "Indulgence",
         ]
         .into_iter()
@@ -80,7 +88,21 @@ fn help_buttons_are_small_and_beside_labels() {
             assert!(button.width() < 32.);
             assert!((button.width() - button.height()).abs() < 1.);
             assert!(button.right() < value.center().x);
-            assert!((value.width() - crate::ui::slider::VALUE_WIDTH).abs() < 1.);
+            if width < 850. {
+                let track = h.get_by_label(name).rect();
+                assert!((button.center().y - value.center().y).abs() < 1.);
+                assert!((track.center().y - value.center().y).abs() < 1.);
+            }
+            assert!(
+                (value.width()
+                    - if width < 850. {
+                        40.
+                    } else {
+                        crate::ui::slider::VALUE_WIDTH
+                    })
+                .abs()
+                    < 1.
+            );
             assert!((value.right() - (width - 8.)).abs() < 1.);
         }
     }
@@ -90,10 +112,15 @@ fn help_buttons_are_small_and_beside_labels() {
 fn culture_sliders_use_integer_minus_five_to_five_values() {
     let mut h = Harness::builder()
         .with_size(egui::vec2(400., 800.))
-        .build_ui_state(super::show, crate::model::Settings::default().culture);
+        .build_ui_state(
+            |ui, state| {
+                super::show(ui, state);
+            },
+            crate::model::Settings::default().culture,
+        );
     h.run();
     assert_eq!(h.query_all_by_value("0").count(), 6);
-    h.get_by_label("Power distance").focus();
+    h.get_by_label("Power Distance").focus();
     h.run();
     h.key_press(egui::Key::ArrowRight);
     h.run();

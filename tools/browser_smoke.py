@@ -52,7 +52,7 @@ def main():
             page.wait_for_function("document.getElementById('loading').hidden")
 
         def settings():
-            return page.evaluate("JSON.parse(localStorage.getItem('terra.settings.v1')).settings")
+            return page.evaluate("JSON.parse(localStorage.getItem('terra.settings'))")
 
         def wait_settings(expression):
             page.wait_for_function(f"{expression}")
@@ -73,33 +73,36 @@ def main():
             initial = settings()
             startup = page.evaluate("performance.getEntriesByName('terra-ready')[0].startTime")
             page.screenshot(path=str(artifacts / f"{args.browser}-desktop.png"))
-            # Canvas coordinates for Power distance and Reset at the fixed desktop viewport.
-            press_slider(210, 191, "JSON.parse(localStorage.getItem('terra.settings.v1')).settings.culture[0] > 50")
+            # Canvas coordinates for section controls at the fixed desktop viewport.
+            press_slider(210, 150, "JSON.parse(localStorage.getItem('terra.settings')).culture[0] > 50")
             changed = settings()
             page.reload()
             ready()
             assert settings() == changed
-            page.mouse.click(38, 75, delay=100)
-            wait_settings("JSON.parse(localStorage.getItem('terra.settings.v1')).settings.culture[0] === 50")
+            page.mouse.click(170, 570, delay=100)
+            wait_settings("JSON.parse(localStorage.getItem('terra.settings')).culture[0] === 50")
             assert settings() == initial
             # Overall importances are independent integers on a 0–10 scale.
-            press_slider(210, 714, "JSON.parse(localStorage.getItem('terra.settings.v1')).settings.overall_importances[0] > 5")
+            press_slider(210, 714, "JSON.parse(localStorage.getItem('terra.settings')).overall_importances[0] > 5")
             importances = settings()["overall_importances"]
             assert importances[1] == initial["overall_importances"][1]
             assert all(0 <= w <= 10 and w == int(w) for w in importances)
             page.reload()
             ready()
             assert settings()["overall_importances"] == importances
-            page.mouse.click(38, 75, delay=100)
-            wait_settings("JSON.parse(localStorage.getItem('terra.settings.v1')).settings.overall_importances[0] === 5")
+            # Collapse Culture to bring the Weights footer into view.
+            page.mouse.click(60, 75, delay=100)
+            page.wait_for_timeout(300)
+            page.mouse.click(170, 606, delay=100)
+            wait_settings("JSON.parse(localStorage.getItem('terra.settings')).overall_importances[0] === 5")
             assert settings() == initial
             page.set_viewport_size({"width": 390, "height": 844})
             page.wait_for_timeout(400)
             page.screenshot(path=str(artifacts / f"{args.browser}-narrow.png"))
-            press_slider(250, 560, "JSON.parse(localStorage.getItem('terra.settings.v1')).settings.culture[0] > 50")
+            press_slider(300, 490, "JSON.parse(localStorage.getItem('terra.settings')).culture[0] > 50")
             page.screenshot(path=str(artifacts / f"{args.browser}-narrow-settings.png"))
             # Malformed storage recovers and persists defaults.
-            page.evaluate("localStorage.setItem('terra.settings.v1', 'broken')")
+            page.evaluate("localStorage.setItem('terra.settings', 'broken')")
             page.reload()
             ready()
             assert settings() == initial

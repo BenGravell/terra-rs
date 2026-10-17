@@ -1,60 +1,95 @@
-use crate::model::{CONTINENTS, Settings};
+use crate::model::Settings;
 use bevy_egui::egui;
 
-pub(super) fn show(ui: &mut egui::Ui, settings: &mut Settings) {
-    egui::CollapsingHeader::new("Constraints")
-        .default_open(false)
+pub(super) fn show(ui: &mut egui::Ui, settings: &mut Settings) -> bool {
+    super::icons::section("Filters", false)
         .show(ui, |ui| {
             content(ui, settings);
-        });
+            let clicked = super::settings::reset_button(ui, "Filters");
+            if clicked {
+                reset(settings);
+            }
+            clicked
+        })
+        .body_returned
+        .unwrap_or(false)
 }
 
 pub(super) fn content(ui: &mut egui::Ui, settings: &mut Settings) {
-    ui.label("Active limits are strict: a score must exceed its minimum and climate values must lie inside the range.");
     let minimums = &mut settings.minimums;
+    ui.label("Overall Score");
     for (label, value) in [
-        ("Culture Fit minimum", &mut minimums.culture),
-        ("Quality of Life minimum", &mut minimums.quality),
-        ("Happy Planet minimum", &mut minimums.happy_planet),
-        ("Social Progress minimum", &mut minimums.social_progress),
-        ("Human Freedom minimum", &mut minimums.human_freedom),
+        ("Culture Fit Minimum", &mut minimums.culture),
+        ("Quality of Life Minimum", &mut minimums.quality),
     ] {
         percentage(ui, label, value);
     }
-    percentage(ui, "English-speaking minimum", &mut settings.english_min);
-    ui.label("Annual average temperature (°C)");
+    ui.label("Quality of Life");
+    for (label, value) in [
+        ("Happy Planet Minimum", &mut minimums.happy_planet),
+        ("Social Progress Minimum", &mut minimums.social_progress),
+        ("Human Freedom Minimum", &mut minimums.human_freedom),
+    ] {
+        percentage(ui, label, value);
+    }
+    ui.label("Language");
+    percentage(ui, "English-Speaking Minimum", &mut settings.english_min);
+    ui.label("Annual Average Temperature (°C)");
     for (name, value) in [
         ("Minimum °C", &mut settings.temperature.min),
         ("Maximum °C", &mut settings.temperature.max),
     ] {
-        let label = ui.label(name);
-        super::slider::show(ui, value, -10.0..=30.0, label.id, "", false);
+        super::slider::row(
+            ui,
+            name,
+            "Annual average temperature limit in °C.",
+            value,
+            -10.0..=30.0,
+            "",
+            false,
+        );
     }
-    ui.label("Daily sunshine (hours)");
+    ui.label("Daily Sunshine (Hours)");
     for (name, value) in [
-        ("Minimum hours", &mut settings.sunshine.min),
-        ("Maximum hours", &mut settings.sunshine.max),
+        ("Minimum Hours", &mut settings.sunshine.min),
+        ("Maximum Hours", &mut settings.sunshine.max),
     ] {
-        let label = ui.label(name);
-        super::slider::show(ui, value, 3.0..=10.0, label.id, "", false);
+        super::slider::row(
+            ui,
+            name,
+            "Daily sunshine limit in hours.",
+            value,
+            3.0..=10.0,
+            "",
+            false,
+        );
     }
     ui.label("Continents");
-    for continent in CONTINENTS {
-        let mut active = settings.continents.iter().any(|c| c == continent);
-        if ui.checkbox(&mut active, continent).changed() {
-            if active {
-                settings.continents.push(continent.into());
-            } else {
-                settings.continents.retain(|c| c != continent);
-            }
-        }
-    }
+    super::continents::show(ui, &mut settings.continents);
 }
 
 fn percentage(ui: &mut egui::Ui, label: &str, value: &mut f64) {
-    let label = ui.label(label);
     let mut pct = *value * 100.;
-    if super::slider::show(ui, &mut pct, 0.0..=100.0, label.id, "%", false).changed() {
+    if super::slider::row(
+        ui,
+        label,
+        "The country must exceed this minimum percentage.",
+        &mut pct,
+        0.0..=100.0,
+        "%",
+        false,
+    )
+    .changed()
+    {
         *value = pct / 100.;
     }
+}
+
+pub(super) fn reset(settings: &mut Settings) {
+    let defaults = Settings::default();
+    settings.minimums = defaults.minimums;
+    settings.english_min = defaults.english_min;
+    settings.temperature = defaults.temperature;
+    settings.sunshine = defaults.sunshine;
+    settings.continents = defaults.continents;
 }

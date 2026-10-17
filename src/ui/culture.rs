@@ -1,56 +1,65 @@
 use crate::model::Culture;
 use bevy_egui::egui;
 
-pub(super) fn show(ui: &mut egui::Ui, culture: &mut Culture) {
-    egui::CollapsingHeader::new("Culture fit")
-        .default_open(true)
+pub(super) fn show(ui: &mut egui::Ui, culture: &mut Culture) -> bool {
+    super::icons::section("Culture", true)
         .show(ui, |ui| {
             content(ui, culture);
-        });
+            let clicked = super::settings::reset_button(ui, "Culture");
+            if clicked {
+                reset(culture);
+            }
+            clicked
+        })
+        .body_returned
+        .unwrap_or(false)
 }
 
 pub(super) fn content(ui: &mut egui::Ui, culture: &mut Culture) {
     for (name, value, help) in [
         (
-            "Power distance",
+            "Power Distance",
             &mut culture.power_distance,
-            "Low: shared power. High: acceptance of hierarchy.",
+            "Negative: shared power. Positive: acceptance of hierarchy.",
         ),
         (
             "Individualism",
             &mut culture.individualism,
-            "Low: strong group ties. High: individual independence.",
+            "Negative: strong group ties. Positive: individual independence.",
         ),
         (
             "Masculinity",
             &mut culture.masculinity,
-            "Low: cooperation and care. High: competition and achievement.",
+            "Negative: cooperation and care. Positive: competition and achievement.",
         ),
         (
-            "Uncertainty avoidance",
+            "Uncertainty Avoidance",
             &mut culture.uncertainty_avoidance,
-            "Low: comfort with ambiguity. High: preference for rules and predictability.",
+            "Negative: comfort with ambiguity. Positive: preference for rules and predictability.",
         ),
         (
-            "Long-term orientation",
+            "Long-Term Orientation",
             &mut culture.long_term_orientation,
-            "Low: tradition and near-term outcomes. High: adaptation and long-term planning.",
+            "Negative: tradition and near-term outcomes. Positive: adaptation and long-term planning.",
         ),
         (
             "Indulgence",
             &mut culture.indulgence,
-            "Low: restraint. High: freedom to enjoy life.",
+            "Negative: restraint. Positive: freedom to enjoy life.",
         ),
     ] {
-        let label = super::help::label(ui, name, help);
         let mut importance = (*value / 10.).round() - 5.;
-        if super::slider::show(ui, &mut importance, -5.0..=5.0, label.id, "", true)
+        if super::slider::row(ui, name, help, &mut importance, -5.0..=5.0, "", true)
             .on_hover_text(help)
             .changed()
         {
             *value = (importance + 5.) * 10.;
         }
     }
+}
+
+pub(super) fn reset(culture: &mut Culture) {
+    *culture = crate::model::Settings::default().culture;
 }
 
 #[cfg(test)]

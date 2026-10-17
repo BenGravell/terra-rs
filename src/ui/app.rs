@@ -41,7 +41,6 @@ impl Default for TerraApp {
         let (settings, message) = persistence::restore();
         Self {
             data: data.unwrap_or(Dataset {
-                schema_version: 1,
                 sources: vec![],
                 countries: vec![],
             }),

@@ -3,7 +3,7 @@ use std::sync::Arc;
 
 // Muted blue and warm earth tones; neutral surfaces keep attention on the data.
 pub(super) const ACCENT: Color32 = Color32::from_rgb(48, 86, 110);
-pub(super) const CULTURE: Color32 = Color32::from_rgb(163, 77, 53);
+pub(super) const CULTURE: Color32 = Color32::from_rgb(229, 181, 27);
 pub(super) const WARNING: Color32 = Color32::from_rgb(137, 96, 35);
 pub(super) fn quality_colors() -> [Color32; 3] {
     // Fixed samples span indigo, blue-teal, and green on the shared map scale.
@@ -22,6 +22,7 @@ pub(super) const NO_ELIGIBLE_DATA: Color32 = Color32::from_rgb(218, 217, 212);
 pub(super) const QUALITY_NAMES: [&str; 3] = ["Happy Planet", "Social Progress", "Human Freedom"];
 
 pub(super) fn apply(ctx: &egui::Context) {
+    egui_extras::install_image_loaders(ctx);
     let mut fonts = egui::FontDefinitions::default();
     fonts.font_data.insert(
         "atkinson".into(),
@@ -60,6 +61,8 @@ pub(super) fn apply(ctx: &egui::Context) {
     );
     ctx.set_fonts(fonts);
     let mut style = (*ctx.style_of(egui::Theme::Light)).clone();
+    // Filtering legitimately replaces country identities at the same row position.
+    style.debug.warn_if_rect_changes_id = false;
     // Format slider readouts without rounding their stored values.
     style.number_formatter = egui::style::NumberFormatter::new(|value, _| format!("{value:.0}"));
     style.visuals = egui::Visuals::light();
@@ -73,7 +76,7 @@ pub(super) fn apply(ctx: &egui::Context) {
     style.visuals.selection.stroke = egui::Stroke::new(1., ACCENT);
     style.visuals.hyperlink_color = ACCENT;
     style.visuals.warn_fg_color = WARNING;
-    style.visuals.error_fg_color = CULTURE;
+    style.visuals.error_fg_color = Color32::from_rgb(163, 77, 53);
     style.visuals.window_stroke = egui::Stroke::new(1., BORDER);
     for (widget, fill, stroke) in [
         (

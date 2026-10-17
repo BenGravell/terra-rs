@@ -15,14 +15,26 @@ pub(super) fn tab_selector(ui: &mut egui::Ui, tab: &mut usize, labels: &[&str]) 
         egui::Layout::left_to_right(egui::Align::Center),
         |ui| {
             ui.spacing_mut().button_padding.x = 4.;
+            ui.spacing_mut().item_spacing.x = 4.;
             let width = (ui.available_width()
                 - (labels.len() - 1) as f32 * ui.spacing().item_spacing.x)
                 / labels.len() as f32;
             for (index, label) in labels.iter().enumerate() {
+                let selected = *tab == index;
+                let color = if selected {
+                    ui.visuals().selection.stroke.color
+                } else {
+                    ui.visuals().text_color()
+                };
+                let icon = super::icons::tab(label, color, if width < 100. { 14. } else { 16. });
+                let mut text = egui::RichText::new(*label);
+                if width < 100. {
+                    text = text.size(12.);
+                }
                 if ui
                     .add_sized(
                         [width, 44.],
-                        egui::Button::selectable(*tab == index, *label),
+                        egui::Button::selectable(selected, (icon, text)),
                     )
                     .clicked()
                 {
@@ -96,15 +108,10 @@ pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
     }
     let narrow = narrow(root);
     egui::CentralPanel::default().show(root, |ui| {
-        let id = ui.id().with("results_tab");
-        let mut tab = ui
-            .ctx()
-            .data_mut(|data| data.get_temp::<usize>(id).unwrap_or(0));
-        if narrow {
-            tab_selector(ui, &mut tab, &["Table", "Map"]);
-            ui.separator();
-            ui.ctx().data_mut(|data| data.insert_temp(id, tab));
-        }
+        let tab = ui.ctx().data_mut(|data| {
+            data.get_temp::<usize>(egui::Id::new("mobile_results_tab"))
+                .unwrap_or(0)
+        });
         let mut show = |ui: &mut egui::Ui| {
             if !results_summary::show(ui, &app.settings, &app.scores) {
                 return;
@@ -159,7 +166,7 @@ pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
                 );
             }
         };
-        if narrow {
+        if narrow && tab == 1 {
             egui::ScrollArea::vertical()
                 .id_salt(("results_scroll", narrow, tab))
                 .auto_shrink([false, true])

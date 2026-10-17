@@ -12,7 +12,7 @@ fn invalid_weights_hide_results_and_recovery_restores_them() {
     h.run();
     assert!(h.state().scores.is_empty());
     assert!(h.query_by_label("Check your settings").is_some());
-    h.get_by_label("Reset").click();
+    h.get_by_label("Reset Weights").click_accesskit();
     h.run();
     assert_eq!(h.state().scores.len(), 85);
 }
