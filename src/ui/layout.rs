@@ -236,32 +236,7 @@ pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
 
 fn landing(ui: &mut egui::Ui) {
     let width = (ui.available_width() - 56.).clamp(1., 648.);
-    let title_size = (ui.ctx().content_rect().width() * 0.12).clamp(64., 128.);
     let font = egui::FontId::proportional(18.);
-    let mut intro = egui::text::LayoutJob {
-        halign: egui::Align::Center,
-        ..Default::default()
-    };
-    intro.wrap.max_width = width;
-    for (text, italics) in [
-        ("A country recommendation app designed to help you ", false),
-        ("find your place in the world", true),
-        (" by using data to answer ", false),
-        ("\"which country is right for me?\"", true),
-    ] {
-        intro.append(
-            text,
-            0.,
-            egui::TextFormat {
-                font_id: font.clone(),
-                line_height: Some(28.8),
-                color: ui.visuals().text_color(),
-                italics,
-                ..Default::default()
-            },
-        );
-    }
-    let intro = ui.fonts_mut(|fonts| fonts.layout_job(intro));
     let mut prompt = egui::text::LayoutJob::simple(
         "Adjust your Culture, Weights, and Filters settings and explore your results in the Table and Map.".into(),
         font,
@@ -273,16 +248,7 @@ fn landing(ui: &mut egui::Ui) {
         section.format.line_height = Some(28.8);
     }
     let prompt = ui.fonts_mut(|fonts| fonts.layout_job(prompt));
-    let title_height = ui
-        .painter()
-        .layout_no_wrap(
-            "TERRA".into(),
-            egui::FontId::new(title_size, egui::FontFamily::Name("caps".into())),
-            super::theme::TEXT,
-        )
-        .size()
-        .y;
-    let height = title_height + intro.size().y + prompt.size().y + 36.;
+    let height = prompt.size().y;
     let rect = egui::Rect::from_center_size(ui.max_rect().center(), egui::vec2(width, height));
     ui.scope_builder(
         egui::UiBuilder::new()
@@ -290,8 +256,6 @@ fn landing(ui: &mut egui::Ui) {
             .layout(egui::Layout::top_down(egui::Align::Center)),
         |ui| {
             ui.spacing_mut().item_spacing.y = 18.;
-            super::theme::title_sized(ui, title_size);
-            ui.label(intro);
             ui.label(prompt);
         },
     );

@@ -608,20 +608,14 @@ fn mobile_landing_is_centered_only_when_both_drawers_are_closed() {
         assert!(h.query_by_label(prompt).is_none());
         h.get_by_label("Culture").click();
         h.run();
-        let copy = h.get_by_label(intro).rect();
+        assert!(h.query_by_label(intro).is_none());
+        assert_eq!(h.query_all_by_label("TERRA").count(), 1);
         let cta = h.get_by_label(prompt).rect();
-        let logo = h
-            .query_all_by_label("TERRA")
-            .map(|node| node.rect())
-            .max_by(|a, b| a.top().total_cmp(&b.top()))
-            .unwrap();
         let top = h.get_by_label("Table").rect().bottom() + 12.;
         let bottom = h.get_by_label("Culture").rect().top() - 6.;
-        assert!(logo.height() >= 64.);
-        assert!((copy.center().x - width / 2.).abs() < 2.);
         assert!((cta.center().x - width / 2.).abs() < 2.);
-        assert!(((logo.top() + cta.bottom()) / 2. - (top + bottom) / 2.).abs() < 12.);
-        assert!(logo.top() > top && cta.bottom() < bottom);
+        assert!((cta.center().y - (top + bottom) / 2.).abs() < 12.);
+        assert!(cta.top() > top && cta.bottom() < bottom);
         h.get_by_label("Weights").click();
         h.run();
         assert!(h.query_by_label(prompt).is_none());
