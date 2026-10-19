@@ -26,3 +26,6 @@ pub use app::{TerraApp, run};
 
 #[cfg(test)]
 mod test_support;
+
+#[cfg(test)]
+mod browser_smoke_test;

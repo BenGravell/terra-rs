@@ -55,6 +55,7 @@ outputs = []
 [tasks.hook-pre-push]
 description = "Run CI checks not covered by pre-commit before pushing"
 run = [
+    "python3 tools/browser_smoke.py --check-layout",
     "cargo run --locked -p terra-prepare -- --check",
     "NO_COLOR=true trunk build --release --cargo-profile web",
     "uv run --locked --group browser playwright install chromium",

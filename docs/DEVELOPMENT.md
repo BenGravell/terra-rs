@@ -65,8 +65,8 @@ Cache inputs include workspace sources, assets, data, configuration, toolchain v
 variables.
 Markdown-only changes reuse successful Rust results when the other inputs are unchanged.
 
-The pre-push hook runs the remaining CI checks in order: deterministic asset regeneration, a release WASM build,
-Chromium installation if needed, and the browser smoke test.
+The pre-push hook runs a native smoke-layout pre-check, deterministic asset regeneration, a release WASM build, Chromium
+installation if needed, and the browser smoke test.
 These checks run on every push without mise result caching and stop the push on failure.
 They check the current working tree; commit the intended changes before pushing.
 
@@ -189,6 +189,12 @@ Geometry tests cover holes, antimeridian islands, corrupt indices, and marker co
 UI tests cover keyboard changes, weight balancing, reset, invalid settings, empty results, selection, and simultaneous
 settings and live results on narrow screens.
 
+Run the fast native smoke-layout check before building the release site:
+
+```sh
+python3 tools/browser_smoke.py --check-layout
+```
+
 After building the release site, run browser checks:
 
 ```sh
@@ -198,7 +204,12 @@ mise exec -- uv run --locked --group browser tools/browser_smoke.py --browser fi
 mise exec -- uv run --locked --group browser tools/browser_smoke.py --browser webkit
 ```
 
-The script starts its own local server under `/terra-rs/`.
+The script first runs the native `browser_smoke_contract` unit test, then starts its own local server under
+`/terra-rs/`.
+The Rust test derives click positions from the actual egui controls, exercises the same interaction sequence, and
+exports a typed plan with expected settings for Python to replay.
+Coordinates and serialized settings fields are not duplicated in Python.
+Missing, offscreen, or ineffective controls fail before the browser launches.
 It exercises canvas controls, weight balancing, persistence/reset, corrupt and blocked storage, and desktop/narrow
 layouts.
 Chrome is used if installed; otherwise the downloaded Chromium is used.
