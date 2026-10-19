@@ -43,7 +43,7 @@ fn buildup_segments_sum_to_overall_with_zero_and_mixed_weights() {
 #[test]
 fn bundled_flags_cover_every_rankable_country() {
     let ids: Vec<_> = super::FLAG_IDS.lines().collect();
-    assert_eq!(super::FLAG_PIXELS.len(), ids.len() * 32 * 24 * 4);
+    assert_eq!(super::FLAG_PIXELS.len(), ids.len() * 64 * 48 * 4);
     let data = crate::model::Dataset::parse(include_str!("../../assets/countries.json")).unwrap();
     let settings = crate::model::Settings::default();
     for country in data
@@ -91,24 +91,12 @@ fn every_part_of_the_row_selects_the_country() {
 }
 
 #[test]
-fn flag_edges_align_with_capital_letter_edges() {
+fn flag_height_is_midway_between_rank_and_text() {
     use bevy_egui::egui::{Shape, TextureId};
     let mut h = harness(1400.);
     h.run();
     let name = &h.state().data.countries[h.state().scores[1].country].name;
     let name_rect = h.get_by_label(name).rect();
-    let text = h
-        .output()
-        .shapes
-        .iter()
-        .find_map(|shape| match &shape.shape {
-            Shape::Text(text) if text.galley.job.text == *name => Some(text),
-            _ => None,
-        })
-        .unwrap();
-    let glyph = &text.galley.rows[0].glyphs[0];
-    let capital_top = text.pos.y + glyph.pos.y + glyph.uv_rect.offset.y;
-    let capital_bottom = capital_top + glyph.uv_rect.size.y;
     let flag = h
         .output()
         .shapes
@@ -124,8 +112,21 @@ fn flag_edges_align_with_capital_letter_edges() {
             _ => None,
         })
         .unwrap();
-    assert!((flag.top() - capital_top).abs() <= 1.);
-    assert!((flag.bottom() - capital_bottom).abs() <= 1.);
+    let rank = h.get_by_label("2").rect();
+    let text = h
+        .output()
+        .shapes
+        .iter()
+        .find_map(|shape| match &shape.shape {
+            Shape::Text(text) if text.galley.job.text == *name => Some(text),
+            _ => None,
+        })
+        .unwrap();
+    let capital_height = text.galley.rows[0].glyphs[0].uv_rect.size.y;
+    let expected_height = (rank.height() + capital_height) * 0.5;
+    assert!((flag.height() - expected_height).abs() <= 1.);
+    assert!(flag.height() < rank.height() - 3.);
+    assert!((flag.center().y - name_rect.center().y).abs() <= 1.);
 }
 
 #[test]
@@ -149,8 +150,8 @@ fn rendered_flags_preserve_the_source_aspect_ratio() {
             } else {
                 flag_left = Some(rect.left());
             }
-            let source_ratio = uv.width() * 64.
-                / (uv.height() * (super::FLAG_IDS.lines().count().div_ceil(2) * 24) as f32);
+            let source_ratio = uv.width() * 256.
+                / (uv.height() * (super::FLAG_IDS.lines().count().div_ceil(4) * 48) as f32);
             assert!((rect.aspect_ratio() - source_ratio).abs() < 0.001);
             count += 1;
         }

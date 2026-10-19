@@ -149,9 +149,13 @@ pub(super) fn score_color(score: f64) -> Color32 {
 }
 
 pub(super) fn title(ui: &mut egui::Ui) -> egui::Response {
+    title_sized(ui, 25.)
+}
+
+pub(super) fn title_sized(ui: &mut egui::Ui, size: f32) -> egui::Response {
     let mut title = ui.painter().layout_no_wrap(
         "TERRA".into(),
-        egui::FontId::new(25., egui::FontFamily::Name("caps".into())),
+        egui::FontId::new(size, egui::FontFamily::Name("caps".into())),
         egui::Color32::WHITE,
     );
     let bounds = title.mesh_bounds;

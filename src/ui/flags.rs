@@ -15,22 +15,22 @@ pub(super) fn texture(ui: &egui::Ui) -> egui::TextureHandle {
     ui.ctx()
         .data_mut(|data| data.get_temp::<egui::TextureHandle>(flag_texture_id))
         .unwrap_or_else(|| {
-            let height = FLAG_IDS.lines().count().div_ceil(2) * 24;
-            let mut pixels = vec![0; 64 * height * 4];
+            let height = FLAG_IDS.lines().count().div_ceil(4) * 48;
+            let mut pixels = vec![0; 256 * height * 4];
             for (index, cell) in FLAG_PIXELS
-                .as_chunks::<{ 32 * 24 * 4 }>()
+                .as_chunks::<{ 64 * 48 * 4 }>()
                 .0
                 .iter()
                 .enumerate()
             {
-                for (row, source) in cell.as_chunks::<{ 32 * 4 }>().0.iter().enumerate() {
-                    let offset = ((index / 2 * 24 + row) * 64 + index % 2 * 32) * 4;
-                    pixels[offset..offset + 32 * 4].copy_from_slice(source);
+                for (row, source) in cell.as_chunks::<{ 64 * 4 }>().0.iter().enumerate() {
+                    let offset = ((index / 4 * 48 + row) * 256 + index % 4 * 64) * 4;
+                    pixels[offset..offset + 64 * 4].copy_from_slice(source);
                 }
             }
             let texture = ui.ctx().load_texture(
                 "country_flags",
-                egui::ColorImage::from_rgba_unmultiplied([64, height], &pixels),
+                egui::ColorImage::from_rgba_unmultiplied([256, height], &pixels),
                 egui::TextureOptions::LINEAR,
             );
             ui.ctx()
@@ -40,9 +40,9 @@ pub(super) fn texture(ui: &egui::Ui) -> egui::TextureHandle {
 }
 
 pub(super) fn cell_uv(index: usize) -> egui::Rect {
-    let rows = FLAG_IDS.lines().count().div_ceil(2) as f32;
+    let rows = FLAG_IDS.lines().count().div_ceil(4) as f32;
     egui::Rect::from_min_max(
-        egui::pos2((index % 2) as f32 / 2., (index / 2) as f32 / rows),
-        egui::pos2((index % 2 + 1) as f32 / 2., (index / 2 + 1) as f32 / rows),
+        egui::pos2((index % 4) as f32 / 4., (index / 4) as f32 / rows),
+        egui::pos2((index % 4 + 1) as f32 / 4., (index / 4 + 1) as f32 / rows),
     )
 }

@@ -10,49 +10,60 @@ pub(super) fn show(
     revision: &mut u64,
     message: Option<&str>,
 ) {
-    if ui.ctx().content_rect().width() < 850. {
-        let id = ui.id().with("preferences_tab");
-        let mut tab = ui
-            .ctx()
-            .data_mut(|data| data.get_temp::<usize>(id).unwrap_or(0));
-        ui.with_layout(egui::Layout::bottom_up(egui::Align::Min), |ui| {
-            super::layout::tab_selector(
-                ui,
-                &mut tab,
-                &["Culture", "Weights", "Filters", "Presets"],
-            );
-            ui.separator();
-            let reset = reset_button(ui, ["Culture", "Weights", "Filters", "Presets"][tab]);
-            ui.with_layout(egui::Layout::top_down(egui::Align::Min), |ui| {
-                egui::ScrollArea::vertical()
-                    .id_salt(("preferences_content", tab))
-                    .auto_shrink([false, false])
-                    .show(ui, |ui| {
-                        show_content(
-                            ui,
-                            countries,
-                            settings,
-                            reference,
-                            revision,
-                            message,
-                            Some(tab),
-                        )
-                    });
-            });
-            if reset {
-                match tab {
-                    0 => culture::reset(&mut settings.culture),
-                    1 => weights::reset(settings),
-                    2 => constraints::reset(settings),
-                    _ => *reference = None,
-                }
-                *revision += 1;
+    show_content(ui, countries, settings, reference, revision, message, None);
+}
+
+pub(super) fn mobile_content(
+    ui: &mut egui::Ui,
+    countries: &[Country],
+    settings: &mut Settings,
+    reference: &mut Option<usize>,
+    revision: &mut u64,
+    message: Option<&str>,
+    tab: usize,
+) {
+    ui.with_layout(egui::Layout::bottom_up(egui::Align::Min), |ui| {
+        let reset = reset_button(ui, ["Culture", "Weights", "Filters", "Presets"][tab]);
+        let height_id = ui.id().with(("preferences_height", tab));
+        let content_height = ui.ctx().data_mut(|data| {
+            data.get_temp::<f32>(height_id)
+                .unwrap_or(ui.available_height())
+        });
+        let size = egui::vec2(
+            ui.available_width(),
+            content_height.min(ui.available_height()),
+        );
+        ui.allocate_ui_with_layout(size, egui::Layout::top_down(egui::Align::Min), |ui| {
+            let scroll = egui::ScrollArea::vertical()
+                .id_salt(("preferences_content", tab))
+                .auto_shrink([false, false])
+                .show(ui, |ui| {
+                    show_content(
+                        ui,
+                        countries,
+                        settings,
+                        reference,
+                        revision,
+                        message,
+                        Some(tab),
+                    );
+                });
+            if (scroll.content_size.y - content_height).abs() > 0.5 {
+                ui.ctx()
+                    .data_mut(|data| data.insert_temp(height_id, scroll.content_size.y));
+                ui.ctx().request_discard("settings content height changed");
             }
         });
-        ui.ctx().data_mut(|data| data.insert_temp(id, tab));
-    } else {
-        show_content(ui, countries, settings, reference, revision, message, None);
-    }
+        if reset {
+            match tab {
+                0 => culture::reset(&mut settings.culture),
+                1 => weights::reset(settings),
+                2 => constraints::reset(settings),
+                _ => *reference = None,
+            }
+            *revision += 1;
+        }
+    });
 }
 
 fn show_content(

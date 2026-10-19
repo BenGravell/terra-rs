@@ -9,7 +9,8 @@ fn narrow(ui: &egui::Ui) -> bool {
     ui.ctx().content_rect().width() < 850.
 }
 
-pub(super) fn tab_selector(ui: &mut egui::Ui, tab: &mut usize, labels: &[&str]) {
+pub(super) fn tab_selector(ui: &mut egui::Ui, tab: &mut usize, labels: &[&str]) -> Option<usize> {
+    let mut clicked = None;
     ui.allocate_ui_with_layout(
         egui::vec2(ui.available_width(), 44.),
         egui::Layout::left_to_right(egui::Align::Center),
@@ -39,10 +40,12 @@ pub(super) fn tab_selector(ui: &mut egui::Ui, tab: &mut usize, labels: &[&str]) 
                     .clicked()
                 {
                     *tab = index;
+                    clicked = Some(index);
                 }
             }
         },
     );
+    clicked
 }
 
 pub(super) fn root(ctx: &egui::Context) -> egui::Ui {
@@ -89,11 +92,49 @@ pub(super) fn settings(root: &mut egui::Ui, app: &mut TerraApp) {
                     .show(ui, show);
             });
     } else {
+        let id = egui::Id::new("mobile_settings_tab");
+        let (mut tab, mut open) = root
+            .ctx()
+            .data_mut(|data| data.get_temp::<(usize, bool)>(id).unwrap_or((0, true)));
         let height = (root.available_height() * 0.48).min(420.);
-        egui::Panel::bottom("settings_narrow")
-            .exact_size(height)
+        egui::Panel::bottom("settings_tabs")
             .resizable(false)
-            .show(root, show);
+            .show(root, |ui| {
+                let mut selected = if open { tab } else { usize::MAX };
+                if let Some(clicked) = tab_selector(
+                    ui,
+                    &mut selected,
+                    &["Culture", "Weights", "Filters", "Presets"],
+                ) {
+                    open = !open || clicked != tab;
+                    tab = clicked;
+                }
+            });
+        root.ctx()
+            .data_mut(|data| data.insert_temp(id, (tab, open)));
+        let results_open = root.ctx().data_mut(|data| {
+            data.get_temp::<bool>(egui::Id::new("mobile_results_open"))
+                .unwrap_or(true)
+        });
+        let drawer_height = if results_open {
+            (height - 60.).max(0.)
+        } else {
+            root.available_height()
+        };
+        egui::Panel::bottom("settings_narrow")
+            .exact_size(drawer_height)
+            .resizable(false)
+            .show_collapsible(root, &mut open, |ui| {
+                settings::mobile_content(
+                    ui,
+                    &app.data.countries,
+                    &mut app.settings,
+                    &mut app.reference,
+                    &mut app.settings_revision,
+                    app.message.as_deref(),
+                    tab,
+                );
+            });
     }
 }
 
@@ -107,7 +148,7 @@ pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
         return;
     }
     let narrow = narrow(root);
-    egui::CentralPanel::default().show(root, |ui| {
+    let show_results = |ui: &mut egui::Ui| {
         let tab = ui.ctx().data_mut(|data| {
             data.get_temp::<usize>(egui::Id::new("mobile_results_tab"))
                 .unwrap_or(0)
@@ -166,15 +207,94 @@ pub(super) fn results(root: &mut egui::Ui, app: &mut TerraApp) {
                 );
             }
         };
-        if narrow && tab == 1 {
-            egui::ScrollArea::vertical()
-                .id_salt(("results_scroll", narrow, tab))
-                .auto_shrink([false, true])
-                .show(ui, show);
-        } else {
-            show(ui);
-        }
-    });
+        show(ui);
+    };
+    if narrow {
+        let mut open = root.ctx().data_mut(|data| {
+            data.get_temp::<bool>(egui::Id::new("mobile_results_open"))
+                .unwrap_or(true)
+        });
+        egui::Panel::top("results_narrow")
+            .exact_size(root.available_height())
+            .resizable(false)
+            .frame(egui::Frame::central_panel(root.style()))
+            .show_collapsible(root, &mut open, show_results);
+        let settings_open = root.ctx().data_mut(|data| {
+            data.get_temp::<(usize, bool)>(egui::Id::new("mobile_settings_tab"))
+                .unwrap_or((0, true))
+                .1
+        });
+        egui::CentralPanel::default().show(root, |ui| {
+            if !open && !settings_open {
+                landing(ui);
+            }
+        });
+    } else {
+        egui::CentralPanel::default().show(root, show_results);
+    }
+}
+
+fn landing(ui: &mut egui::Ui) {
+    let width = (ui.available_width() - 56.).clamp(1., 648.);
+    let title_size = (ui.ctx().content_rect().width() * 0.12).clamp(64., 128.);
+    let font = egui::FontId::proportional(18.);
+    let mut intro = egui::text::LayoutJob {
+        halign: egui::Align::Center,
+        ..Default::default()
+    };
+    intro.wrap.max_width = width;
+    for (text, italics) in [
+        ("A country recommendation app designed to help you ", false),
+        ("find your place in the world", true),
+        (" by using data to answer ", false),
+        ("\"which country is right for me?\"", true),
+    ] {
+        intro.append(
+            text,
+            0.,
+            egui::TextFormat {
+                font_id: font.clone(),
+                line_height: Some(28.8),
+                color: ui.visuals().text_color(),
+                italics,
+                ..Default::default()
+            },
+        );
+    }
+    let intro = ui.fonts_mut(|fonts| fonts.layout_job(intro));
+    let mut prompt = egui::text::LayoutJob::simple(
+        "Adjust your Culture, Weights, and Filters settings and explore your results in the Table and Map.".into(),
+        font,
+        super::theme::TEXT,
+        width,
+    );
+    prompt.halign = egui::Align::Center;
+    for section in &mut prompt.sections {
+        section.format.line_height = Some(28.8);
+    }
+    let prompt = ui.fonts_mut(|fonts| fonts.layout_job(prompt));
+    let title_height = ui
+        .painter()
+        .layout_no_wrap(
+            "TERRA".into(),
+            egui::FontId::new(title_size, egui::FontFamily::Name("caps".into())),
+            super::theme::TEXT,
+        )
+        .size()
+        .y;
+    let height = title_height + intro.size().y + prompt.size().y + 36.;
+    let rect = egui::Rect::from_center_size(ui.max_rect().center(), egui::vec2(width, height));
+    ui.scope_builder(
+        egui::UiBuilder::new()
+            .max_rect(rect)
+            .layout(egui::Layout::top_down(egui::Align::Center)),
+        |ui| {
+            ui.spacing_mut().item_spacing.y = 18.;
+            super::theme::title_sized(ui, title_size);
+            ui.label(intro);
+            ui.label(prompt);
+        },
+    );
 }
 
 #[cfg(test)]

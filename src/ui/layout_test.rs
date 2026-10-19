@@ -165,13 +165,7 @@ fn ranking_uses_the_full_results_width() {
         let name = &h.state().data.countries[h.state().scores[0].country].name;
         let row = h.get_by_label(&format!("Select {name}")).rect();
         let results_right = if width >= 1800. {
-            let selected = h.state().selected.unwrap();
-            let map_label = h
-                .get_by_label(&format!(
-                    "Selected: {}",
-                    h.state().data.countries[selected].name
-                ))
-                .rect();
+            let map_label = h.get_by_label("Country map").rect();
             map_label.left() - 10.
         } else {
             width
@@ -190,10 +184,7 @@ fn mobile_results_tabs_switch_views_and_preserve_selection() {
         let mut h = harness(width);
         h.run();
         let selected = h.state().selected;
-        let selected_label = format!(
-            "Selected: {}",
-            h.state().data.countries[selected.unwrap()].name
-        );
+        let selected_label = "Country map";
         let table = h.get_by_label("Table").rect();
         let map = h.get_by_label("Map").rect();
         assert!((table.width() - map.width()).abs() < 1.);
@@ -207,7 +198,7 @@ fn mobile_results_tabs_switch_views_and_preserve_selection() {
                     .rect()
                     .top()
         );
-        assert!(h.query_by_label(&selected_label).is_none());
+        assert!(h.query_by_label(selected_label).is_none());
         h.get_by_label("Map").click();
         h.run();
         assert!(
@@ -217,10 +208,10 @@ fn mobile_results_tabs_switch_views_and_preserve_selection() {
                 .next()
                 .is_none()
         );
-        assert!(h.query_by_label(&selected_label).is_some());
+        assert!(h.query_by_label(selected_label).is_some());
         h.get_by_label("Weights").click();
         h.run();
-        assert!(h.query_by_label(&selected_label).is_some());
+        assert!(h.query_by_label(selected_label).is_some());
         h.get_by_label("Table").click();
         h.run();
         assert!(
@@ -230,7 +221,7 @@ fn mobile_results_tabs_switch_views_and_preserve_selection() {
                 .next()
                 .is_some()
         );
-        assert!(h.query_by_label(&selected_label).is_none());
+        assert!(h.query_by_label(selected_label).is_none());
         assert_eq!(h.state().selected, selected);
     }
     let mut h = harness(1440.);
@@ -247,24 +238,65 @@ fn mobile_results_tabs_switch_views_and_preserve_selection() {
 }
 
 #[test]
-fn about_topics_expand_within_phone_and_desktop_widths() {
-    for width in [320., 390., 1440.] {
+fn about_intro_and_sources_fit_phone_and_desktop_widths() {
+    for width in [320., 360., 390., 1440.] {
         let mut h = harness(width);
         h.run();
         h.get_by_label("About").click();
         h.run();
-        assert!(h.query_by_label("ABOUT TERRA").is_none());
-        assert!(h.query_by_label("Which country feels like home?").is_none());
-        let heading = h.get_by_label("Start exploring").rect();
-        assert!(heading.left() >= 0. && heading.right() <= width);
+        let table_bottom = h.get_by_label("Map: Natural Earth 5.1.2").rect().bottom();
+        h.run_steps(60);
+        let settled_bottom = h.get_by_label("Map: Natural Earth 5.1.2").rect().bottom();
+        assert!(
+            (settled_bottom - table_bottom).abs() < 1.,
+            "Table drifts between frames: {table_bottom} -> {settled_bottom}"
+        );
+        assert!(h.query_by_label("Start exploring").is_none());
+        assert!(h.query_by_label("Overall score & ranking").is_some());
+        let intro = "Terra is a country recommendation app designed to help you find your place in the world by using data to answer \"which country is right for me?\"";
+        for label in [
+            "About Terra",
+            intro,
+            "Name",
+            "Year",
+            "License",
+            "Map: Natural Earth 5.1.2",
+            "Public domain",
+        ] {
+            let rect = h.get_by_label(label).rect();
+            assert!(
+                rect.left() >= 0. && rect.right() <= width,
+                "{label} overflows at {width}: {rect:?}"
+            );
+        }
+        let header_bottom = h.get_by_label("Name").rect().bottom();
+        let first_row_top = h.get_by_label(&h.state().data.sources[0].name).rect().top();
+        assert!(
+            (0. ..=16.).contains(&(first_row_top - header_bottom)),
+            "Unexpected space before first row: {}",
+            first_row_top - header_bottom
+        );
+        for source in &h.state().data.sources {
+            let rect = h.get_by_label(&source.name).rect();
+            assert!(rect.height() < 100., "Source row is too tall: {rect:?}");
+            for label in [&source.year, &source.license] {
+                assert!(
+                    h.query_all_by_label(label)
+                        .any(|node| { (node.rect().top() - rect.top()).abs() < 1. }),
+                    "{label} is not aligned with {}",
+                    source.name
+                );
+            }
+            assert!(
+                rect.left() >= 0. && rect.right() <= width,
+                "{} overflows at {width}: {rect:?}",
+                source.name
+            );
+        }
         h.get_by_label("Overall score & ranking").click();
         h.run();
         let explanation = h.get_by_label("The overall score combines Culture Fit and Quality of Life using your weights. Ranks number matching countries consecutively after constraints. Equal scores are ordered by country ID.").rect();
         assert!(explanation.left() >= 0. && explanation.right() <= width);
-        assert!(explanation.left() < 40.);
-        if width >= 1440. {
-            assert!(explanation.width() > 800.);
-        }
     }
 }
 
@@ -280,9 +312,8 @@ fn desktop_map_leaves_room_for_ranking_at_wide_and_short_sizes() {
         let mut h = harness(width);
         h.set_size(egui::vec2(width, height));
         h.run();
-        let selected = h.state().selected.unwrap();
-        let selected_label = format!("Selected: {}", h.state().data.countries[selected].name);
-        let map_bottom = h.get_by_label(&selected_label).rect().bottom();
+        let selected_label = "Country map";
+        let map_bottom = h.get_by_label(selected_label).rect().bottom();
         let heading = h
             .query_all_by(|node| {
                 node.label()
@@ -318,10 +349,7 @@ fn large_screens_place_map_beside_table_and_resize_back_to_stacked() {
     let mut h = harness(1920.);
     h.run();
     let selected = h.state().selected;
-    let selected_label = format!(
-        "Selected: {}",
-        h.state().data.countries[selected.unwrap()].name
-    );
+    let selected_label = "Country map";
     for (width, height, side_by_side) in [
         (1920., 1080., true),
         (2560., 1440., true),
@@ -331,7 +359,7 @@ fn large_screens_place_map_beside_table_and_resize_back_to_stacked() {
     ] {
         h.set_size(egui::vec2(width, height));
         h.run();
-        let map_label = h.get_by_label(&selected_label).rect();
+        let map_label = h.get_by_label(selected_label).rect();
         let table = h
             .query_all_by(|node| {
                 node.label()
@@ -342,7 +370,7 @@ fn large_screens_place_map_beside_table_and_resize_back_to_stacked() {
             .rect();
         if side_by_side {
             assert!(table.right() < map_label.left());
-            assert!(table.top() < map_label.top());
+            assert!(table.top() < map_label.bottom());
         } else {
             assert!(table.top() > map_label.bottom());
         }
@@ -365,7 +393,7 @@ fn mobile_header_and_legend_stay_on_single_rows() {
             assert!((button.center().y - title.center().y).abs() < 1.);
             assert!(button.right() <= width, "{name} {button:?} at {width}");
         }
-        let legends: Vec<_> = h
+        let mut legends: Vec<_> = h
             .output()
             .shapes
             .iter()
@@ -382,6 +410,7 @@ fn mobile_header_and_legend_stay_on_single_rows() {
             })
             .collect();
         assert_eq!(legends.len(), 4);
+        legends.sort_by(|a, b| a.left().total_cmp(&b.left()));
         let bar_left = h
             .output()
             .shapes
@@ -403,7 +432,10 @@ fn mobile_header_and_legend_stay_on_single_rows() {
             .next()
             .unwrap()
             .rect();
-        assert!((legends[0].left() - bar_left).abs() < 1.);
+        if width <= 390. {
+            assert!(legends[0].left() < bar_left);
+        }
+        assert!((legends.last().unwrap().right() - row.right()).abs() < 1.);
         assert!(legends.last().unwrap().right() <= row.right());
         assert!(
             legends
@@ -477,8 +509,130 @@ fn mobile_table_fills_results_height() {
             })
             .unwrap();
         assert!(
-            (0. ..=24.).contains(&(settings_top - table_bottom)),
+            table_bottom >= height * 0.5 - 24. && table_bottom <= settings_top,
             "table bottom {table_bottom}, settings top {settings_top} at {width}x{height}"
         );
+    }
+}
+
+#[test]
+fn mobile_results_tabs_toggle_and_reopen_from_about() {
+    for width in [320., 390., 844.] {
+        let mut h = harness(width);
+        h.run();
+        let selected = h.state().selected;
+        let selected_label = "Country map";
+        let table_tab = h.get_by_label("Table").rect();
+        for section in ["Table", "Map"] {
+            if section == "Map" {
+                h.get_by_label(section).click();
+                h.run();
+            }
+            h.get_by_label(section).click();
+            h.run();
+            assert!(h.query_by_label(selected_label).is_none());
+            assert!(
+                h.query_all_by(|node| node
+                    .label()
+                    .is_some_and(|label| label.starts_with("Select ")))
+                    .next()
+                    .is_none()
+            );
+            assert!(h.query_by_label("Power Distance").is_some());
+            assert_eq!(h.get_by_label("Table").rect(), table_tab);
+            h.get_by_label(section).click();
+            h.run();
+            if section == "Table" {
+                assert!(
+                    h.query_all_by(|node| node
+                        .label()
+                        .is_some_and(|label| label.starts_with("Select ")))
+                        .next()
+                        .is_some()
+                );
+            } else {
+                assert!(h.query_by_label(selected_label).is_some());
+            }
+        }
+        h.get_by_label("Map").click();
+        h.run();
+        h.get_by_label("About").click();
+        h.run();
+        h.get_by_label("Map").click();
+        h.run();
+        assert!(h.query_by_label(selected_label).is_some());
+        assert_eq!(h.state().selected, selected);
+    }
+}
+
+#[test]
+fn mobile_settings_content_stays_above_reset_when_results_are_closed() {
+    for (width, height) in [(320., 568.), (390., 844.), (844., 950.)] {
+        let mut h = harness(width);
+        h.set_size(egui::vec2(width, height));
+        h.run();
+        let shared_top = h.get_by_label("Power Distance").rect().top();
+        let tabs = h.get_by_label("Culture").rect();
+        for section in ["Table", "Map"] {
+            if section == "Map" {
+                h.get_by_label(section).click();
+                h.run();
+            }
+            h.get_by_label(section).click();
+            h.run();
+            let settings_top = h.get_by_label("Power Distance").rect().top();
+            let header_bottom = h.get_by_label("Table").rect().bottom();
+            assert!(settings_top >= header_bottom);
+            let content_bottom = h.get_by_label("Indulgence").rect().bottom();
+            let reset_top = h.get_by_label("Reset Culture").rect().top();
+            assert!((0. ..=24.).contains(&(reset_top - content_bottom)));
+            assert_eq!(h.get_by_label("Culture").rect(), tabs);
+            h.get_by_label(section).click();
+            h.run();
+            assert!((h.get_by_label("Power Distance").rect().top() - shared_top).abs() < 1.);
+        }
+    }
+}
+
+#[test]
+fn mobile_landing_is_centered_only_when_both_drawers_are_closed() {
+    let prompt = "Adjust your Culture, Weights, and Filters settings and explore your results in the Table and Map.";
+    let intro = "A country recommendation app designed to help you find your place in the world by using data to answer \"which country is right for me?\"";
+    for (width, height) in [(320., 568.), (390., 844.), (844., 950.)] {
+        let mut h = harness(width);
+        h.set_size(egui::vec2(width, height));
+        h.run();
+        assert!(h.query_by_label(prompt).is_none());
+        h.get_by_label("Table").click();
+        h.run();
+        assert!(h.query_by_label(prompt).is_none());
+        h.get_by_label("Culture").click();
+        h.run();
+        let copy = h.get_by_label(intro).rect();
+        let cta = h.get_by_label(prompt).rect();
+        let logo = h
+            .query_all_by_label("TERRA")
+            .map(|node| node.rect())
+            .max_by(|a, b| a.top().total_cmp(&b.top()))
+            .unwrap();
+        let top = h.get_by_label("Table").rect().bottom() + 12.;
+        let bottom = h.get_by_label("Culture").rect().top() - 6.;
+        assert!(logo.height() >= 64.);
+        assert!((copy.center().x - width / 2.).abs() < 2.);
+        assert!((cta.center().x - width / 2.).abs() < 2.);
+        assert!(((logo.top() + cta.bottom()) / 2. - (top + bottom) / 2.).abs() < 12.);
+        assert!(logo.top() > top && cta.bottom() < bottom);
+        h.get_by_label("Weights").click();
+        h.run();
+        assert!(h.query_by_label(prompt).is_none());
+        h.get_by_label("Weights").click();
+        h.run();
+        assert!(h.query_by_label(prompt).is_some());
+        h.get_by_label("Map").click();
+        h.run();
+        assert!(h.query_by_label(prompt).is_none());
+        h.get_by_label("About").click();
+        h.run();
+        assert!(h.query_by_label(prompt).is_none());
     }
 }

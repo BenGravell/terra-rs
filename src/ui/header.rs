@@ -51,15 +51,32 @@ pub(super) fn show(ui: &mut egui::Ui, narrow: bool, tab: &mut Tab) {
             let mut selected = ui
                 .ctx()
                 .data_mut(|data| data.get_temp::<usize>(id).unwrap_or(0));
-            let mut destination = if *tab == Tab::About { 2 } else { selected };
-            super::layout::tab_selector(ui, &mut destination, &["Table", "Map", "About"]);
-            if destination == 2 {
-                *tab = Tab::About;
+            let open_id = egui::Id::new("mobile_results_open");
+            let mut open = ui
+                .ctx()
+                .data_mut(|data| data.get_temp::<bool>(open_id).unwrap_or(true));
+            let mut destination = if *tab == Tab::About {
+                2
+            } else if open {
+                selected
             } else {
-                *tab = Tab::Results;
-                selected = destination;
+                usize::MAX
+            };
+            if let Some(clicked) =
+                super::layout::tab_selector(ui, &mut destination, &["Table", "Map", "About"])
+            {
+                if clicked == 2 {
+                    *tab = Tab::About;
+                } else {
+                    open = *tab == Tab::About || !open || clicked != selected;
+                    *tab = Tab::Results;
+                    selected = clicked;
+                }
             }
-            ui.ctx().data_mut(|data| data.insert_temp(id, selected));
+            ui.ctx().data_mut(|data| {
+                data.insert_temp(id, selected);
+                data.insert_temp(open_id, open);
+            });
             return;
         }
         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {

@@ -27,14 +27,16 @@ pub(super) fn show(
             ui.spacing_mut().interact_size.y = 18.;
         }
         let flags = super::flags::texture(ui);
+        let text_height = ui.text_style_height(&egui::TextStyle::Body);
+        let rank_diameter = text_height + 6.;
         let capitals = ui.painter().layout_no_wrap(
             "H".into(),
             egui::TextStyle::Body.resolve(ui.style()),
             ui.visuals().text_color(),
         );
-        let cap_bounds = capitals.rows[0].visuals.mesh_bounds;
+        let flag_height = (rank_diameter + capitals.rows[0].visuals.mesh_bounds.height()) * 0.5;
         let flag_slot_width = (0..FLAG_IDS.lines().count())
-            .map(|index| flag_width(flag_uv(index), cap_bounds.height()))
+            .map(|index| flag_width(flag_uv(index), flag_height))
             .fold(0., f32::max);
         let font = egui::TextStyle::Body.resolve(ui.style());
         let text_width = |text: &str| {
@@ -44,7 +46,6 @@ pub(super) fn show(
                 .x
         };
         let column_gap = if compact { 6. } else { 16. };
-        let rank_diameter = ui.text_style_height(&egui::TextStyle::Body) + 6.;
         let rank_width = rank_diameter;
         let score_width = text_width("100%");
         let minimum_bar_width = if compact { 60. } else { 180. };
@@ -55,14 +56,24 @@ pub(super) fn show(
             .min(available - fixed_width - minimum_bar_width)
             .max(flag_slot_width + ui.spacing().item_spacing.x);
         let bar_width = (available - fixed_width - country_width).max(minimum_bar_width);
+        let legend_width = std::iter::once("Culture Fit")
+            .chain(QUALITY_NAMES)
+            .map(|name| text_width(&format!("■ {name}")))
+            .sum::<f32>()
+            + 3. * 8.;
+        let legend_width = if legend_width > bar_width {
+            available
+        } else {
+            bar_width
+        };
         ui.horizontal(|ui| {
             ui.spacing_mut().item_spacing.x = 0.;
-            ui.add_space(fixed_width + country_width);
+            ui.add_space(available - legend_width);
             ui.allocate_ui_with_layout(
-                egui::vec2(bar_width, 18.),
+                egui::vec2(legend_width, 18.),
                 egui::Layout::left_to_right(egui::Align::Center),
                 |ui| {
-                    ui.set_width(bar_width);
+                    ui.set_width(legend_width);
                     ui.spacing_mut().item_spacing.x = 8.;
                     let mut legend_font = egui::TextStyle::Body.resolve(ui.style());
                     let legend_width = ui.available_width() - 3. * ui.spacing().item_spacing.x;
@@ -84,9 +95,10 @@ pub(super) fn show(
                     {
                         legend_font.size -= 0.25;
                     }
-                    ui.horizontal(|ui| {
+                    ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                         for (name, color) in std::iter::once(("Culture Fit", CULTURE))
                             .chain(QUALITY_NAMES.into_iter().zip(parts))
+                            .rev()
                         {
                             let mut label = egui::text::LayoutJob::default();
                             let font = legend_font.clone();
@@ -127,32 +139,38 @@ pub(super) fn show(
                             );
                             let country = &countries[s.country];
                             let country_cell = ui.allocate_ui_with_layout(
-                                egui::vec2(country_width, capitals.size().y),
+                                egui::vec2(
+                                    country_width,
+                                    ui.text_style_height(&egui::TextStyle::Body),
+                                ),
                                 egui::Layout::left_to_right(egui::Align::Center),
                                 |ui| {
                                     ui.set_width(country_width);
                                     let (slot, _) = ui.allocate_exact_size(
-                                        egui::vec2(flag_slot_width, capitals.size().y),
+                                        egui::vec2(flag_slot_width, flag_height),
                                         egui::Sense::hover(),
                                     );
-                                    let name = ui
-                                        .add(
-                                            egui::Label::new(&country.name)
-                                                .selectable(false)
-                                                .truncate(),
-                                        )
-                                        .on_hover_text(&country.name);
+                                    ui.add(
+                                        egui::Label::new(&country.name)
+                                            .selectable(false)
+                                            .truncate(),
+                                    )
+                                    .on_hover_text(&country.name);
                                     if let Some(index) =
                                         FLAG_IDS.lines().position(|id| id == country.id)
                                     {
                                         let uv = flag_uv(index);
-                                        let width = flag_width(uv, cap_bounds.height());
+                                        let width = flag_width(uv, flag_height);
+                                        let pos = egui::pos2(
+                                            slot.left(),
+                                            slot.center().y - flag_height * 0.5,
+                                        );
+                                        let pixels_per_point = ui.ctx().pixels_per_point();
+                                        let pos =
+                                            (pos * pixels_per_point).round() / pixels_per_point;
                                         let rect = egui::Rect::from_min_size(
-                                            egui::pos2(
-                                                slot.left(),
-                                                name.rect.top() + cap_bounds.top(),
-                                            ),
-                                            egui::vec2(width, cap_bounds.height()),
+                                            pos,
+                                            egui::vec2(width, flag_height),
                                         );
                                         ui.painter().image(
                                             flags.id(),
@@ -234,21 +252,33 @@ pub(super) fn show(
 }
 
 fn flag_width(uv: egui::Rect, height: f32) -> f32 {
-    let atlas_height = (FLAG_IDS.lines().count().div_ceil(2) * 24) as f32;
-    height * (uv.width() * 64.) / (uv.height() * atlas_height)
+    let atlas_height = (FLAG_IDS.lines().count().div_ceil(4) * 48) as f32;
+    height * (uv.width() * 256.) / (uv.height() * atlas_height)
 }
 
 fn flag_uv(index: usize) -> egui::Rect {
-    let rows = &FLAG_PIXELS[index * 32 * 24 * 4..(index + 1) * 32 * 24 * 4];
-    let rows = rows.as_chunks::<{ 32 * 4 }>().0;
-    let visible = |row: &[u8; 32 * 4]| row.as_chunks::<4>().0.iter().any(|pixel| pixel[3] != 0);
-    let top = rows.iter().position(visible).unwrap_or(0);
-    let bottom = 24 - rows.iter().rev().position(visible).unwrap_or(0);
-    let height = (FLAG_IDS.lines().count().div_ceil(2) * 24) as f32;
+    let pixels = &FLAG_PIXELS[index * 64 * 48 * 4..(index + 1) * 64 * 48 * 4];
+    let (left, top, right, bottom) = pixels
+        .as_chunks::<4>()
+        .0
+        .iter()
+        .enumerate()
+        .filter(|(_, pixel)| pixel[3] != 0)
+        .fold((64, 48, 0, 0), |(left, top, right, bottom), (i, _)| {
+            let (x, y) = (i % 64, i / 64);
+            (left.min(x), top.min(y), right.max(x + 1), bottom.max(y + 1))
+        });
+    let height = (FLAG_IDS.lines().count().div_ceil(4) * 48) as f32;
     let cell = super::flags::cell_uv(index);
     egui::Rect::from_min_max(
-        egui::pos2(cell.left(), cell.top() + top as f32 / height),
-        egui::pos2(cell.right(), cell.top() + bottom as f32 / height),
+        egui::pos2(
+            cell.left() + left as f32 / 256.,
+            cell.top() + top as f32 / height,
+        ),
+        egui::pos2(
+            cell.left() + right as f32 / 256.,
+            cell.top() + bottom as f32 / height,
+        ),
     )
 }
 

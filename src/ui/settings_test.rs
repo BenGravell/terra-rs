@@ -76,7 +76,9 @@ fn resets_only_change_their_own_section_on_mobile_and_desktop() {
             h.state_mut().reference = Some(0);
             h.run();
             if width < 850. {
-                h.get_by_label(section).click();
+                if section != "Culture" {
+                    h.get_by_label(section).click();
+                }
             } else if section == "Filters" {
                 h.get_by_label("Filters").click_accesskit();
             } else if section == "Presets" {
@@ -135,7 +137,9 @@ fn mobile_reset_is_full_width_and_pinned_above_tabs() {
         h.set_size(egui::vec2(width, height));
         h.run();
         for section in ["Culture", "Weights", "Filters", "Presets"] {
-            h.get_by_label(section).click();
+            if section != "Culture" {
+                h.get_by_label(section).click();
+            }
             h.run();
             let reset = h.get_by_label(&format!("Reset {section}")).rect();
             let first_tab = h.get_by_label("Culture").rect();
@@ -161,5 +165,26 @@ fn desktop_sections_use_mobile_names_and_icons() {
             }),
             "missing icon for {label}"
         );
+    }
+}
+
+#[test]
+fn mobile_settings_tabs_toggle_drawer() {
+    let mut h = harness(390.);
+    h.run();
+    let tabs = h.get_by_label("Culture").rect();
+    h.get_by_label("Culture").click();
+    h.run();
+    assert!(h.query_by_label("Power Distance").is_none());
+    assert!(h.query_by_label("Reset Culture").is_none());
+    assert_eq!(h.get_by_label("Culture").rect(), tabs);
+    for section in ["Culture", "Weights", "Filters", "Presets"] {
+        h.get_by_label(section).click();
+        h.run();
+        assert!(h.query_by_label(&format!("Reset {section}")).is_some());
+        h.get_by_label(section).click();
+        h.run();
+        assert!(h.query_by_label(&format!("Reset {section}")).is_none());
+        assert_eq!(h.get_by_label("Culture").rect(), tabs);
     }
 }
