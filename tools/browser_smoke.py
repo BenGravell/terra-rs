@@ -99,7 +99,7 @@ def main():
             page.set_viewport_size({"width": 390, "height": 844})
             page.wait_for_timeout(400)
             page.screenshot(path=str(artifacts / f"{args.browser}-narrow.png"))
-            press_slider(300, 490, "JSON.parse(localStorage.getItem('terra.settings')).culture[0] > 50")
+            press_slider(300, 537, "JSON.parse(localStorage.getItem('terra.settings')).culture[0] > 50")
             page.screenshot(path=str(artifacts / f"{args.browser}-narrow-settings.png"))
             # Malformed storage recovers and persists defaults.
             page.evaluate("localStorage.setItem('terra.settings', 'broken')")
