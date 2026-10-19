@@ -9,7 +9,7 @@ name = "Hofstede dimensions"
 normalization = "culture"
 sha256 = "d9e9011a88d42481f6c14f02763cac88bd7eadd9faf1f7562390d8f4a719e86e"
 retrieved = "unknown"
-license = "unknown upstream terms; see source URL"
+license = "Research use allowed"
 units = "original index points"
 join_key = "country"
 null_markers = ["", "NA", "NaN"]
@@ -31,7 +31,9 @@ name = "Happy Planet"
 normalization = "max"
 sha256 = "4d1f426d64ca0f1b5895850ec1bb3abf37a6492180abcdc38657c9b5742d51d1"
 retrieved = "unknown"
-license = "unknown upstream terms; see source URL"
+# Checked https://happyplanetindex.org/hpi/ and /stories-from-previous-editions/.
+# The site reserves rights; no license for the pinned 2019 data was found.
+license = "No explicit license found"
 units = "normalized score 0–1"
 join_key = "country"
 null_markers = ["", "NA", "NaN"]
@@ -48,7 +50,10 @@ name = "Social Progress"
 normalization = "max"
 sha256 = "c30e13593a6b8bedee213ae6ab210b28d4bf9cdca02e1245a51bc1d3576a64a5"
 retrieved = "unknown"
-license = "unknown upstream terms; see source URL"
+# Source-page footer: https://en.wikipedia.org/wiki/Social_Progress_Index
+# https://creativecommons.org/licenses/by-sa/4.0/
+# This covers Wikipedia content, not a separate license from Social Progress Imperative.
+license = "CC BY-SA 4.0 (Wikipedia); upstream terms may apply"
 units = "normalized score 0–1"
 join_key = "country"
 null_markers = ["", "NA", "NaN"]
@@ -65,7 +70,11 @@ name = "Human Freedom"
 normalization = "max_then_year_mean"
 sha256 = "efc3df08193ca5a66a8d745dc2025fb3b31cd7459b92c86d3f32e2455c22a0ab"
 retrieved = "unknown"
-license = "unknown upstream terms; see source URL"
+# https://www.cato.org/human-freedom-index/2022 provides data without explicit reuse terms.
+# Report copyright page (PDF page 3):
+# https://www.cato.org/sites/cato.org/files/2023-01/human-freedom-index-2022.pdf
+# Copyright 2022 Cato Institute and Fraser Institute; all rights reserved.
+license = "No explicit license; report reserves rights"
 units = "normalized score 0–1"
 join_key = "country"
 null_markers = ["", "NA", "NaN"]
@@ -85,7 +94,8 @@ name = "English-speaking ratio"
 normalization = "none"
 sha256 = "c182dc1470692a360d6a65c81b17a11deed839dce1f11ca8508843a69f942be8"
 retrieved = "unknown"
-license = "unknown upstream terms; see source URL"
+# Source-page footer links to https://creativecommons.org/licenses/by-sa/4.0/
+license = "CC BY-SA 4.0 (Wikipedia)"
 units = "population fraction"
 join_key = "country"
 null_markers = ["", "NA", "NaN"]
@@ -102,7 +112,8 @@ name = "Average temperature"
 normalization = "none"
 sha256 = "3134e8f5cbd77a551b10e6038a5d1aa471bf0be910cf67933537e44d768833ad"
 retrieved = "unknown"
-license = "unknown upstream terms; see source URL"
+# Source-page footer links to https://creativecommons.org/licenses/by-sa/4.0/
+license = "CC BY-SA 4.0 (Wikipedia)"
 units = "degrees Celsius"
 join_key = "country"
 null_markers = ["", "NA", "NaN"]
@@ -119,7 +130,8 @@ name = "Daily sunshine"
 normalization = "none"
 sha256 = "d6e67cf1b9d95391a7cb769cdc16b3e64d4c622f55484be8199b73bcf15f65c8"
 retrieved = "unknown"
-license = "unknown upstream terms; see source URL"
+# Source-page footer links to https://creativecommons.org/licenses/by-sa/4.0/
+license = "CC BY-SA 4.0 (Wikipedia)"
 units = "hours/day"
 join_key = "country"
 null_markers = ["", "NA", "NaN"]
@@ -136,7 +148,9 @@ name = "Country coordinates"
 normalization = "none"
 sha256 = "6c7953f4fd4eeb1d277aa5771be181d9c8fe6fd7ddbf2e79e3904274e2010f86"
 retrieved = "unknown"
-license = "unknown upstream terms; see source URL"
+# The countries.csv page licenses its content (including the table) under:
+# https://creativecommons.org/licenses/by/4.0/.
+license = "CC BY 4.0"
 units = "longitude/latitude degrees"
 join_key = "country"
 null_markers = ["", "NA", "NaN"]
@@ -154,7 +168,9 @@ name = "Continents"
 normalization = "none"
 sha256 = "d4b590a095076d10067e5f53942244e33331a21e6397fd9ce805d0407948ac8c"
 retrieved = "unknown"
-license = "unknown upstream terms; see source URL"
+# Simple Wikipedia footer links to https://creativecommons.org/licenses/by-sa/4.0/
+# It also lists GFDL; CC BY-SA is the license recorded here.
+license = "CC BY-SA 4.0 (Wikipedia)"
 units = "continent name"
 join_key = "country"
 null_markers = ["", "NA", "NaN"]
@@ -171,7 +187,8 @@ name = "ISO alpha-3 country codes"
 normalization = "none"
 sha256 = "e859fa34ee97d5515dd689405abbc32ae64dfeeb8896dc687dc78122b1e9ace9"
 retrieved = "unknown"
-license = "unknown upstream terms; see source URL"
+# Source page, "Using ISO Codes": ISO allows free-of-charge use of the codes.
+license = "Free use of codes (ISO terms)"
 units = "ISO alpha-3"
 join_key = "country"
 null_markers = ["", "NA", "NaN"]

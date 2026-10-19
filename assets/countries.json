@@ -1,1 +1,4779 @@
-{"sources":[{"name":"Hofstede dimensions","url":"https://geerthofstede.com/research-and-vsm/dimension-data-matrix/","year":"unknown","license":"unknown upstream terms; see source URL"},{"name":"Happy Planet","url":"https://happyplanetindex.org/hpi/","year":"2019","license":"unknown upstream terms; see source URL"},{"name":"Social Progress","url":"https://en.wikipedia.org/wiki/Social_Progress_Index#2022_Social_Progress_Index_Rankings","year":"2022","license":"unknown upstream terms; see source URL"},{"name":"Human Freedom","url":"https://www.cato.org/human-freedom-index/2022","year":"2015–2020 (2022 release)","license":"unknown upstream terms; see source URL"},{"name":"English-speaking ratio","url":"https://en.wikipedia.org/wiki/List_of_countries_by_English-speaking_population","year":"mixed / unknown","license":"unknown upstream terms; see source URL"},{"name":"Average temperature","url":"https://en.wikipedia.org/wiki/List_of_countries_by_average_yearly_temperature","year":"1961–1990; Denmark/Norway exceptions","license":"unknown upstream terms; see source URL"},{"name":"Daily sunshine","url":"https://en.wikipedia.org/wiki/List_of_cities_by_sunshine_duration","year":"mixed / unknown","license":"unknown upstream terms; see source URL"},{"name":"Country coordinates","url":"https://developers.google.com/public-data/docs/canonical/countries_csv","year":"unknown","license":"unknown upstream terms; see source URL"},{"name":"Continents","url":"https://simple.wikipedia.org/wiki/List_of_countries_by_continents","year":"unknown","license":"unknown upstream terms; see source URL"},{"name":"ISO alpha-3 country codes","url":"https://www.iso.org/iso-3166-country-codes.html","year":"unknown","license":"unknown upstream terms; see source URL"}],"countries":[{"id":"ABW","name":"Aruba","culture":null,"quality":null,"english":0.4231,"temperature":null,"sunshine":null,"continent":null,"location":[-69.96834,12.52111]},{"id":"AFG","name":"Afghanistan","culture":null,"quality":null,"english":null,"temperature":12.6,"sunshine":8.7,"continent":"Asia","location":[67.70995,33.93911]},{"id":"AGO","name":"Angola","culture":[83.0,18.0,20.0,60.0,15.0,83.0],"quality":null,"english":null,"temperature":21.55,"sunshine":6.41,"continent":"Africa","location":[17.873886,-11.202692]},{"id":"AIA","name":"Anguilla","culture":null,"quality":null,"english":0.9231,"temperature":null,"sunshine":null,"continent":null,"location":[-63.068615,18.220554]},{"id":"ALA","name":"Åland Islands","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":null},{"id":"ALB","name":"Albania","culture":[90.0,20.0,80.0,70.0,61.0,15.0],"quality":[0.8223510643658767,0.8168393211373155,0.8598566308243726],"english":null,"temperature":11.4,"sunshine":6.97,"continent":"Europe","location":[20.168331,41.15333]},{"id":"AND","name":"Andorra","culture":null,"quality":null,"english":0.22,"temperature":7.6,"sunshine":null,"continent":"Europe","location":[1.601554,42.546246]},{"id":"ARE","name":"United Arab Emirates","culture":[74.0,36.0,52.0,66.0,22.0,22.0],"quality":[0.5528507981938392,0.7791492175446331,0.6297491039426523],"english":null,"temperature":26.65,"sunshine":9.61,"continent":"Asia","location":[53.847816,23.424076]},{"id":"ARG","name":"Argentina","culture":[49.0,46.0,56.0,86.0,20.0,62.0],"quality":[0.8055220435583741,0.8666519726691647,0.7874551971326165],"english":0.0652,"temperature":14.8,"sunshine":6.59,"continent":"South America","location":[-63.616673,-38.416096]},{"id":"ARM","name":"Armenia","culture":[85.0,22.0,50.0,88.0,61.0,25.0],"quality":[0.8819866776707036,0.8241128499008156,0.8550179211469532],"english":null,"temperature":7.15,"sunshine":6.78,"continent":"Asia","location":[45.03819,40.0691]},{"id":"ASM","name":"American Samoa","culture":null,"quality":null,"english":0.801,"temperature":null,"sunshine":null,"continent":null,"location":[-170.13222,-14.270972]},{"id":"ATA","name":"Antarctica","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[-0.071389,-75.25098]},{"id":"ATF","name":"French Southern Territories","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[69.34856,-49.280365]},{"id":"ATG","name":"Antigua and Barbuda","culture":null,"quality":null,"english":0.8,"temperature":25.85,"sunshine":null,"continent":null,"location":[-61.79643,17.060816]},{"id":"AUS","name":"Australia","culture":[38.0,90.0,61.0,51.0,21.0,71.0],"quality":[0.6947482159752626,0.9679303504518405,0.9530465949820788],"english":0.928,"temperature":21.65,"sunshine":7.71,"continent":"Oceania","location":[133.77513,-25.274399]},{"id":"AUT","name":"Austria","culture":[11.0,55.0,79.0,70.0,60.0,63.0],"quality":[0.7543486251842513,0.9703548600396739,0.9308243727598565],"english":0.7308,"temperature":6.35,"sunshine":5.16,"continent":"Europe","location":[14.550072,47.51623]},{"id":"AZE","name":"Azerbaijan","culture":[85.0,22.0,50.0,88.0,61.0,22.0],"quality":[0.7740321538630366,0.6971567114833591,0.6345878136200717],"english":null,"temperature":11.95,"sunshine":6.05,"continent":"Asia","location":[47.576927,40.143105]},{"id":"BDI","name":"Burundi","culture":null,"quality":[0.6074238987014424,0.4728895746087723,0.5206093189964157],"english":null,"temperature":19.8,"sunshine":6.5,"continent":"Africa","location":[29.918886,-3.373056]},{"id":"BEL","name":"Belgium","culture":[65.0,75.0,54.0,94.0,82.0,57.0],"quality":[0.6854117063406673,0.9612078465946661,0.9130824372759855],"english":0.5905,"temperature":9.55,"sunshine":4.24,"continent":"Europe","location":[4.469936,50.503887]},{"id":"BEN","name":"Benin","culture":null,"quality":[0.6666637418010407,0.6126294908529867,0.7725806451612902],"english":null,"temperature":27.55,"sunshine":6.85,"continent":"Africa","location":[2.315834,9.30769]},{"id":"BES","name":"Bonaire, Sint Eustatius and Saba","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":null},{"id":"BFA","name":"Burkina Faso","culture":[70.0,15.0,50.0,55.0,27.0,18.0],"quality":[0.6693511552623082,0.5491514216442583,0.7465949820788529],"english":null,"temperature":28.29,"sunshine":8.79,"continent":"Africa","location":[-1.561593,12.238333]},{"id":"BGD","name":"Bangladesh","culture":[80.0,20.0,55.0,60.0,47.0,20.0],"quality":[0.8776859412995821,0.6178091249724488,0.6064516129032257],"english":0.12,"temperature":25.0,"sunshine":5.66,"continent":"Asia","location":[90.35633,23.684994]},{"id":"BGR","name":"Bulgaria","culture":[70.0,30.0,40.0,85.0,69.0,16.0],"quality":[0.6466702972546221,0.8464844610976416,0.8625448028673834],"english":0.2487,"temperature":10.55,"sunshine":5.96,"continent":"Europe","location":[25.48583,42.733883]},{"id":"BHR","name":"Bahrain","culture":null,"quality":[0.5413196757181709,0.7283447211813975,0.5655913978494623],"english":null,"temperature":26.8,"sunshine":null,"continent":"Asia","location":[50.63777,25.930414]},{"id":"BHS","name":"Bahamas","culture":null,"quality":null,"english":0.8713,"temperature":24.85,"sunshine":null,"continent":"North America","location":[-77.39628,25.03428]},{"id":"BIH","name":"Bosnia and Herzegovina","culture":[90.0,22.0,48.0,87.0,70.0,44.0],"quality":[0.7699472195920306,0.7849900815516863,0.7987455197132616],"english":null,"temperature":9.85,"sunshine":4.85,"continent":"Europe","location":[17.679075,43.915886]},{"id":"BLM","name":"Saint Barthélemy","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":null},{"id":"BLR","name":"Belarus","culture":[95.0,25.0,20.0,95.0,81.0,15.0],"quality":[0.691097349101885,0.7878554110645801,0.6612903225806451],"english":null,"temperature":6.15,"sunshine":4.95,"continent":"Europe","location":[27.953388,53.70981]},{"id":"BLZ","name":"Belize","culture":null,"quality":null,"english":0.8165,"temperature":25.35,"sunshine":null,"continent":"North America","location":[-88.49765,17.189877]},{"id":"BMU","name":"Bermuda","culture":null,"quality":null,"english":0.9692,"temperature":null,"sunshine":null,"continent":null,"location":[-64.75737,32.321384]},{"id":"BOL","name":"Bolivia","culture":[78.0,10.0,42.0,87.0,25.0,46.0],"quality":[0.7251194500353071,0.7400264491955038,0.7451612903225806],"english":null,"temperature":21.55,"sunshine":6.27,"continent":"South America","location":[-63.588654,-16.290154]},{"id":"BRA","name":"Brazil","culture":[69.0,38.0,49.0,76.0,44.0,59.0],"quality":[0.879327669132765,0.7853206964954818,0.7772401433691756],"english":0.0514,"temperature":24.95,"sunshine":6.12,"continent":"South America","location":[-51.92528,-14.235004]},{"id":"BRB","name":"Barbados","culture":null,"quality":null,"english":1.0,"temperature":26.0,"sunshine":null,"continent":"North America","location":[-59.543198,13.193887]},{"id":"BRN","name":"Brunei","culture":null,"quality":null,"english":0.3776,"temperature":26.85,"sunshine":null,"continent":"Asia","location":[114.72767,4.535277]},{"id":"BTN","name":"Bhutan","culture":null,"quality":[0.5909486939787473,0.7499448975093674,0.7161290322580643],"english":null,"temperature":7.4,"sunshine":null,"continent":"Asia","location":[90.4336,27.514162]},{"id":"BVT","name":"Bouvet Island","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[3.413194,-54.4232]},{"id":"BWA","name":"Botswana","culture":null,"quality":[0.5132513486520998,0.7261406215560944,0.8127240143369173],"english":0.3842,"temperature":21.5,"sunshine":9.24,"continent":"Africa","location":[24.684866,-22.328474]},{"id":"CAF","name":"Central African Republic","culture":null,"quality":[0.40625939343272294,0.3569539343178312,0.5973118279569891],"english":null,"temperature":24.9,"sunshine":6.98,"continent":"Africa","location":[20.939444,6.611111]},{"id":"CAN","name":"Canada","culture":[39.0,80.0,52.0,48.0,36.0,68.0],"quality":[0.6475213949614049,0.9716773198148557,0.9485663082437275],"english":0.8207,"temperature":-5.1,"sunshine":5.62,"continent":"North America","location":[-106.34677,56.130367]},{"id":"CCK","name":"Cocos (Keeling) Islands","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[96.87096,-12.164165]},{"id":"CHE","name":"Switzerland","culture":[34.0,68.0,70.0,58.0,74.0,66.0],"quality":[0.9685308012594838,0.9947101608992728,0.9813620071684586],"english":0.6128,"temperature":5.1,"sunshine":5.49,"continent":"Europe","location":[8.227512,46.818188]},{"id":"CHL","name":"Chile","culture":[63.0,23.0,28.0,86.0,31.0,68.0],"quality":[0.7354663303373175,0.8902358386599075,0.9139784946236559],"english":0.0953,"temperature":8.45,"sunshine":7.69,"continent":"South America","location":[-71.54297,-35.675148]},{"id":"CHN","name":"China","culture":[80.0,20.0,66.0,30.0,87.0,24.0],"quality":[0.6749991547402612,0.724487546837117,0.5682795698924731],"english":0.007,"temperature":7.5,"sunshine":5.08,"continent":"Asia","location":[104.1954,35.86166]},{"id":"CIV","name":"Cote d'Ivoire","culture":null,"quality":[0.6388565226829606,0.5952171038130923,0.7177419354838709],"english":null,"temperature":26.35,"sunshine":6.29,"continent":"Africa","location":[-5.54708,7.539989]},{"id":"CMR","name":"Cameroon","culture":null,"quality":[0.6430938898123405,0.5664536037028874,0.582616487455197],"english":0.3799,"temperature":24.6,"sunshine":5.64,"continent":"Africa","location":[12.354722,7.369722]},{"id":"COD","name":"Congo, Democratic Republic of","culture":null,"quality":[0.6530912178136028,0.47057527000220417,0.5663082437275985],"english":null,"temperature":24.0,"sunshine":6.1,"continent":"Africa","location":[21.758663,-4.038333]},{"id":"COG","name":"Congo, Republic of","culture":null,"quality":[0.7598986122555508,0.5239144809345383,0.5725806451612903],"english":null,"temperature":24.55,"sunshine":4.4,"continent":"Africa","location":[15.827659,-0.228021]},{"id":"COK","name":"Cook Islands","culture":null,"quality":null,"english":0.198,"temperature":null,"sunshine":null,"continent":null,"location":[-159.77766,-21.236736]},{"id":"COL","name":"Colombia","culture":[67.0,13.0,64.0,80.0,13.0,83.0],"quality":[0.9695059792720534,0.7695613841745648,0.7449820788530466],"english":0.0422,"temperature":24.5,"sunshine":5.25,"continent":"South America","location":[-74.29733,4.570868]},{"id":"COM","name":"Comoros","culture":null,"quality":[0.6838588162047954,0.5742781573727133,0.6268817204301074],"english":null,"temperature":25.3,"sunshine":null,"continent":"Africa","location":[43.87222,-11.875001]},{"id":"CPV","name":"Cape Verde","culture":[75.0,20.0,15.0,40.0,12.0,83.0],"quality":null,"english":null,"temperature":23.3,"sunshine":null,"continent":"Africa","location":[-24.013197,16.002083]},{"id":"CRI","name":"Costa Rica","culture":null,"quality":[1.0,0.8888031739034605,0.8915770609318995],"english":0.0815,"temperature":24.8,"sunshine":null,"continent":"North America","location":[-83.753426,9.748917]},{"id":"CUB","name":"Cuba","culture":null,"quality":null,"english":null,"temperature":25.2,"sunshine":null,"continent":"North America","location":[-77.781166,21.521757]},{"id":"CUW","name":"Curaçao","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":null},{"id":"CXR","name":"Christmas Island","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[105.69045,-10.447525]},{"id":"CYM","name":"Cayman Islands","culture":null,"quality":null,"english":0.766,"temperature":null,"sunshine":null,"continent":null,"location":[-80.566956,19.51347]},{"id":"CYP","name":"Cyprus","culture":null,"quality":[0.796331223042059,0.9166850341635443,0.9055555555555554],"english":0.7271,"temperature":18.45,"sunshine":9.08,"continent":"Europe","location":[33.42986,35.12641]},{"id":"CZE","name":"Czech Republic","culture":[57.0,58.0,57.0,74.0,70.0,29.0],"quality":[0.7543722716214397,0.93883623539784,0.9256272401433691],"english":0.5065,"temperature":7.55,"sunshine":4.57,"continent":"Europe","location":[15.472962,49.817493]},{"id":"DEU","name":"Germany","culture":[35.0,67.0,66.0,65.0,83.0,40.0],"quality":[0.8497163645036265,0.9777385937844391,0.9335125448028673],"english":0.5633,"temperature":8.4,"sunshine":4.5,"continent":"Europe","location":[10.451526,51.16569]},{"id":"DJI","name":"Djibouti","culture":null,"quality":null,"english":null,"temperature":28.0,"sunshine":8.98,"continent":"Africa","location":[42.590275,11.825138]},{"id":"DMA","name":"Dominica","culture":null,"quality":null,"english":0.9403,"temperature":22.35,"sunshine":null,"continent":"North America","location":[-61.370975,15.414999]},{"id":"DNK","name":"Denmark","culture":[18.0,74.0,16.0,23.0,35.0,70.0],"quality":[0.7303921717374574,0.9977959003746971,0.9637992831541218],"english":0.8605,"temperature":8.86,"sunshine":5.24,"continent":"Europe","location":[9.501785,56.26392]},{"id":"DOM","name":"Dominican Republic","culture":[65.0,30.0,65.0,45.0,13.0,54.0],"quality":[0.8838128442977731,0.7687899493057088,0.8297491039426523],"english":null,"temperature":24.55,"sunshine":null,"continent":"North America","location":[-70.16265,18.735693]},{"id":"DZA","name":"Algeria","culture":[80.0,35.0,35.0,70.0,26.0,32.0],"quality":[0.7491263864597666,0.7228344721181398,0.5451612903225805],"english":0.07,"temperature":22.5,"sunshine":8.95,"continent":"Africa","location":[1.659626,28.033886]},{"id":"ECU","name":"Ecuador","culture":null,"quality":[0.9480105383151824,0.7907207405774741,0.7684587813620071],"english":null,"temperature":21.85,"sunshine":5.23,"continent":"South America","location":[-78.1834,-1.831239]},{"id":"EGY","name":"Egypt","culture":[80.0,37.0,55.0,55.0,42.0,0.0],"quality":[0.6957805657565984,0.6472338549702447,0.4510752688172042],"english":0.3138,"temperature":22.1,"sunshine":9.81,"continent":"Africa","location":[30.802498,26.820553]},{"id":"ERI","name":"Eritrea","culture":null,"quality":null,"english":null,"temperature":25.5,"sunshine":9.21,"continent":"Africa","location":[39.782333,15.179384]},{"id":"ESH","name":"Western Sahara","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":"Africa","location":[-12.885834,24.215527]},{"id":"ESP","name":"Spain","culture":[57.0,51.0,42.0,86.0,48.0,44.0],"quality":[0.8433383819904436,0.9405995150980824,0.9053763440860214],"english":0.2204,"temperature":13.3,"sunshine":7.59,"continent":"Europe","location":[-3.74922,40.46367]},{"id":"EST","name":"Estonia","culture":[40.0,60.0,30.0,60.0,82.0,16.0],"quality":[0.5550154907440364,0.9495261185805599,0.9566308243727596],"english":0.5022,"temperature":2.0,"sunshine":5.46,"continent":"Europe","location":[25.013607,58.595272]},{"id":"ETH","name":"Ethiopia","culture":null,"quality":[0.6724117081617188,0.5227022261406216,0.5594982078853046],"english":null,"temperature":22.2,"sunshine":7.63,"continent":"Africa","location":[40.489674,9.145]},{"id":"FIN","name":"Finland","culture":[33.0,63.0,26.0,59.0,38.0,57.0],"quality":[0.8261958832991841,0.9969142605245757,0.9492831541218636],"english":0.7024,"temperature":1.55,"sunshine":5.09,"continent":"Europe","location":[25.748152,61.92411]},{"id":"FJI","name":"Fiji","culture":null,"quality":null,"english":0.2062,"temperature":24.4,"sunshine":5.27,"continent":"Oceania","location":[179.41441,-16.578194]},{"id":"FLK","name":"Falkland Islands","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":4.52,"continent":"South America","location":[-59.523613,-51.796253]},{"id":"FRA","name":"France","culture":[68.0,71.0,43.0,86.0,63.0,48.0],"quality":[0.8349583364493722,0.9485342737491734,0.8860215053763439],"english":0.5725,"temperature":10.7,"sunshine":5.48,"continent":"Europe","location":[2.213749,46.22764]},{"id":"FRO","name":"Faroe Islands","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":2.3,"continent":null,"location":[-6.911806,61.892635]},{"id":"FSM","name":"Micronesia","culture":null,"quality":null,"english":0.5766,"temperature":25.85,"sunshine":null,"continent":"Oceania","location":[150.55081,7.425554]},{"id":"GAB","name":"Gabon","culture":null,"quality":[0.6423865020932327,0.6852545735067226,0.7182795698924731],"english":null,"temperature":25.05,"sunshine":4.71,"continent":"Africa","location":[11.609444,-0.803689]},{"id":"GBR","name":"United Kingdom","culture":[35.0,89.0,66.0,35.0,51.0,69.0],"quality":[0.9018701341527319,0.9491955036367644,0.943548387096774],"english":0.983,"temperature":8.45,"sunshine":4.19,"continent":"Europe","location":[-3.435973,55.37805]},{"id":"GEO","name":"Georgia","culture":[65.0,41.0,55.0,85.0,38.0,32.0],"quality":[0.7134148050842452,0.8202556755565353,0.8530465949820788],"english":null,"temperature":5.65,"sunshine":5.61,"continent":"Europe","location":[43.35689,42.315407]},{"id":"GGY","name":"Guernsey","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[-2.585278,49.46569]},{"id":"GHA","name":"Ghana","culture":[80.0,15.0,40.0,65.0,4.0,72.0],"quality":[0.6369045011071018,0.7141282785981926,0.8028673835125447],"english":0.6667,"temperature":27.2,"sunshine":6.66,"continent":"Africa","location":[-1.023194,7.946527]},{"id":"GIB","name":"Gibraltar","culture":null,"quality":null,"english":1.0,"temperature":null,"sunshine":null,"continent":null,"location":[-5.345374,36.13774]},{"id":"GIN","name":"Guinea","culture":null,"quality":[0.6133178410109232,0.46737932554551465,0.6159498207885304],"english":null,"temperature":25.7,"sunshine":6.68,"continent":"Africa","location":[-9.696645,9.945587]},{"id":"GLP","name":"Guadeloupe","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":"North America","location":[-62.067642,16.995972]},{"id":"GMB","name":"Gambia","culture":null,"quality":null,"english":0.0234,"temperature":27.5,"sunshine":8.41,"continent":"Africa","location":[-15.310139,13.443182]},{"id":"GNB","name":"Guinea-Bissau","culture":null,"quality":null,"english":null,"temperature":26.75,"sunshine":7.42,"continent":"Africa","location":[-15.180413,11.803749]},{"id":"GNQ","name":"Equatorial Guinea","culture":null,"quality":null,"english":null,"temperature":24.55,"sunshine":4.24,"continent":"Africa","location":[10.267895,1.650801]},{"id":"GRC","name":"Greece","culture":[60.0,35.0,57.0,100.0,45.0,50.0],"quality":[0.7865284115767495,0.9085298655499229,0.8232974910394265],"english":0.5098,"temperature":15.4,"sunshine":7.6,"continent":"Europe","location":[21.824312,39.074207]},{"id":"GRD","name":"Grenada","culture":null,"quality":null,"english":0.9091,"temperature":26.0,"sunshine":null,"continent":null,"location":[-61.60417,12.262776]},{"id":"GRL","name":"Greenland","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":"North America","location":[-42.6043,71.70694]},{"id":"GTM","name":"Guatemala","culture":null,"quality":[0.9326109606208849,0.6635441921974874,0.793010752688172],"english":null,"temperature":23.45,"sunshine":null,"continent":"North America","location":[-90.23076,15.783471]},{"id":"GUF","name":"French Guiana","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":5.41,"continent":"South America","location":[-53.125782,3.933889]},{"id":"GUM","name":"Guam","culture":null,"quality":null,"english":0.9109,"temperature":null,"sunshine":null,"continent":null,"location":[144.79373,13.444304]},{"id":"GUY","name":"Guyana","culture":null,"quality":null,"english":0.9055,"temperature":26.0,"sunshine":6.74,"continent":"South America","location":[-58.93018,4.860416]},{"id":"HKG","name":"Hong Kong","culture":[68.0,25.0,57.0,29.0,61.0,17.0],"quality":null,"english":0.4607,"temperature":21.45,"sunshine":null,"continent":null,"location":[114.1095,22.396427]},{"id":"HMD","name":"Heard Island and McDonald Islands","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[73.50416,-53.08181]},{"id":"HND","name":"Honduras","culture":null,"quality":[0.9303317490508859,0.6741238703989421,0.7385304659498207],"english":null,"temperature":23.5,"sunshine":6.19,"continent":"North America","location":[-86.241905,15.199999]},{"id":"HRV","name":"Croatia","culture":[73.0,33.0,40.0,80.0,58.0,33.0],"quality":[0.7446061623774559,0.907207405774741,0.8750896057347669],"english":0.5708,"temperature":10.9,"sunshine":6.22,"continent":"Europe","location":[15.2,45.1]},{"id":"HTI","name":"Haiti","culture":null,"quality":[0.6155482760837246,0.5005510249063259,0.7614695340501791],"english":null,"temperature":24.9,"sunshine":null,"continent":"North America","location":[-72.28522,18.971188]},{"id":"HUN","name":"Hungary","culture":[46.0,80.0,88.0,82.0,58.0,31.0],"quality":[0.7323279549995048,0.861913158474763,0.825268817204301],"english":0.57,"temperature":9.75,"sunshine":5.45,"continent":"Europe","location":[19.503304,47.162495]},{"id":"IDN","name":"Indonesia","culture":[78.0,14.0,46.0,48.0,62.0,38.0],"quality":[0.7992255044772288,0.7347366100947763,0.760931899641577],"english":null,"temperature":25.85,"sunshine":7.56,"continent":"Asia","location":[113.921326,-0.789275]},{"id":"IMN","name":"Isle of Man","culture":null,"quality":null,"english":0.9993,"temperature":null,"sunshine":null,"continent":null,"location":[-4.548056,54.236107]},{"id":"IND","name":"India","culture":[77.0,48.0,56.0,40.0,51.0,26.0],"quality":[0.5861032345395084,0.663323782234957,0.7025089605734767],"english":0.1481,"temperature":23.65,"sunshine":7.08,"continent":"Asia","location":[78.96288,20.593683]},{"id":"IOT","name":"British Indian Ocean Territory","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[71.87652,-6.343194]},{"id":"IRL","name":"Ireland","culture":[28.0,70.0,68.0,35.0,24.0,65.0],"quality":[0.8242108602603032,0.9663874807141283,0.9580645161290321],"english":0.9837,"temperature":9.3,"sunshine":3.98,"continent":"Europe","location":[-8.24389,53.41291]},{"id":"IRN","name":"Iran","culture":[58.0,41.0,43.0,59.0,14.0,40.0],"quality":[0.7030971534570417,0.7022261406215561,0.47921146953405014],"english":null,"temperature":17.25,"sunshine":7.96,"continent":"Asia","location":[53.688046,32.42791]},{"id":"IRQ","name":"Iraq","culture":[97.0,31.0,53.0,96.0,12.0,23.0],"quality":[0.7296268605280173,0.6261847035486005,0.5369892473118278],"english":0.35,"temperature":21.4,"sunshine":8.88,"continent":"Asia","location":[43.67929,33.22319]},{"id":"ISL","name":"Iceland","culture":[30.0,60.0,10.0,50.0,28.0,67.0],"quality":[0.7727808110725926,0.9867754022481817,0.9442652329749103],"english":0.98,"temperature":-0.7,"sunshine":3.63,"continent":"Europe","location":[-19.020836,64.96305]},{"id":"ISR","name":"Israel","culture":null,"quality":[0.7773980779777062,0.9165748291822791,0.8139784946236558],"english":0.8497,"temperature":19.2,"sunshine":9.07,"continent":"Asia","location":[34.851612,31.046051]},{"id":"ITA","name":"Italy","culture":[50.0,76.0,70.0,75.0,61.0,30.0],"quality":[0.8169451878781392,0.9392770553229007,0.8992831541218637],"english":0.2851,"temperature":13.45,"sunshine":6.64,"continent":"Europe","location":[12.56738,41.87194]},{"id":"JAM","name":"Jamaica","culture":null,"quality":[0.9330633711527095,0.8097862023363457,0.8473118279569891],"english":0.9764,"temperature":24.95,"sunshine":null,"continent":"North America","location":[-77.29751,18.109581]},{"id":"JEY","name":"Jersey","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[-2.13125,49.21444]},{"id":"JOR","name":"Jordan","culture":[70.0,30.0,45.0,65.0,16.0,43.0],"quality":[0.7066759001794891,0.7418999338770113,0.7111111111111111],"english":0.45,"temperature":18.3,"sunshine":null,"continent":"Asia","location":[36.238415,30.585163]},{"id":"JPN","name":"Japan","culture":[54.0,46.0,95.0,92.0,88.0,42.0],"quality":[0.7583883804251468,0.971897729777386,0.9317204301075268],"english":null,"temperature":11.15,"sunshine":4.92,"continent":"Asia","location":[138.25293,36.204823]},{"id":"KAZ","name":"Kazakhstan","culture":[88.0,20.0,50.0,88.0,85.0,22.0],"quality":[0.622727310662001,0.7847696715891558,0.6992831541218637],"english":0.1542,"temperature":5.5,"sunshine":6.66,"continent":"Asia","location":[66.92368,48.019573]},{"id":"KEN","name":"Kenya","culture":null,"quality":[0.7280815386894209,0.6387480714128279,0.7139784946236558],"english":0.1883,"temperature":24.75,"sunshine":8.28,"continent":"Africa","location":[37.906193,-0.023559]},{"id":"KGZ","name":"Kyrgyzstan","culture":null,"quality":[0.8653936304003828,0.740908089045625,0.7415770609318996],"english":null,"temperature":2.1,"sunshine":null,"continent":"Asia","location":[74.7661,41.20438]},{"id":"KHM","name":"Cambodia","culture":null,"quality":[0.7729510698033777,0.6139519506281684,0.6985663082437276],"english":0.222,"temperature":26.8,"sunshine":null,"continent":"Asia","location":[104.99097,12.565679]},{"id":"KIR","name":"Kiribati","culture":null,"quality":null,"english":0.2421,"temperature":28.2,"sunshine":null,"continent":"Oceania","location":[-168.73404,-3.370417]},{"id":"KNA","name":"Saint Kitts and Nevis","culture":null,"quality":null,"english":0.78,"temperature":24.5,"sunshine":null,"continent":null,"location":[-62.782997,17.357822]},{"id":"KOR","name":"South Korea","culture":[60.0,18.0,39.0,85.0,100.0,29.0],"quality":[0.6416474764840694,0.9529424729997796,0.8867383512544803],"english":null,"temperature":11.5,"sunshine":6.02,"continent":"Asia","location":[127.76692,35.907757]},{"id":"KWT","name":"Kuwait","culture":null,"quality":[0.5370010727060301,0.8161780912497245,0.6591397849462365],"english":null,"temperature":27.15,"sunshine":null,"continent":"Asia","location":[47.481766,29.31166]},{"id":"LAO","name":"Laos","culture":null,"quality":[0.6894278006417075,0.5639188891337888,0.5908602150537634],"english":null,"temperature":22.8,"sunshine":null,"continent":"Asia","location":[102.4955,19.85627]},{"id":"LBN","name":"Lebanon","culture":[62.0,43.0,48.0,57.0,22.0,10.0],"quality":[0.628446178227311,0.7326427154507384,0.7078853046594982],"english":0.3999,"temperature":15.0,"sunshine":null,"continent":"Asia","location":[35.862286,33.85472]},{"id":"LBR","name":"Liberia","culture":null,"quality":[0.7416105355005048,0.5403350231430462,0.7247311827956988],"english":0.8267,"temperature":25.3,"sunshine":null,"continent":"Africa","location":[-9.429499,6.428055]},{"id":"LBY","name":"Libya","culture":[100.0,35.0,66.0,67.0,15.0,74.0],"quality":[0.6878362554198454,0.5981926383072516,0.5222222222222221],"english":null,"temperature":21.8,"sunshine":8.71,"continent":"Africa","location":[17.22833,26.3351]},{"id":"LCA","name":"Saint Lucia","culture":null,"quality":null,"english":0.4303,"temperature":25.5,"sunshine":null,"continent":null,"location":[-60.978893,13.909444]},{"id":"LIE","name":"Liechtenstein","culture":null,"quality":null,"english":null,"temperature":5.8,"sunshine":null,"continent":"Europe","location":[9.555373,47.166]},{"id":"LKA","name":"Sri Lanka","culture":null,"quality":[0.7540922044981923,0.7628388803173903,0.7161290322580643],"english":0.1832,"temperature":26.95,"sunshine":null,"continent":"Asia","location":[80.7718,7.873054]},{"id":"LSO","name":"Lesotho","culture":null,"quality":[0.440052009483261,0.5829843508926603,0.7516129032258063],"english":0.2786,"temperature":11.85,"sunshine":null,"continent":"Africa","location":[28.233608,-29.609987]},{"id":"LTU","name":"Lithuania","culture":[42.0,60.0,19.0,65.0,82.0,16.0],"quality":[0.5939207574059927,0.9225258981705973,0.9256272401433692],"english":0.3799,"temperature":6.2,"sunshine":4.63,"continent":"Europe","location":[23.881275,55.169437]},{"id":"LUX","name":"Luxembourg","culture":[40.0,60.0,50.0,70.0,64.0,56.0],"quality":[0.5111927336027423,0.9640731761075602,0.9455197132616485],"english":0.5697,"temperature":8.65,"sunshine":4.48,"continent":"Europe","location":[6.129583,49.815273]},{"id":"LVA","name":"Latvia","culture":[44.0,70.0,9.0,63.0,69.0,13.0],"quality":[0.5502146263608555,0.9087502755124531,0.9229390681003583],"english":0.4589,"temperature":5.6,"sunshine":4.81,"continent":"Europe","location":[24.60319,56.879635]},{"id":"MAC","name":"Macao","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":null},{"id":"MAF","name":"Saint Martin (French part)","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":null},{"id":"MAR","name":"Morocco","culture":[70.0,46.0,53.0,68.0,14.0,25.0],"quality":[0.8197728400331962,0.7057527000220412,0.6175627240143369],"english":0.1843,"temperature":17.1,"sunshine":8.58,"continent":"Africa","location":[-7.09262,31.791702]},{"id":"MCO","name":"Monaco","culture":null,"quality":null,"english":null,"temperature":13.55,"sunshine":7.05,"continent":"Europe","location":[7.412841,43.750298]},{"id":"MDA","name":"Moldova","culture":[90.0,27.0,39.0,95.0,71.0,19.0],"quality":[0.8213165635167627,0.8176107560061715,0.7944444444444443],"english":null,"temperature":9.45,"sunshine":5.82,"continent":"Europe","location":[28.369884,47.411633]},{"id":"MDG","name":"Madagascar","culture":null,"quality":[0.7119303540001704,0.5187348468150761,0.7250896057347669],"english":0.18,"temperature":22.65,"sunshine":7.76,"continent":"Africa","location":[46.869106,-18.766947]},{"id":"MDV","name":"Maldives","culture":null,"quality":null,"english":null,"temperature":28.0,"sunshine":null,"continent":"Asia","location":[73.22068,3.202778]},{"id":"MEX","name":"Mexico","culture":[81.0,30.0,69.0,82.0,24.0,97.0],"quality":[0.8754871802123624,0.7806920872823453,0.7295698924731182],"english":0.13,"temperature":21.0,"sunshine":6.85,"continent":"North America","location":[-102.55279,23.6345]},{"id":"MHL","name":"Marshall Islands","culture":null,"quality":null,"english":0.9831,"temperature":27.4,"sunshine":null,"continent":"Oceania","location":[171.18448,7.131474]},{"id":"MKD","name":"North Macedonia","culture":[90.0,22.0,45.0,87.0,62.0,35.0],"quality":[0.7067430628354612,0.8016310337227243,0.8084229390681003],"english":null,"temperature":9.8,"sunshine":6.41,"continent":"Europe","location":[21.745275,41.608635]},{"id":"MLI","name":"Mali","culture":null,"quality":[0.633958732465156,0.517191977077364,0.6557347670250895],"english":null,"temperature":28.25,"sunshine":8.51,"continent":"Africa","location":[-3.996166,17.570692]},{"id":"MLT","name":"Malta","culture":[56.0,59.0,47.0,96.0,47.0,66.0],"quality":[0.7010078219203973,0.9314525016530747,0.9094982078853046],"english":0.883,"temperature":19.2,"sunshine":8.37,"continent":"Europe","location":[14.375416,35.937496]},{"id":"MMR","name":"Myanmar","culture":null,"quality":[0.6452847340548574,0.5671148335904783,0.5818996415770609],"english":0.0445,"temperature":13.05,"sunshine":null,"continent":"Asia","location":[95.95622,21.913965]},{"id":"MNE","name":"Montenegro","culture":[88.0,24.0,48.0,90.0,75.0,20.0],"quality":[0.6660008187751297,0.8225699801631035,0.8379928315412185],"english":null,"temperature":10.55,"sunshine":6.8,"continent":"Europe","location":[19.37439,42.70868]},{"id":"MNG","name":"Mongolia","culture":null,"quality":[0.39426364595691166,0.7406876790830945,0.8487455197132615],"english":null,"temperature":1.7,"sunshine":7.65,"continent":"Asia","location":[103.84666,46.862495]},{"id":"MNP","name":"Northern Mariana Islands","culture":null,"quality":null,"english":0.8333,"temperature":null,"sunshine":null,"continent":null,"location":[145.38469,17.33083]},{"id":"MOZ","name":"Mozambique","culture":[85.0,15.0,38.0,44.0,11.0,80.0],"quality":[0.7120493271112489,0.5319594445668945,0.7234767025089605],"english":null,"temperature":23.8,"sunshine":7.78,"continent":"Africa","location":[35.529564,-18.665695]},{"id":"MRT","name":"Mauritania","culture":null,"quality":[0.5585527848160549,0.5135552126956139,0.5818996415770609],"english":null,"temperature":27.65,"sunshine":9.13,"continent":"Africa","location":[-10.940835,21.00789]},{"id":"MSR","name":"Montserrat","culture":null,"quality":null,"english":0.678,"temperature":null,"sunshine":null,"continent":null,"location":[-62.187366,16.742498]},{"id":"MTQ","name":"Martinique","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":"North America","location":[-61.024174,14.641528]},{"id":"MUS","name":"Mauritius","culture":null,"quality":[0.8302096392869028,0.8313863786643156,0.8487455197132615],"english":0.1597,"temperature":22.4,"sunshine":null,"continent":"Africa","location":[57.55215,-20.348404]},{"id":"MWI","name":"Malawi","culture":null,"quality":[0.6237200987795267,0.5983028432885167,0.7532258064516127],"english":0.0388,"temperature":21.9,"sunshine":7.66,"continent":"Africa","location":[34.301525,-13.254308]},{"id":"MYS","name":"Malaysia","culture":[100.0,26.0,50.0,36.0,41.0,57.0],"quality":[0.6726133496967632,0.8163985012122549,0.7261648745519712],"english":0.5734,"temperature":25.4,"sunshine":null,"continent":"Asia","location":[101.97577,4.210484]},{"id":"MYT","name":"Mayotte","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[45.166245,-12.8275]},{"id":"NAM","name":"Namibia","culture":null,"quality":[0.5931448363677528,0.6832708838439497,0.814516129032258],"english":0.1724,"temperature":19.95,"sunshine":10.24,"continent":"Africa","location":[18.49041,-22.95764]},{"id":"NCL","name":"New Caledonia","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[165.61804,-20.904305]},{"id":"NER","name":"Niger","culture":null,"quality":[0.6663316835839139,0.4754242891778709,0.6740143369175625],"english":null,"temperature":27.15,"sunshine":8.78,"continent":"Africa","location":[8.081666,17.607788]},{"id":"NFK","name":"Norfolk Island","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[167.95471,-29.040834]},{"id":"NGA","name":"Nigeria","culture":[80.0,30.0,60.0,55.0,13.0,84.0],"quality":[0.550105711010391,0.5837557857615164,0.6499999999999999],"english":0.6064,"temperature":27.0,"sunshine":7.58,"continent":"Africa","location":[8.675277,9.081999]},{"id":"NIC","name":"Nicaragua","culture":null,"quality":[0.8893944792498539,0.6637646021600176,0.7041218637992831],"english":null,"temperature":24.9,"sunshine":7.56,"continent":"North America","location":[-85.20723,12.865416]},{"id":"NIU","name":"Niue","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[-169.86723,-19.054445]},{"id":"NLD","name":"Netherlands","culture":[38.0,80.0,14.0,53.0,67.0,68.0],"quality":[0.8854589889987211,0.9804937183160679,0.9417562724014336],"english":0.9094,"temperature":9.25,"sunshine":4.55,"continent":"Europe","location":[5.291266,52.132633]},{"id":"NOR","name":"Norway","culture":[31.0,69.0,8.0,50.0,35.0,55.0],"quality":[0.8198066359200814,1.0,0.9421146953405017],"english":0.876,"temperature":2.17,"sunshine":3.47,"continent":"Europe","location":[8.468946,60.472023]},{"id":"NPL","name":"Nepal","culture":null,"quality":[0.8549419499602022,0.6545073837337448,0.7501792114695339],"english":0.03,"temperature":8.1,"sunshine":null,"continent":"Asia","location":[84.12401,28.394857]},{"id":"NRU","name":"Nauru","culture":null,"quality":null,"english":0.9667,"temperature":null,"sunshine":null,"continent":"Oceania","location":[166.9315,-0.522778]},{"id":"NZL","name":"New Zealand","culture":[22.0,79.0,58.0,49.0,33.0,75.0],"quality":[0.9255034991207163,0.9616486665197268,0.975448028673835],"english":0.9782,"temperature":19.53,"sunshine":5.56,"continent":"Oceania","location":[174.88597,-40.90056]},{"id":"OMN","name":"Oman","culture":null,"quality":null,"english":null,"temperature":25.6,"sunshine":9.57,"continent":"Asia","location":[55.923256,21.512583]},{"id":"PAK","name":"Pakistan","culture":[55.0,14.0,50.0,70.0,50.0,0.0],"quality":[0.7268324402672451,0.5655719638527662,0.5853046594982079],"english":0.4891,"temperature":20.2,"sunshine":8.31,"continent":"Asia","location":[69.345116,30.37532]},{"id":"PAN","name":"Panama","culture":null,"quality":[0.9335232892317499,0.8157372713246639,0.857706093189964],"english":0.14,"temperature":25.4,"sunshine":4.78,"continent":"North America","location":[-80.78213,8.537981]},{"id":"PCN","name":"Pitcairn","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":null},{"id":"PER","name":"Peru","culture":[64.0,16.0,42.0,87.0,25.0,46.0],"quality":[0.9006723377866184,0.7791492175446331,0.825268817204301],"english":null,"temperature":19.6,"sunshine":6.25,"continent":"South America","location":[-75.01515,-9.189967]},{"id":"PHL","name":"Philippines","culture":[94.0,32.0,64.0,44.0,27.0,42.0],"quality":[0.9201655133228276,0.7434428036147234,0.7281362007168458],"english":0.5821,"temperature":25.55,"sunshine":5.76,"continent":"Asia","location":[121.77402,12.879721]},{"id":"PLW","name":"Palau","culture":null,"quality":null,"english":0.925,"temperature":27.6,"sunshine":null,"continent":"Oceania","location":[134.58252,7.51498]},{"id":"PNG","name":"Papua New Guinea","culture":null,"quality":null,"english":0.7043,"temperature":25.25,"sunshine":6.75,"continent":"Oceania","location":[143.95555,-6.314993]},{"id":"POL","name":"Poland","culture":[68.0,60.0,64.0,93.0,38.0,29.0],"quality":[0.7254976004671349,0.8835133348027332,0.8578853046594981],"english":0.4906,"temperature":7.85,"sunshine":4.3,"continent":"Europe","location":[19.145136,51.919437]},{"id":"PRI","name":"Puerto Rico","culture":[68.0,27.0,56.0,38.0,0.0,90.0],"quality":null,"english":0.4861,"temperature":null,"sunshine":8.12,"continent":"North America","location":[-66.59015,18.220833]},{"id":"PRK","name":"North Korea","culture":null,"quality":null,"english":null,"temperature":5.7,"sunshine":6.83,"continent":"Asia","location":[127.51009,40.33985]},{"id":"PRT","name":"Portugal","culture":[63.0,27.0,31.0,99.0,28.0,33.0],"quality":[0.7454843370467046,0.9339872162221733,0.9258064516129031],"english":0.273,"temperature":15.15,"sunshine":7.69,"continent":"Europe","location":[-8.224454,39.39987]},{"id":"PRY","name":"Paraguay","culture":[70.0,12.0,40.0,85.0,20.0,56.0],"quality":[0.7670791800879965,0.7599735508044964,0.789605734767025],"english":null,"temperature":23.55,"sunshine":7.68,"continent":"South America","location":[-58.443832,-23.442503]},{"id":"PSE","name":"Palestine","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":"Asia","location":null},{"id":"PYF","name":"French Polynesia","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[-149.40685,-17.679743]},{"id":"QAT","name":"Qatar","culture":null,"quality":[0.3919998947132168,0.7325325104694732,0.6351254480286738],"english":null,"temperature":27.15,"sunshine":null,"continent":"Asia","location":[51.183884,25.354826]},{"id":"REU","name":"Réunion","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[55.536385,-21.11514]},{"id":"ROU","name":"Romania","culture":[90.0,30.0,42.0,90.0,52.0,20.0],"quality":[0.7446680281760655,0.8473661009477629,0.8840501792114694],"english":0.3098,"temperature":8.8,"sunshine":5.79,"continent":"Europe","location":[24.96676,45.94316]},{"id":"RUS","name":"Russia","culture":[93.0,39.0,36.0,95.0,81.0,20.0],"quality":[0.5627847946602937,0.7933656601278378,0.6557347670250896],"english":0.035,"temperature":-5.35,"sunshine":5.81,"continent":"Asia","location":[105.318756,61.52401]},{"id":"RWA","name":"Rwanda","culture":null,"quality":[0.6322273907197031,0.5750495922415694,0.6673835125448028],"english":0.15,"temperature":17.85,"sunshine":null,"continent":"Africa","location":[29.873888,-1.940278]},{"id":"SAU","name":"Saudi Arabia","culture":[72.0,48.0,43.0,64.0,27.0,14.0],"quality":[0.6705407460195074,0.7040996253030637,0.4887096774193547],"english":null,"temperature":24.65,"sunshine":8.87,"continent":"Asia","location":[45.079163,23.885942]},{"id":"SDN","name":"Sudan","culture":null,"quality":[0.6381678351859352,0.5004408199250606,0.4111827956989247],"english":null,"temperature":26.9,"sunshine":9.75,"continent":"Africa","location":[30.217636,12.862807]},{"id":"SEN","name":"Senegal","culture":null,"quality":[0.8249630799123612,0.635882741899934,0.7370967741935482],"english":null,"temperature":27.85,"sunshine":8.62,"continent":"Africa","location":[-14.452362,14.497401]},{"id":"SGP","name":"Singapore","culture":[74.0,20.0,48.0,8.0,72.0,46.0],"quality":[0.7339840614211842,0.9230769230769232,0.8403225806451612],"english":0.9643,"temperature":26.45,"sunshine":5.54,"continent":"Asia","location":[103.81984,1.352083]},{"id":"SGS","name":"South Georgia and the South Sandwich Islands","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":"South America","location":[-36.58791,-54.42958]},{"id":"SHN","name":"Saint Helena, Ascension and Tristan da Cunha","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":null},{"id":"SJM","name":"Svalbard and Jan Mayen","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[23.670273,77.553604]},{"id":"SLB","name":"Solomon Islands","culture":null,"quality":null,"english":0.3168,"temperature":25.65,"sunshine":6.38,"continent":"Oceania","location":[160.15619,-9.64571]},{"id":"SLE","name":"Sierra Leone","culture":null,"quality":[0.46757789410615025,0.5563147454264933,0.6953405017921147],"english":0.8353,"temperature":26.05,"sunshine":null,"continent":"Africa","location":[-11.779889,8.460555]},{"id":"SLV","name":"El Salvador","culture":[66.0,19.0,40.0,94.0,20.0,89.0],"quality":[0.9076506191987663,0.7099404893101169,0.782258064516129],"english":null,"temperature":24.45,"sunshine":8.1,"continent":"North America","location":[-88.89653,13.794185]},{"id":"SMR","name":"San Marino","culture":null,"quality":null,"english":null,"temperature":11.85,"sunshine":null,"continent":"Europe","location":[12.457777,43.94236]},{"id":"SOM","name":"Somalia","culture":null,"quality":null,"english":null,"temperature":27.05,"sunshine":8.5,"continent":"Africa","location":[46.199615,5.152149]},{"id":"SPM","name":"Saint Pierre and Miquelon","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":3.91,"continent":null,"location":[-56.27111,46.941936]},{"id":"SRB","name":"Serbia","culture":[86.0,25.0,43.0,92.0,52.0,28.0],"quality":[0.8575234578578025,0.8353537579898611,0.8008960573476701],"english":null,"temperature":10.55,"sunshine":5.63,"continent":"Europe","location":[21.00586,44.01652]},{"id":"SSD","name":"South Sudan","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":7.78,"continent":"Africa","location":null},{"id":"STP","name":"Sao Tome and Principe","culture":[75.0,37.0,24.0,70.0,32.0,41.0],"quality":null,"english":null,"temperature":23.75,"sunshine":null,"continent":"Africa","location":[6.613081,0.18636]},{"id":"SUR","name":"Suriname","culture":null,"quality":null,"english":0.8709,"temperature":25.7,"sunshine":null,"continent":"South America","location":[-56.027782,3.919305]},{"id":"SVK","name":"Slovakia","culture":[100.0,52.0,100.0,51.0,77.0,28.0],"quality":[0.750501957160918,0.8958562927044303,0.882258064516129],"english":0.2594,"temperature":6.8,"sunshine":5.58,"continent":"Europe","location":[19.699024,48.669025]},{"id":"SVN","name":"Slovenia","culture":[71.0,27.0,19.0,88.0,49.0,48.0],"quality":[0.7716151622847044,0.9278157372713247,0.8883512544802866],"english":0.5902,"temperature":8.9,"sunshine":5.41,"continent":"Europe","location":[14.995463,46.15124]},{"id":"SWE","name":"Sweden","culture":[31.0,71.0,5.0,29.0,53.0,78.0],"quality":[0.8137690688663788,0.9854529424729999,0.9521505376344085],"english":0.89,"temperature":1.75,"sunshine":4.88,"continent":"Europe","location":[18.643501,60.128162]},{"id":"SWZ","name":"Eswatini","culture":null,"quality":[0.5695572666320801,0.5420983028432885,0.6025089605734767],"english":0.482,"temperature":21.4,"sunshine":null,"continent":null,"location":null},{"id":"SXM","name":"Sint Maarten (Dutch part)","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":null},{"id":"SYC","name":"Seychelles","culture":null,"quality":null,"english":0.3793,"temperature":27.15,"sunshine":null,"continent":"Africa","location":[55.491978,-4.679574]},{"id":"SYR","name":"Syria","culture":null,"quality":null,"english":null,"temperature":17.75,"sunshine":null,"continent":"Asia","location":[38.996815,34.802074]},{"id":"TCA","name":"Turks and Caicos Islands","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[-71.79793,21.694025]},{"id":"TCD","name":"Chad","culture":null,"quality":[0.4892682512280165,0.3823010800088164,0.5770609318996415],"english":null,"temperature":26.55,"sunshine":9.19,"continent":"Africa","location":[18.732206,15.454166]},{"id":"TGO","name":"Togo","culture":null,"quality":[0.601222791841374,0.5684372933656602,0.6817204301075268],"english":null,"temperature":27.15,"sunshine":7.07,"continent":"Africa","location":[0.824782,8.619543]},{"id":"THA","name":"Thailand","culture":[64.0,20.0,34.0,64.0,32.0,45.0],"quality":[0.8525075007160566,0.7692307692307693,0.6924731182795698],"english":0.2716,"temperature":26.3,"sunshine":6.18,"continent":"Asia","location":[100.99254,15.870032]},{"id":"TJK","name":"Tajikistan","culture":null,"quality":[0.8887391872049676,0.6176989199911836,0.5815412186379928],"english":null,"temperature":6.4,"sunshine":null,"continent":"Asia","location":[71.27609,38.861034]},{"id":"TKL","name":"Tokelau","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[-171.85588,-8.967363]},{"id":"TKM","name":"Turkmenistan","culture":null,"quality":null,"english":null,"temperature":15.1,"sunshine":null,"continent":"Asia","location":[59.55628,38.96972]},{"id":"TLS","name":"East Timor","culture":null,"quality":null,"english":null,"temperature":25.25,"sunshine":null,"continent":"Asia","location":[125.72754,-8.874217]},{"id":"TON","name":"Tonga","culture":null,"quality":null,"english":0.3,"temperature":25.25,"sunshine":null,"continent":"Oceania","location":[-175.19824,-21.178986]},{"id":"TTO","name":"Trinidad and Tobago","culture":[47.0,16.0,58.0,55.0,13.0,80.0],"quality":[0.5094110561622628,0.8329292484020278,0.8186379928315412],"english":0.8774,"temperature":25.75,"sunshine":null,"continent":"South America","location":[-61.222504,10.691803]},{"id":"TUN","name":"Tunisia","culture":null,"quality":[0.7077709830189132,0.7689001542869738,0.6840501792114694],"english":null,"temperature":19.2,"sunshine":8.36,"continent":"Africa","location":[9.537499,33.886917]},{"id":"TUR","name":"Turkey","culture":[66.0,37.0,45.0,85.0,46.0,49.0],"quality":[0.6652268225630648,0.7338549702446552,0.6297491039426523],"english":0.1496,"temperature":9.9,"sunshine":6.39,"continent":"Asia","location":[35.24332,38.963745]},{"id":"TUV","name":"Tuvalu","culture":null,"quality":null,"english":null,"temperature":27.65,"sunshine":null,"continent":"Oceania","location":[177.64932,-7.109535]},{"id":"TWN","name":"Taiwan","culture":[58.0,17.0,45.0,69.0,93.0,49.0],"quality":null,"english":null,"temperature":null,"sunshine":5.6,"continent":"Asia","location":[120.96052,23.69781]},{"id":"TZA","name":"Tanzania","culture":[70.0,25.0,40.0,50.0,34.0,38.0],"quality":[0.5955494085067417,0.6046947322018955,0.6965949820788531],"english":0.0989,"temperature":22.35,"sunshine":8.19,"continent":"Africa","location":[34.88882,-6.369028]},{"id":"UGA","name":"Uganda","culture":null,"quality":[0.7214228108116035,0.5437513775622659,0.67168458781362],"english":0.899,"temperature":22.8,"sunshine":6.31,"continent":"Africa","location":[32.290276,1.373333]},{"id":"UKR","name":"Ukraine","culture":[92.0,25.0,27.0,95.0,86.0,14.0],"quality":[0.6591108294377369,0.8173903460436412,0.7129032258064516],"english":null,"temperature":8.3,"sunshine":5.36,"continent":"Europe","location":[31.16558,48.379433]},{"id":"UMI","name":"United States Minor Outlying Islands","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":null},{"id":"URY","name":"Uruguay","culture":[61.0,36.0,38.0,98.0,26.0,53.0],"quality":[0.9270432720778278,0.8846153846153846,0.8910394265232974],"english":0.24,"temperature":17.55,"sunshine":6.8,"continent":"South America","location":[-55.765835,-32.522778]},{"id":"USA","name":"United States","culture":[40.0,91.0,62.0,46.0,26.0,68.0],"quality":[0.6034030486536546,0.9328851664095218,0.9385304659498207],"english":0.955,"temperature":8.55,"sunshine":7.49,"continent":"North America","location":[-95.71289,37.09024]},{"id":"UZB","name":"Uzbekistan","culture":null,"quality":null,"english":null,"temperature":12.05,"sunshine":7.74,"continent":"Asia","location":[64.58526,41.37749]},{"id":"VAT","name":"Vatican City","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":"Europe","location":[12.453389,41.902916]},{"id":"VCT","name":"Saint Vincent and the Grenadines","culture":null,"quality":null,"english":0.95,"temperature":26.8,"sunshine":null,"continent":null,"location":[-61.287228,12.984305]},{"id":"VEN","name":"Venezuela","culture":[81.0,12.0,73.0,76.0,16.0,100.0],"quality":[0.7886324024090645,0.6460216001763279,0.44301075268817197],"english":null,"temperature":25.35,"sunshine":7.93,"continent":"South America","location":[-66.58973,6.42375]},{"id":"VGB","name":"British Virgin Islands","culture":null,"quality":null,"english":0.8696,"temperature":null,"sunshine":null,"continent":null,"location":[-64.63997,18.420694]},{"id":"VIR","name":"United States Virgin Islands","culture":null,"quality":null,"english":0.8037,"temperature":null,"sunshine":null,"continent":"North America","location":[-64.89633,18.335766]},{"id":"VNM","name":"Vietnam","culture":[70.0,20.0,40.0,30.0,57.0,35.0],"quality":[0.7806398426664842,0.7513775622658145,0.6100358422939067],"english":null,"temperature":24.45,"sunshine":6.05,"continent":"Asia","location":[108.2772,14.058324]},{"id":"VUT","name":"Vanuatu","culture":null,"quality":null,"english":0.8355,"temperature":23.95,"sunshine":null,"continent":"Oceania","location":[166.95915,-15.376706]},{"id":"WLF","name":"Wallis and Futuna","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":null,"location":[-177.1561,-13.768752]},{"id":"WSM","name":"Samoa","culture":null,"quality":null,"english":0.4986,"temperature":26.7,"sunshine":null,"continent":"Oceania","location":[-172.10463,-13.759029]},{"id":"XKX","name":"Kosovo","culture":null,"quality":null,"english":null,"temperature":null,"sunshine":null,"continent":"Europe","location":[20.902977,42.602634]},{"id":"YEM","name":"Yemen","culture":null,"quality":[0.7191458888904214,0.43068106678421864,0.4406810035842293],"english":0.09,"temperature":23.85,"sunshine":null,"continent":"Asia","location":[48.516388,15.552727]},{"id":"ZAF","name":"South Africa","culture":[49.0,65.0,63.0,49.0,34.0,63.0],"quality":[0.5834143264978499,0.7708838439497466,0.7743727598566307],"english":0.31,"temperature":17.75,"sunshine":8.69,"continent":"Africa","location":[22.937506,-30.559483]},{"id":"ZMB","name":"Zambia","culture":[60.0,35.0,40.0,50.0,30.0,42.0],"quality":[0.5544999744355851,0.5738373374476526,0.7211469534050178],"english":0.1602,"temperature":21.4,"sunshine":8.04,"continent":"Africa","location":[27.849333,-13.133897]},{"id":"ZWE","name":"Zimbabwe","culture":null,"quality":[0.4615101710126648,0.5749393872603042,0.6098566308243727],"english":0.8207,"temperature":21.0,"sunshine":8.4,"continent":"Africa","location":[29.154858,-19.015438]}]}
+{
+  "sources": [
+    {
+      "name": "Hofstede dimensions",
+      "url": "https://geerthofstede.com/research-and-vsm/dimension-data-matrix/",
+      "year": "unknown",
+      "license": "Research use allowed"
+    },
+    {
+      "name": "Happy Planet",
+      "url": "https://happyplanetindex.org/hpi/",
+      "year": "2019",
+      "license": "No explicit license found"
+    },
+    {
+      "name": "Social Progress",
+      "url": "https://en.wikipedia.org/wiki/Social_Progress_Index#2022_Social_Progress_Index_Rankings",
+      "year": "2022",
+      "license": "CC BY-SA 4.0 (Wikipedia); upstream terms may apply"
+    },
+    {
+      "name": "Human Freedom",
+      "url": "https://www.cato.org/human-freedom-index/2022",
+      "year": "2015–2020 (2022 release)",
+      "license": "No explicit license; report reserves rights"
+    },
+    {
+      "name": "English-speaking ratio",
+      "url": "https://en.wikipedia.org/wiki/List_of_countries_by_English-speaking_population",
+      "year": "mixed / unknown",
+      "license": "CC BY-SA 4.0 (Wikipedia)"
+    },
+    {
+      "name": "Average temperature",
+      "url": "https://en.wikipedia.org/wiki/List_of_countries_by_average_yearly_temperature",
+      "year": "1961–1990; Denmark/Norway exceptions",
+      "license": "CC BY-SA 4.0 (Wikipedia)"
+    },
+    {
+      "name": "Daily sunshine",
+      "url": "https://en.wikipedia.org/wiki/List_of_cities_by_sunshine_duration",
+      "year": "mixed / unknown",
+      "license": "CC BY-SA 4.0 (Wikipedia)"
+    },
+    {
+      "name": "Country coordinates",
+      "url": "https://developers.google.com/public-data/docs/canonical/countries_csv",
+      "year": "unknown",
+      "license": "CC BY 4.0"
+    },
+    {
+      "name": "Continents",
+      "url": "https://simple.wikipedia.org/wiki/List_of_countries_by_continents",
+      "year": "unknown",
+      "license": "CC BY-SA 4.0 (Wikipedia)"
+    },
+    {
+      "name": "ISO alpha-3 country codes",
+      "url": "https://www.iso.org/iso-3166-country-codes.html",
+      "year": "unknown",
+      "license": "Free use of codes (ISO terms)"
+    }
+  ],
+  "countries": [
+    {
+      "id": "ABW",
+      "name": "Aruba",
+      "culture": null,
+      "quality": null,
+      "english": 0.4231,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -69.96834,
+        12.52111
+      ]
+    },
+    {
+      "id": "AFG",
+      "name": "Afghanistan",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 12.6,
+      "sunshine": 8.7,
+      "continent": "Asia",
+      "location": [
+        67.70995,
+        33.93911
+      ]
+    },
+    {
+      "id": "AGO",
+      "name": "Angola",
+      "culture": [
+        83.0,
+        18.0,
+        20.0,
+        60.0,
+        15.0,
+        83.0
+      ],
+      "quality": null,
+      "english": null,
+      "temperature": 21.55,
+      "sunshine": 6.41,
+      "continent": "Africa",
+      "location": [
+        17.873886,
+        -11.202692
+      ]
+    },
+    {
+      "id": "AIA",
+      "name": "Anguilla",
+      "culture": null,
+      "quality": null,
+      "english": 0.9231,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -63.068615,
+        18.220554
+      ]
+    },
+    {
+      "id": "ALA",
+      "name": "Åland Islands",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": null
+    },
+    {
+      "id": "ALB",
+      "name": "Albania",
+      "culture": [
+        90.0,
+        20.0,
+        80.0,
+        70.0,
+        61.0,
+        15.0
+      ],
+      "quality": [
+        0.8223510643658767,
+        0.8168393211373155,
+        0.8598566308243726
+      ],
+      "english": null,
+      "temperature": 11.4,
+      "sunshine": 6.97,
+      "continent": "Europe",
+      "location": [
+        20.168331,
+        41.15333
+      ]
+    },
+    {
+      "id": "AND",
+      "name": "Andorra",
+      "culture": null,
+      "quality": null,
+      "english": 0.22,
+      "temperature": 7.6,
+      "sunshine": null,
+      "continent": "Europe",
+      "location": [
+        1.601554,
+        42.546246
+      ]
+    },
+    {
+      "id": "ARE",
+      "name": "United Arab Emirates",
+      "culture": [
+        74.0,
+        36.0,
+        52.0,
+        66.0,
+        22.0,
+        22.0
+      ],
+      "quality": [
+        0.5528507981938392,
+        0.7791492175446331,
+        0.6297491039426523
+      ],
+      "english": null,
+      "temperature": 26.65,
+      "sunshine": 9.61,
+      "continent": "Asia",
+      "location": [
+        53.847816,
+        23.424076
+      ]
+    },
+    {
+      "id": "ARG",
+      "name": "Argentina",
+      "culture": [
+        49.0,
+        46.0,
+        56.0,
+        86.0,
+        20.0,
+        62.0
+      ],
+      "quality": [
+        0.8055220435583741,
+        0.8666519726691647,
+        0.7874551971326165
+      ],
+      "english": 0.0652,
+      "temperature": 14.8,
+      "sunshine": 6.59,
+      "continent": "South America",
+      "location": [
+        -63.616673,
+        -38.416096
+      ]
+    },
+    {
+      "id": "ARM",
+      "name": "Armenia",
+      "culture": [
+        85.0,
+        22.0,
+        50.0,
+        88.0,
+        61.0,
+        25.0
+      ],
+      "quality": [
+        0.8819866776707036,
+        0.8241128499008156,
+        0.8550179211469532
+      ],
+      "english": null,
+      "temperature": 7.15,
+      "sunshine": 6.78,
+      "continent": "Asia",
+      "location": [
+        45.03819,
+        40.0691
+      ]
+    },
+    {
+      "id": "ASM",
+      "name": "American Samoa",
+      "culture": null,
+      "quality": null,
+      "english": 0.801,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -170.13222,
+        -14.270972
+      ]
+    },
+    {
+      "id": "ATA",
+      "name": "Antarctica",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -0.071389,
+        -75.25098
+      ]
+    },
+    {
+      "id": "ATF",
+      "name": "French Southern Territories",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        69.34856,
+        -49.280365
+      ]
+    },
+    {
+      "id": "ATG",
+      "name": "Antigua and Barbuda",
+      "culture": null,
+      "quality": null,
+      "english": 0.8,
+      "temperature": 25.85,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -61.79643,
+        17.060816
+      ]
+    },
+    {
+      "id": "AUS",
+      "name": "Australia",
+      "culture": [
+        38.0,
+        90.0,
+        61.0,
+        51.0,
+        21.0,
+        71.0
+      ],
+      "quality": [
+        0.6947482159752626,
+        0.9679303504518405,
+        0.9530465949820788
+      ],
+      "english": 0.928,
+      "temperature": 21.65,
+      "sunshine": 7.71,
+      "continent": "Oceania",
+      "location": [
+        133.77513,
+        -25.274399
+      ]
+    },
+    {
+      "id": "AUT",
+      "name": "Austria",
+      "culture": [
+        11.0,
+        55.0,
+        79.0,
+        70.0,
+        60.0,
+        63.0
+      ],
+      "quality": [
+        0.7543486251842513,
+        0.9703548600396739,
+        0.9308243727598565
+      ],
+      "english": 0.7308,
+      "temperature": 6.35,
+      "sunshine": 5.16,
+      "continent": "Europe",
+      "location": [
+        14.550072,
+        47.51623
+      ]
+    },
+    {
+      "id": "AZE",
+      "name": "Azerbaijan",
+      "culture": [
+        85.0,
+        22.0,
+        50.0,
+        88.0,
+        61.0,
+        22.0
+      ],
+      "quality": [
+        0.7740321538630366,
+        0.6971567114833591,
+        0.6345878136200717
+      ],
+      "english": null,
+      "temperature": 11.95,
+      "sunshine": 6.05,
+      "continent": "Asia",
+      "location": [
+        47.576927,
+        40.143105
+      ]
+    },
+    {
+      "id": "BDI",
+      "name": "Burundi",
+      "culture": null,
+      "quality": [
+        0.6074238987014424,
+        0.4728895746087723,
+        0.5206093189964157
+      ],
+      "english": null,
+      "temperature": 19.8,
+      "sunshine": 6.5,
+      "continent": "Africa",
+      "location": [
+        29.918886,
+        -3.373056
+      ]
+    },
+    {
+      "id": "BEL",
+      "name": "Belgium",
+      "culture": [
+        65.0,
+        75.0,
+        54.0,
+        94.0,
+        82.0,
+        57.0
+      ],
+      "quality": [
+        0.6854117063406673,
+        0.9612078465946661,
+        0.9130824372759855
+      ],
+      "english": 0.5905,
+      "temperature": 9.55,
+      "sunshine": 4.24,
+      "continent": "Europe",
+      "location": [
+        4.469936,
+        50.503887
+      ]
+    },
+    {
+      "id": "BEN",
+      "name": "Benin",
+      "culture": null,
+      "quality": [
+        0.6666637418010407,
+        0.6126294908529867,
+        0.7725806451612902
+      ],
+      "english": null,
+      "temperature": 27.55,
+      "sunshine": 6.85,
+      "continent": "Africa",
+      "location": [
+        2.315834,
+        9.30769
+      ]
+    },
+    {
+      "id": "BES",
+      "name": "Bonaire, Sint Eustatius and Saba",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": null
+    },
+    {
+      "id": "BFA",
+      "name": "Burkina Faso",
+      "culture": [
+        70.0,
+        15.0,
+        50.0,
+        55.0,
+        27.0,
+        18.0
+      ],
+      "quality": [
+        0.6693511552623082,
+        0.5491514216442583,
+        0.7465949820788529
+      ],
+      "english": null,
+      "temperature": 28.29,
+      "sunshine": 8.79,
+      "continent": "Africa",
+      "location": [
+        -1.561593,
+        12.238333
+      ]
+    },
+    {
+      "id": "BGD",
+      "name": "Bangladesh",
+      "culture": [
+        80.0,
+        20.0,
+        55.0,
+        60.0,
+        47.0,
+        20.0
+      ],
+      "quality": [
+        0.8776859412995821,
+        0.6178091249724488,
+        0.6064516129032257
+      ],
+      "english": 0.12,
+      "temperature": 25.0,
+      "sunshine": 5.66,
+      "continent": "Asia",
+      "location": [
+        90.35633,
+        23.684994
+      ]
+    },
+    {
+      "id": "BGR",
+      "name": "Bulgaria",
+      "culture": [
+        70.0,
+        30.0,
+        40.0,
+        85.0,
+        69.0,
+        16.0
+      ],
+      "quality": [
+        0.6466702972546221,
+        0.8464844610976416,
+        0.8625448028673834
+      ],
+      "english": 0.2487,
+      "temperature": 10.55,
+      "sunshine": 5.96,
+      "continent": "Europe",
+      "location": [
+        25.48583,
+        42.733883
+      ]
+    },
+    {
+      "id": "BHR",
+      "name": "Bahrain",
+      "culture": null,
+      "quality": [
+        0.5413196757181709,
+        0.7283447211813975,
+        0.5655913978494623
+      ],
+      "english": null,
+      "temperature": 26.8,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        50.63777,
+        25.930414
+      ]
+    },
+    {
+      "id": "BHS",
+      "name": "Bahamas",
+      "culture": null,
+      "quality": null,
+      "english": 0.8713,
+      "temperature": 24.85,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -77.39628,
+        25.03428
+      ]
+    },
+    {
+      "id": "BIH",
+      "name": "Bosnia and Herzegovina",
+      "culture": [
+        90.0,
+        22.0,
+        48.0,
+        87.0,
+        70.0,
+        44.0
+      ],
+      "quality": [
+        0.7699472195920306,
+        0.7849900815516863,
+        0.7987455197132616
+      ],
+      "english": null,
+      "temperature": 9.85,
+      "sunshine": 4.85,
+      "continent": "Europe",
+      "location": [
+        17.679075,
+        43.915886
+      ]
+    },
+    {
+      "id": "BLM",
+      "name": "Saint Barthélemy",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": null
+    },
+    {
+      "id": "BLR",
+      "name": "Belarus",
+      "culture": [
+        95.0,
+        25.0,
+        20.0,
+        95.0,
+        81.0,
+        15.0
+      ],
+      "quality": [
+        0.691097349101885,
+        0.7878554110645801,
+        0.6612903225806451
+      ],
+      "english": null,
+      "temperature": 6.15,
+      "sunshine": 4.95,
+      "continent": "Europe",
+      "location": [
+        27.953388,
+        53.70981
+      ]
+    },
+    {
+      "id": "BLZ",
+      "name": "Belize",
+      "culture": null,
+      "quality": null,
+      "english": 0.8165,
+      "temperature": 25.35,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -88.49765,
+        17.189877
+      ]
+    },
+    {
+      "id": "BMU",
+      "name": "Bermuda",
+      "culture": null,
+      "quality": null,
+      "english": 0.9692,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -64.75737,
+        32.321384
+      ]
+    },
+    {
+      "id": "BOL",
+      "name": "Bolivia",
+      "culture": [
+        78.0,
+        10.0,
+        42.0,
+        87.0,
+        25.0,
+        46.0
+      ],
+      "quality": [
+        0.7251194500353071,
+        0.7400264491955038,
+        0.7451612903225806
+      ],
+      "english": null,
+      "temperature": 21.55,
+      "sunshine": 6.27,
+      "continent": "South America",
+      "location": [
+        -63.588654,
+        -16.290154
+      ]
+    },
+    {
+      "id": "BRA",
+      "name": "Brazil",
+      "culture": [
+        69.0,
+        38.0,
+        49.0,
+        76.0,
+        44.0,
+        59.0
+      ],
+      "quality": [
+        0.879327669132765,
+        0.7853206964954818,
+        0.7772401433691756
+      ],
+      "english": 0.0514,
+      "temperature": 24.95,
+      "sunshine": 6.12,
+      "continent": "South America",
+      "location": [
+        -51.92528,
+        -14.235004
+      ]
+    },
+    {
+      "id": "BRB",
+      "name": "Barbados",
+      "culture": null,
+      "quality": null,
+      "english": 1.0,
+      "temperature": 26.0,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -59.543198,
+        13.193887
+      ]
+    },
+    {
+      "id": "BRN",
+      "name": "Brunei",
+      "culture": null,
+      "quality": null,
+      "english": 0.3776,
+      "temperature": 26.85,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        114.72767,
+        4.535277
+      ]
+    },
+    {
+      "id": "BTN",
+      "name": "Bhutan",
+      "culture": null,
+      "quality": [
+        0.5909486939787473,
+        0.7499448975093674,
+        0.7161290322580643
+      ],
+      "english": null,
+      "temperature": 7.4,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        90.4336,
+        27.514162
+      ]
+    },
+    {
+      "id": "BVT",
+      "name": "Bouvet Island",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        3.413194,
+        -54.4232
+      ]
+    },
+    {
+      "id": "BWA",
+      "name": "Botswana",
+      "culture": null,
+      "quality": [
+        0.5132513486520998,
+        0.7261406215560944,
+        0.8127240143369173
+      ],
+      "english": 0.3842,
+      "temperature": 21.5,
+      "sunshine": 9.24,
+      "continent": "Africa",
+      "location": [
+        24.684866,
+        -22.328474
+      ]
+    },
+    {
+      "id": "CAF",
+      "name": "Central African Republic",
+      "culture": null,
+      "quality": [
+        0.40625939343272294,
+        0.3569539343178312,
+        0.5973118279569891
+      ],
+      "english": null,
+      "temperature": 24.9,
+      "sunshine": 6.98,
+      "continent": "Africa",
+      "location": [
+        20.939444,
+        6.611111
+      ]
+    },
+    {
+      "id": "CAN",
+      "name": "Canada",
+      "culture": [
+        39.0,
+        80.0,
+        52.0,
+        48.0,
+        36.0,
+        68.0
+      ],
+      "quality": [
+        0.6475213949614049,
+        0.9716773198148557,
+        0.9485663082437275
+      ],
+      "english": 0.8207,
+      "temperature": -5.1,
+      "sunshine": 5.62,
+      "continent": "North America",
+      "location": [
+        -106.34677,
+        56.130367
+      ]
+    },
+    {
+      "id": "CCK",
+      "name": "Cocos (Keeling) Islands",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        96.87096,
+        -12.164165
+      ]
+    },
+    {
+      "id": "CHE",
+      "name": "Switzerland",
+      "culture": [
+        34.0,
+        68.0,
+        70.0,
+        58.0,
+        74.0,
+        66.0
+      ],
+      "quality": [
+        0.9685308012594838,
+        0.9947101608992728,
+        0.9813620071684586
+      ],
+      "english": 0.6128,
+      "temperature": 5.1,
+      "sunshine": 5.49,
+      "continent": "Europe",
+      "location": [
+        8.227512,
+        46.818188
+      ]
+    },
+    {
+      "id": "CHL",
+      "name": "Chile",
+      "culture": [
+        63.0,
+        23.0,
+        28.0,
+        86.0,
+        31.0,
+        68.0
+      ],
+      "quality": [
+        0.7354663303373175,
+        0.8902358386599075,
+        0.9139784946236559
+      ],
+      "english": 0.0953,
+      "temperature": 8.45,
+      "sunshine": 7.69,
+      "continent": "South America",
+      "location": [
+        -71.54297,
+        -35.675148
+      ]
+    },
+    {
+      "id": "CHN",
+      "name": "China",
+      "culture": [
+        80.0,
+        20.0,
+        66.0,
+        30.0,
+        87.0,
+        24.0
+      ],
+      "quality": [
+        0.6749991547402612,
+        0.724487546837117,
+        0.5682795698924731
+      ],
+      "english": 0.007,
+      "temperature": 7.5,
+      "sunshine": 5.08,
+      "continent": "Asia",
+      "location": [
+        104.1954,
+        35.86166
+      ]
+    },
+    {
+      "id": "CIV",
+      "name": "Cote d'Ivoire",
+      "culture": null,
+      "quality": [
+        0.6388565226829606,
+        0.5952171038130923,
+        0.7177419354838709
+      ],
+      "english": null,
+      "temperature": 26.35,
+      "sunshine": 6.29,
+      "continent": "Africa",
+      "location": [
+        -5.54708,
+        7.539989
+      ]
+    },
+    {
+      "id": "CMR",
+      "name": "Cameroon",
+      "culture": null,
+      "quality": [
+        0.6430938898123405,
+        0.5664536037028874,
+        0.582616487455197
+      ],
+      "english": 0.3799,
+      "temperature": 24.6,
+      "sunshine": 5.64,
+      "continent": "Africa",
+      "location": [
+        12.354722,
+        7.369722
+      ]
+    },
+    {
+      "id": "COD",
+      "name": "Congo, Democratic Republic of",
+      "culture": null,
+      "quality": [
+        0.6530912178136028,
+        0.47057527000220417,
+        0.5663082437275985
+      ],
+      "english": null,
+      "temperature": 24.0,
+      "sunshine": 6.1,
+      "continent": "Africa",
+      "location": [
+        21.758663,
+        -4.038333
+      ]
+    },
+    {
+      "id": "COG",
+      "name": "Congo, Republic of",
+      "culture": null,
+      "quality": [
+        0.7598986122555508,
+        0.5239144809345383,
+        0.5725806451612903
+      ],
+      "english": null,
+      "temperature": 24.55,
+      "sunshine": 4.4,
+      "continent": "Africa",
+      "location": [
+        15.827659,
+        -0.228021
+      ]
+    },
+    {
+      "id": "COK",
+      "name": "Cook Islands",
+      "culture": null,
+      "quality": null,
+      "english": 0.198,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -159.77766,
+        -21.236736
+      ]
+    },
+    {
+      "id": "COL",
+      "name": "Colombia",
+      "culture": [
+        67.0,
+        13.0,
+        64.0,
+        80.0,
+        13.0,
+        83.0
+      ],
+      "quality": [
+        0.9695059792720534,
+        0.7695613841745648,
+        0.7449820788530466
+      ],
+      "english": 0.0422,
+      "temperature": 24.5,
+      "sunshine": 5.25,
+      "continent": "South America",
+      "location": [
+        -74.29733,
+        4.570868
+      ]
+    },
+    {
+      "id": "COM",
+      "name": "Comoros",
+      "culture": null,
+      "quality": [
+        0.6838588162047954,
+        0.5742781573727133,
+        0.6268817204301074
+      ],
+      "english": null,
+      "temperature": 25.3,
+      "sunshine": null,
+      "continent": "Africa",
+      "location": [
+        43.87222,
+        -11.875001
+      ]
+    },
+    {
+      "id": "CPV",
+      "name": "Cape Verde",
+      "culture": [
+        75.0,
+        20.0,
+        15.0,
+        40.0,
+        12.0,
+        83.0
+      ],
+      "quality": null,
+      "english": null,
+      "temperature": 23.3,
+      "sunshine": null,
+      "continent": "Africa",
+      "location": [
+        -24.013197,
+        16.002083
+      ]
+    },
+    {
+      "id": "CRI",
+      "name": "Costa Rica",
+      "culture": null,
+      "quality": [
+        1.0,
+        0.8888031739034605,
+        0.8915770609318995
+      ],
+      "english": 0.0815,
+      "temperature": 24.8,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -83.753426,
+        9.748917
+      ]
+    },
+    {
+      "id": "CUB",
+      "name": "Cuba",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 25.2,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -77.781166,
+        21.521757
+      ]
+    },
+    {
+      "id": "CUW",
+      "name": "Curaçao",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": null
+    },
+    {
+      "id": "CXR",
+      "name": "Christmas Island",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        105.69045,
+        -10.447525
+      ]
+    },
+    {
+      "id": "CYM",
+      "name": "Cayman Islands",
+      "culture": null,
+      "quality": null,
+      "english": 0.766,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -80.566956,
+        19.51347
+      ]
+    },
+    {
+      "id": "CYP",
+      "name": "Cyprus",
+      "culture": null,
+      "quality": [
+        0.796331223042059,
+        0.9166850341635443,
+        0.9055555555555554
+      ],
+      "english": 0.7271,
+      "temperature": 18.45,
+      "sunshine": 9.08,
+      "continent": "Europe",
+      "location": [
+        33.42986,
+        35.12641
+      ]
+    },
+    {
+      "id": "CZE",
+      "name": "Czech Republic",
+      "culture": [
+        57.0,
+        58.0,
+        57.0,
+        74.0,
+        70.0,
+        29.0
+      ],
+      "quality": [
+        0.7543722716214397,
+        0.93883623539784,
+        0.9256272401433691
+      ],
+      "english": 0.5065,
+      "temperature": 7.55,
+      "sunshine": 4.57,
+      "continent": "Europe",
+      "location": [
+        15.472962,
+        49.817493
+      ]
+    },
+    {
+      "id": "DEU",
+      "name": "Germany",
+      "culture": [
+        35.0,
+        67.0,
+        66.0,
+        65.0,
+        83.0,
+        40.0
+      ],
+      "quality": [
+        0.8497163645036265,
+        0.9777385937844391,
+        0.9335125448028673
+      ],
+      "english": 0.5633,
+      "temperature": 8.4,
+      "sunshine": 4.5,
+      "continent": "Europe",
+      "location": [
+        10.451526,
+        51.16569
+      ]
+    },
+    {
+      "id": "DJI",
+      "name": "Djibouti",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 28.0,
+      "sunshine": 8.98,
+      "continent": "Africa",
+      "location": [
+        42.590275,
+        11.825138
+      ]
+    },
+    {
+      "id": "DMA",
+      "name": "Dominica",
+      "culture": null,
+      "quality": null,
+      "english": 0.9403,
+      "temperature": 22.35,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -61.370975,
+        15.414999
+      ]
+    },
+    {
+      "id": "DNK",
+      "name": "Denmark",
+      "culture": [
+        18.0,
+        74.0,
+        16.0,
+        23.0,
+        35.0,
+        70.0
+      ],
+      "quality": [
+        0.7303921717374574,
+        0.9977959003746971,
+        0.9637992831541218
+      ],
+      "english": 0.8605,
+      "temperature": 8.86,
+      "sunshine": 5.24,
+      "continent": "Europe",
+      "location": [
+        9.501785,
+        56.26392
+      ]
+    },
+    {
+      "id": "DOM",
+      "name": "Dominican Republic",
+      "culture": [
+        65.0,
+        30.0,
+        65.0,
+        45.0,
+        13.0,
+        54.0
+      ],
+      "quality": [
+        0.8838128442977731,
+        0.7687899493057088,
+        0.8297491039426523
+      ],
+      "english": null,
+      "temperature": 24.55,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -70.16265,
+        18.735693
+      ]
+    },
+    {
+      "id": "DZA",
+      "name": "Algeria",
+      "culture": [
+        80.0,
+        35.0,
+        35.0,
+        70.0,
+        26.0,
+        32.0
+      ],
+      "quality": [
+        0.7491263864597666,
+        0.7228344721181398,
+        0.5451612903225805
+      ],
+      "english": 0.07,
+      "temperature": 22.5,
+      "sunshine": 8.95,
+      "continent": "Africa",
+      "location": [
+        1.659626,
+        28.033886
+      ]
+    },
+    {
+      "id": "ECU",
+      "name": "Ecuador",
+      "culture": null,
+      "quality": [
+        0.9480105383151824,
+        0.7907207405774741,
+        0.7684587813620071
+      ],
+      "english": null,
+      "temperature": 21.85,
+      "sunshine": 5.23,
+      "continent": "South America",
+      "location": [
+        -78.1834,
+        -1.831239
+      ]
+    },
+    {
+      "id": "EGY",
+      "name": "Egypt",
+      "culture": [
+        80.0,
+        37.0,
+        55.0,
+        55.0,
+        42.0,
+        0.0
+      ],
+      "quality": [
+        0.6957805657565984,
+        0.6472338549702447,
+        0.4510752688172042
+      ],
+      "english": 0.3138,
+      "temperature": 22.1,
+      "sunshine": 9.81,
+      "continent": "Africa",
+      "location": [
+        30.802498,
+        26.820553
+      ]
+    },
+    {
+      "id": "ERI",
+      "name": "Eritrea",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 25.5,
+      "sunshine": 9.21,
+      "continent": "Africa",
+      "location": [
+        39.782333,
+        15.179384
+      ]
+    },
+    {
+      "id": "ESH",
+      "name": "Western Sahara",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": "Africa",
+      "location": [
+        -12.885834,
+        24.215527
+      ]
+    },
+    {
+      "id": "ESP",
+      "name": "Spain",
+      "culture": [
+        57.0,
+        51.0,
+        42.0,
+        86.0,
+        48.0,
+        44.0
+      ],
+      "quality": [
+        0.8433383819904436,
+        0.9405995150980824,
+        0.9053763440860214
+      ],
+      "english": 0.2204,
+      "temperature": 13.3,
+      "sunshine": 7.59,
+      "continent": "Europe",
+      "location": [
+        -3.74922,
+        40.46367
+      ]
+    },
+    {
+      "id": "EST",
+      "name": "Estonia",
+      "culture": [
+        40.0,
+        60.0,
+        30.0,
+        60.0,
+        82.0,
+        16.0
+      ],
+      "quality": [
+        0.5550154907440364,
+        0.9495261185805599,
+        0.9566308243727596
+      ],
+      "english": 0.5022,
+      "temperature": 2.0,
+      "sunshine": 5.46,
+      "continent": "Europe",
+      "location": [
+        25.013607,
+        58.595272
+      ]
+    },
+    {
+      "id": "ETH",
+      "name": "Ethiopia",
+      "culture": null,
+      "quality": [
+        0.6724117081617188,
+        0.5227022261406216,
+        0.5594982078853046
+      ],
+      "english": null,
+      "temperature": 22.2,
+      "sunshine": 7.63,
+      "continent": "Africa",
+      "location": [
+        40.489674,
+        9.145
+      ]
+    },
+    {
+      "id": "FIN",
+      "name": "Finland",
+      "culture": [
+        33.0,
+        63.0,
+        26.0,
+        59.0,
+        38.0,
+        57.0
+      ],
+      "quality": [
+        0.8261958832991841,
+        0.9969142605245757,
+        0.9492831541218636
+      ],
+      "english": 0.7024,
+      "temperature": 1.55,
+      "sunshine": 5.09,
+      "continent": "Europe",
+      "location": [
+        25.748152,
+        61.92411
+      ]
+    },
+    {
+      "id": "FJI",
+      "name": "Fiji",
+      "culture": null,
+      "quality": null,
+      "english": 0.2062,
+      "temperature": 24.4,
+      "sunshine": 5.27,
+      "continent": "Oceania",
+      "location": [
+        179.41441,
+        -16.578194
+      ]
+    },
+    {
+      "id": "FLK",
+      "name": "Falkland Islands",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": 4.52,
+      "continent": "South America",
+      "location": [
+        -59.523613,
+        -51.796253
+      ]
+    },
+    {
+      "id": "FRA",
+      "name": "France",
+      "culture": [
+        68.0,
+        71.0,
+        43.0,
+        86.0,
+        63.0,
+        48.0
+      ],
+      "quality": [
+        0.8349583364493722,
+        0.9485342737491734,
+        0.8860215053763439
+      ],
+      "english": 0.5725,
+      "temperature": 10.7,
+      "sunshine": 5.48,
+      "continent": "Europe",
+      "location": [
+        2.213749,
+        46.22764
+      ]
+    },
+    {
+      "id": "FRO",
+      "name": "Faroe Islands",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": 2.3,
+      "continent": null,
+      "location": [
+        -6.911806,
+        61.892635
+      ]
+    },
+    {
+      "id": "FSM",
+      "name": "Micronesia",
+      "culture": null,
+      "quality": null,
+      "english": 0.5766,
+      "temperature": 25.85,
+      "sunshine": null,
+      "continent": "Oceania",
+      "location": [
+        150.55081,
+        7.425554
+      ]
+    },
+    {
+      "id": "GAB",
+      "name": "Gabon",
+      "culture": null,
+      "quality": [
+        0.6423865020932327,
+        0.6852545735067226,
+        0.7182795698924731
+      ],
+      "english": null,
+      "temperature": 25.05,
+      "sunshine": 4.71,
+      "continent": "Africa",
+      "location": [
+        11.609444,
+        -0.803689
+      ]
+    },
+    {
+      "id": "GBR",
+      "name": "United Kingdom",
+      "culture": [
+        35.0,
+        89.0,
+        66.0,
+        35.0,
+        51.0,
+        69.0
+      ],
+      "quality": [
+        0.9018701341527319,
+        0.9491955036367644,
+        0.943548387096774
+      ],
+      "english": 0.983,
+      "temperature": 8.45,
+      "sunshine": 4.19,
+      "continent": "Europe",
+      "location": [
+        -3.435973,
+        55.37805
+      ]
+    },
+    {
+      "id": "GEO",
+      "name": "Georgia",
+      "culture": [
+        65.0,
+        41.0,
+        55.0,
+        85.0,
+        38.0,
+        32.0
+      ],
+      "quality": [
+        0.7134148050842452,
+        0.8202556755565353,
+        0.8530465949820788
+      ],
+      "english": null,
+      "temperature": 5.65,
+      "sunshine": 5.61,
+      "continent": "Europe",
+      "location": [
+        43.35689,
+        42.315407
+      ]
+    },
+    {
+      "id": "GGY",
+      "name": "Guernsey",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -2.585278,
+        49.46569
+      ]
+    },
+    {
+      "id": "GHA",
+      "name": "Ghana",
+      "culture": [
+        80.0,
+        15.0,
+        40.0,
+        65.0,
+        4.0,
+        72.0
+      ],
+      "quality": [
+        0.6369045011071018,
+        0.7141282785981926,
+        0.8028673835125447
+      ],
+      "english": 0.6667,
+      "temperature": 27.2,
+      "sunshine": 6.66,
+      "continent": "Africa",
+      "location": [
+        -1.023194,
+        7.946527
+      ]
+    },
+    {
+      "id": "GIB",
+      "name": "Gibraltar",
+      "culture": null,
+      "quality": null,
+      "english": 1.0,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -5.345374,
+        36.13774
+      ]
+    },
+    {
+      "id": "GIN",
+      "name": "Guinea",
+      "culture": null,
+      "quality": [
+        0.6133178410109232,
+        0.46737932554551465,
+        0.6159498207885304
+      ],
+      "english": null,
+      "temperature": 25.7,
+      "sunshine": 6.68,
+      "continent": "Africa",
+      "location": [
+        -9.696645,
+        9.945587
+      ]
+    },
+    {
+      "id": "GLP",
+      "name": "Guadeloupe",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -62.067642,
+        16.995972
+      ]
+    },
+    {
+      "id": "GMB",
+      "name": "Gambia",
+      "culture": null,
+      "quality": null,
+      "english": 0.0234,
+      "temperature": 27.5,
+      "sunshine": 8.41,
+      "continent": "Africa",
+      "location": [
+        -15.310139,
+        13.443182
+      ]
+    },
+    {
+      "id": "GNB",
+      "name": "Guinea-Bissau",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 26.75,
+      "sunshine": 7.42,
+      "continent": "Africa",
+      "location": [
+        -15.180413,
+        11.803749
+      ]
+    },
+    {
+      "id": "GNQ",
+      "name": "Equatorial Guinea",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 24.55,
+      "sunshine": 4.24,
+      "continent": "Africa",
+      "location": [
+        10.267895,
+        1.650801
+      ]
+    },
+    {
+      "id": "GRC",
+      "name": "Greece",
+      "culture": [
+        60.0,
+        35.0,
+        57.0,
+        100.0,
+        45.0,
+        50.0
+      ],
+      "quality": [
+        0.7865284115767495,
+        0.9085298655499229,
+        0.8232974910394265
+      ],
+      "english": 0.5098,
+      "temperature": 15.4,
+      "sunshine": 7.6,
+      "continent": "Europe",
+      "location": [
+        21.824312,
+        39.074207
+      ]
+    },
+    {
+      "id": "GRD",
+      "name": "Grenada",
+      "culture": null,
+      "quality": null,
+      "english": 0.9091,
+      "temperature": 26.0,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -61.60417,
+        12.262776
+      ]
+    },
+    {
+      "id": "GRL",
+      "name": "Greenland",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -42.6043,
+        71.70694
+      ]
+    },
+    {
+      "id": "GTM",
+      "name": "Guatemala",
+      "culture": null,
+      "quality": [
+        0.9326109606208849,
+        0.6635441921974874,
+        0.793010752688172
+      ],
+      "english": null,
+      "temperature": 23.45,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -90.23076,
+        15.783471
+      ]
+    },
+    {
+      "id": "GUF",
+      "name": "French Guiana",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": 5.41,
+      "continent": "South America",
+      "location": [
+        -53.125782,
+        3.933889
+      ]
+    },
+    {
+      "id": "GUM",
+      "name": "Guam",
+      "culture": null,
+      "quality": null,
+      "english": 0.9109,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        144.79373,
+        13.444304
+      ]
+    },
+    {
+      "id": "GUY",
+      "name": "Guyana",
+      "culture": null,
+      "quality": null,
+      "english": 0.9055,
+      "temperature": 26.0,
+      "sunshine": 6.74,
+      "continent": "South America",
+      "location": [
+        -58.93018,
+        4.860416
+      ]
+    },
+    {
+      "id": "HKG",
+      "name": "Hong Kong",
+      "culture": [
+        68.0,
+        25.0,
+        57.0,
+        29.0,
+        61.0,
+        17.0
+      ],
+      "quality": null,
+      "english": 0.4607,
+      "temperature": 21.45,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        114.1095,
+        22.396427
+      ]
+    },
+    {
+      "id": "HMD",
+      "name": "Heard Island and McDonald Islands",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        73.50416,
+        -53.08181
+      ]
+    },
+    {
+      "id": "HND",
+      "name": "Honduras",
+      "culture": null,
+      "quality": [
+        0.9303317490508859,
+        0.6741238703989421,
+        0.7385304659498207
+      ],
+      "english": null,
+      "temperature": 23.5,
+      "sunshine": 6.19,
+      "continent": "North America",
+      "location": [
+        -86.241905,
+        15.199999
+      ]
+    },
+    {
+      "id": "HRV",
+      "name": "Croatia",
+      "culture": [
+        73.0,
+        33.0,
+        40.0,
+        80.0,
+        58.0,
+        33.0
+      ],
+      "quality": [
+        0.7446061623774559,
+        0.907207405774741,
+        0.8750896057347669
+      ],
+      "english": 0.5708,
+      "temperature": 10.9,
+      "sunshine": 6.22,
+      "continent": "Europe",
+      "location": [
+        15.2,
+        45.1
+      ]
+    },
+    {
+      "id": "HTI",
+      "name": "Haiti",
+      "culture": null,
+      "quality": [
+        0.6155482760837246,
+        0.5005510249063259,
+        0.7614695340501791
+      ],
+      "english": null,
+      "temperature": 24.9,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -72.28522,
+        18.971188
+      ]
+    },
+    {
+      "id": "HUN",
+      "name": "Hungary",
+      "culture": [
+        46.0,
+        80.0,
+        88.0,
+        82.0,
+        58.0,
+        31.0
+      ],
+      "quality": [
+        0.7323279549995048,
+        0.861913158474763,
+        0.825268817204301
+      ],
+      "english": 0.57,
+      "temperature": 9.75,
+      "sunshine": 5.45,
+      "continent": "Europe",
+      "location": [
+        19.503304,
+        47.162495
+      ]
+    },
+    {
+      "id": "IDN",
+      "name": "Indonesia",
+      "culture": [
+        78.0,
+        14.0,
+        46.0,
+        48.0,
+        62.0,
+        38.0
+      ],
+      "quality": [
+        0.7992255044772288,
+        0.7347366100947763,
+        0.760931899641577
+      ],
+      "english": null,
+      "temperature": 25.85,
+      "sunshine": 7.56,
+      "continent": "Asia",
+      "location": [
+        113.921326,
+        -0.789275
+      ]
+    },
+    {
+      "id": "IMN",
+      "name": "Isle of Man",
+      "culture": null,
+      "quality": null,
+      "english": 0.9993,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -4.548056,
+        54.236107
+      ]
+    },
+    {
+      "id": "IND",
+      "name": "India",
+      "culture": [
+        77.0,
+        48.0,
+        56.0,
+        40.0,
+        51.0,
+        26.0
+      ],
+      "quality": [
+        0.5861032345395084,
+        0.663323782234957,
+        0.7025089605734767
+      ],
+      "english": 0.1481,
+      "temperature": 23.65,
+      "sunshine": 7.08,
+      "continent": "Asia",
+      "location": [
+        78.96288,
+        20.593683
+      ]
+    },
+    {
+      "id": "IOT",
+      "name": "British Indian Ocean Territory",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        71.87652,
+        -6.343194
+      ]
+    },
+    {
+      "id": "IRL",
+      "name": "Ireland",
+      "culture": [
+        28.0,
+        70.0,
+        68.0,
+        35.0,
+        24.0,
+        65.0
+      ],
+      "quality": [
+        0.8242108602603032,
+        0.9663874807141283,
+        0.9580645161290321
+      ],
+      "english": 0.9837,
+      "temperature": 9.3,
+      "sunshine": 3.98,
+      "continent": "Europe",
+      "location": [
+        -8.24389,
+        53.41291
+      ]
+    },
+    {
+      "id": "IRN",
+      "name": "Iran",
+      "culture": [
+        58.0,
+        41.0,
+        43.0,
+        59.0,
+        14.0,
+        40.0
+      ],
+      "quality": [
+        0.7030971534570417,
+        0.7022261406215561,
+        0.47921146953405014
+      ],
+      "english": null,
+      "temperature": 17.25,
+      "sunshine": 7.96,
+      "continent": "Asia",
+      "location": [
+        53.688046,
+        32.42791
+      ]
+    },
+    {
+      "id": "IRQ",
+      "name": "Iraq",
+      "culture": [
+        97.0,
+        31.0,
+        53.0,
+        96.0,
+        12.0,
+        23.0
+      ],
+      "quality": [
+        0.7296268605280173,
+        0.6261847035486005,
+        0.5369892473118278
+      ],
+      "english": 0.35,
+      "temperature": 21.4,
+      "sunshine": 8.88,
+      "continent": "Asia",
+      "location": [
+        43.67929,
+        33.22319
+      ]
+    },
+    {
+      "id": "ISL",
+      "name": "Iceland",
+      "culture": [
+        30.0,
+        60.0,
+        10.0,
+        50.0,
+        28.0,
+        67.0
+      ],
+      "quality": [
+        0.7727808110725926,
+        0.9867754022481817,
+        0.9442652329749103
+      ],
+      "english": 0.98,
+      "temperature": -0.7,
+      "sunshine": 3.63,
+      "continent": "Europe",
+      "location": [
+        -19.020836,
+        64.96305
+      ]
+    },
+    {
+      "id": "ISR",
+      "name": "Israel",
+      "culture": null,
+      "quality": [
+        0.7773980779777062,
+        0.9165748291822791,
+        0.8139784946236558
+      ],
+      "english": 0.8497,
+      "temperature": 19.2,
+      "sunshine": 9.07,
+      "continent": "Asia",
+      "location": [
+        34.851612,
+        31.046051
+      ]
+    },
+    {
+      "id": "ITA",
+      "name": "Italy",
+      "culture": [
+        50.0,
+        76.0,
+        70.0,
+        75.0,
+        61.0,
+        30.0
+      ],
+      "quality": [
+        0.8169451878781392,
+        0.9392770553229007,
+        0.8992831541218637
+      ],
+      "english": 0.2851,
+      "temperature": 13.45,
+      "sunshine": 6.64,
+      "continent": "Europe",
+      "location": [
+        12.56738,
+        41.87194
+      ]
+    },
+    {
+      "id": "JAM",
+      "name": "Jamaica",
+      "culture": null,
+      "quality": [
+        0.9330633711527095,
+        0.8097862023363457,
+        0.8473118279569891
+      ],
+      "english": 0.9764,
+      "temperature": 24.95,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -77.29751,
+        18.109581
+      ]
+    },
+    {
+      "id": "JEY",
+      "name": "Jersey",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -2.13125,
+        49.21444
+      ]
+    },
+    {
+      "id": "JOR",
+      "name": "Jordan",
+      "culture": [
+        70.0,
+        30.0,
+        45.0,
+        65.0,
+        16.0,
+        43.0
+      ],
+      "quality": [
+        0.7066759001794891,
+        0.7418999338770113,
+        0.7111111111111111
+      ],
+      "english": 0.45,
+      "temperature": 18.3,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        36.238415,
+        30.585163
+      ]
+    },
+    {
+      "id": "JPN",
+      "name": "Japan",
+      "culture": [
+        54.0,
+        46.0,
+        95.0,
+        92.0,
+        88.0,
+        42.0
+      ],
+      "quality": [
+        0.7583883804251468,
+        0.971897729777386,
+        0.9317204301075268
+      ],
+      "english": null,
+      "temperature": 11.15,
+      "sunshine": 4.92,
+      "continent": "Asia",
+      "location": [
+        138.25293,
+        36.204823
+      ]
+    },
+    {
+      "id": "KAZ",
+      "name": "Kazakhstan",
+      "culture": [
+        88.0,
+        20.0,
+        50.0,
+        88.0,
+        85.0,
+        22.0
+      ],
+      "quality": [
+        0.622727310662001,
+        0.7847696715891558,
+        0.6992831541218637
+      ],
+      "english": 0.1542,
+      "temperature": 5.5,
+      "sunshine": 6.66,
+      "continent": "Asia",
+      "location": [
+        66.92368,
+        48.019573
+      ]
+    },
+    {
+      "id": "KEN",
+      "name": "Kenya",
+      "culture": null,
+      "quality": [
+        0.7280815386894209,
+        0.6387480714128279,
+        0.7139784946236558
+      ],
+      "english": 0.1883,
+      "temperature": 24.75,
+      "sunshine": 8.28,
+      "continent": "Africa",
+      "location": [
+        37.906193,
+        -0.023559
+      ]
+    },
+    {
+      "id": "KGZ",
+      "name": "Kyrgyzstan",
+      "culture": null,
+      "quality": [
+        0.8653936304003828,
+        0.740908089045625,
+        0.7415770609318996
+      ],
+      "english": null,
+      "temperature": 2.1,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        74.7661,
+        41.20438
+      ]
+    },
+    {
+      "id": "KHM",
+      "name": "Cambodia",
+      "culture": null,
+      "quality": [
+        0.7729510698033777,
+        0.6139519506281684,
+        0.6985663082437276
+      ],
+      "english": 0.222,
+      "temperature": 26.8,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        104.99097,
+        12.565679
+      ]
+    },
+    {
+      "id": "KIR",
+      "name": "Kiribati",
+      "culture": null,
+      "quality": null,
+      "english": 0.2421,
+      "temperature": 28.2,
+      "sunshine": null,
+      "continent": "Oceania",
+      "location": [
+        -168.73404,
+        -3.370417
+      ]
+    },
+    {
+      "id": "KNA",
+      "name": "Saint Kitts and Nevis",
+      "culture": null,
+      "quality": null,
+      "english": 0.78,
+      "temperature": 24.5,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -62.782997,
+        17.357822
+      ]
+    },
+    {
+      "id": "KOR",
+      "name": "South Korea",
+      "culture": [
+        60.0,
+        18.0,
+        39.0,
+        85.0,
+        100.0,
+        29.0
+      ],
+      "quality": [
+        0.6416474764840694,
+        0.9529424729997796,
+        0.8867383512544803
+      ],
+      "english": null,
+      "temperature": 11.5,
+      "sunshine": 6.02,
+      "continent": "Asia",
+      "location": [
+        127.76692,
+        35.907757
+      ]
+    },
+    {
+      "id": "KWT",
+      "name": "Kuwait",
+      "culture": null,
+      "quality": [
+        0.5370010727060301,
+        0.8161780912497245,
+        0.6591397849462365
+      ],
+      "english": null,
+      "temperature": 27.15,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        47.481766,
+        29.31166
+      ]
+    },
+    {
+      "id": "LAO",
+      "name": "Laos",
+      "culture": null,
+      "quality": [
+        0.6894278006417075,
+        0.5639188891337888,
+        0.5908602150537634
+      ],
+      "english": null,
+      "temperature": 22.8,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        102.4955,
+        19.85627
+      ]
+    },
+    {
+      "id": "LBN",
+      "name": "Lebanon",
+      "culture": [
+        62.0,
+        43.0,
+        48.0,
+        57.0,
+        22.0,
+        10.0
+      ],
+      "quality": [
+        0.628446178227311,
+        0.7326427154507384,
+        0.7078853046594982
+      ],
+      "english": 0.3999,
+      "temperature": 15.0,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        35.862286,
+        33.85472
+      ]
+    },
+    {
+      "id": "LBR",
+      "name": "Liberia",
+      "culture": null,
+      "quality": [
+        0.7416105355005048,
+        0.5403350231430462,
+        0.7247311827956988
+      ],
+      "english": 0.8267,
+      "temperature": 25.3,
+      "sunshine": null,
+      "continent": "Africa",
+      "location": [
+        -9.429499,
+        6.428055
+      ]
+    },
+    {
+      "id": "LBY",
+      "name": "Libya",
+      "culture": [
+        100.0,
+        35.0,
+        66.0,
+        67.0,
+        15.0,
+        74.0
+      ],
+      "quality": [
+        0.6878362554198454,
+        0.5981926383072516,
+        0.5222222222222221
+      ],
+      "english": null,
+      "temperature": 21.8,
+      "sunshine": 8.71,
+      "continent": "Africa",
+      "location": [
+        17.22833,
+        26.3351
+      ]
+    },
+    {
+      "id": "LCA",
+      "name": "Saint Lucia",
+      "culture": null,
+      "quality": null,
+      "english": 0.4303,
+      "temperature": 25.5,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -60.978893,
+        13.909444
+      ]
+    },
+    {
+      "id": "LIE",
+      "name": "Liechtenstein",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 5.8,
+      "sunshine": null,
+      "continent": "Europe",
+      "location": [
+        9.555373,
+        47.166
+      ]
+    },
+    {
+      "id": "LKA",
+      "name": "Sri Lanka",
+      "culture": null,
+      "quality": [
+        0.7540922044981923,
+        0.7628388803173903,
+        0.7161290322580643
+      ],
+      "english": 0.1832,
+      "temperature": 26.95,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        80.7718,
+        7.873054
+      ]
+    },
+    {
+      "id": "LSO",
+      "name": "Lesotho",
+      "culture": null,
+      "quality": [
+        0.440052009483261,
+        0.5829843508926603,
+        0.7516129032258063
+      ],
+      "english": 0.2786,
+      "temperature": 11.85,
+      "sunshine": null,
+      "continent": "Africa",
+      "location": [
+        28.233608,
+        -29.609987
+      ]
+    },
+    {
+      "id": "LTU",
+      "name": "Lithuania",
+      "culture": [
+        42.0,
+        60.0,
+        19.0,
+        65.0,
+        82.0,
+        16.0
+      ],
+      "quality": [
+        0.5939207574059927,
+        0.9225258981705973,
+        0.9256272401433692
+      ],
+      "english": 0.3799,
+      "temperature": 6.2,
+      "sunshine": 4.63,
+      "continent": "Europe",
+      "location": [
+        23.881275,
+        55.169437
+      ]
+    },
+    {
+      "id": "LUX",
+      "name": "Luxembourg",
+      "culture": [
+        40.0,
+        60.0,
+        50.0,
+        70.0,
+        64.0,
+        56.0
+      ],
+      "quality": [
+        0.5111927336027423,
+        0.9640731761075602,
+        0.9455197132616485
+      ],
+      "english": 0.5697,
+      "temperature": 8.65,
+      "sunshine": 4.48,
+      "continent": "Europe",
+      "location": [
+        6.129583,
+        49.815273
+      ]
+    },
+    {
+      "id": "LVA",
+      "name": "Latvia",
+      "culture": [
+        44.0,
+        70.0,
+        9.0,
+        63.0,
+        69.0,
+        13.0
+      ],
+      "quality": [
+        0.5502146263608555,
+        0.9087502755124531,
+        0.9229390681003583
+      ],
+      "english": 0.4589,
+      "temperature": 5.6,
+      "sunshine": 4.81,
+      "continent": "Europe",
+      "location": [
+        24.60319,
+        56.879635
+      ]
+    },
+    {
+      "id": "MAC",
+      "name": "Macao",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": null
+    },
+    {
+      "id": "MAF",
+      "name": "Saint Martin (French part)",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": null
+    },
+    {
+      "id": "MAR",
+      "name": "Morocco",
+      "culture": [
+        70.0,
+        46.0,
+        53.0,
+        68.0,
+        14.0,
+        25.0
+      ],
+      "quality": [
+        0.8197728400331962,
+        0.7057527000220412,
+        0.6175627240143369
+      ],
+      "english": 0.1843,
+      "temperature": 17.1,
+      "sunshine": 8.58,
+      "continent": "Africa",
+      "location": [
+        -7.09262,
+        31.791702
+      ]
+    },
+    {
+      "id": "MCO",
+      "name": "Monaco",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 13.55,
+      "sunshine": 7.05,
+      "continent": "Europe",
+      "location": [
+        7.412841,
+        43.750298
+      ]
+    },
+    {
+      "id": "MDA",
+      "name": "Moldova",
+      "culture": [
+        90.0,
+        27.0,
+        39.0,
+        95.0,
+        71.0,
+        19.0
+      ],
+      "quality": [
+        0.8213165635167627,
+        0.8176107560061715,
+        0.7944444444444443
+      ],
+      "english": null,
+      "temperature": 9.45,
+      "sunshine": 5.82,
+      "continent": "Europe",
+      "location": [
+        28.369884,
+        47.411633
+      ]
+    },
+    {
+      "id": "MDG",
+      "name": "Madagascar",
+      "culture": null,
+      "quality": [
+        0.7119303540001704,
+        0.5187348468150761,
+        0.7250896057347669
+      ],
+      "english": 0.18,
+      "temperature": 22.65,
+      "sunshine": 7.76,
+      "continent": "Africa",
+      "location": [
+        46.869106,
+        -18.766947
+      ]
+    },
+    {
+      "id": "MDV",
+      "name": "Maldives",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 28.0,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        73.22068,
+        3.202778
+      ]
+    },
+    {
+      "id": "MEX",
+      "name": "Mexico",
+      "culture": [
+        81.0,
+        30.0,
+        69.0,
+        82.0,
+        24.0,
+        97.0
+      ],
+      "quality": [
+        0.8754871802123624,
+        0.7806920872823453,
+        0.7295698924731182
+      ],
+      "english": 0.13,
+      "temperature": 21.0,
+      "sunshine": 6.85,
+      "continent": "North America",
+      "location": [
+        -102.55279,
+        23.6345
+      ]
+    },
+    {
+      "id": "MHL",
+      "name": "Marshall Islands",
+      "culture": null,
+      "quality": null,
+      "english": 0.9831,
+      "temperature": 27.4,
+      "sunshine": null,
+      "continent": "Oceania",
+      "location": [
+        171.18448,
+        7.131474
+      ]
+    },
+    {
+      "id": "MKD",
+      "name": "North Macedonia",
+      "culture": [
+        90.0,
+        22.0,
+        45.0,
+        87.0,
+        62.0,
+        35.0
+      ],
+      "quality": [
+        0.7067430628354612,
+        0.8016310337227243,
+        0.8084229390681003
+      ],
+      "english": null,
+      "temperature": 9.8,
+      "sunshine": 6.41,
+      "continent": "Europe",
+      "location": [
+        21.745275,
+        41.608635
+      ]
+    },
+    {
+      "id": "MLI",
+      "name": "Mali",
+      "culture": null,
+      "quality": [
+        0.633958732465156,
+        0.517191977077364,
+        0.6557347670250895
+      ],
+      "english": null,
+      "temperature": 28.25,
+      "sunshine": 8.51,
+      "continent": "Africa",
+      "location": [
+        -3.996166,
+        17.570692
+      ]
+    },
+    {
+      "id": "MLT",
+      "name": "Malta",
+      "culture": [
+        56.0,
+        59.0,
+        47.0,
+        96.0,
+        47.0,
+        66.0
+      ],
+      "quality": [
+        0.7010078219203973,
+        0.9314525016530747,
+        0.9094982078853046
+      ],
+      "english": 0.883,
+      "temperature": 19.2,
+      "sunshine": 8.37,
+      "continent": "Europe",
+      "location": [
+        14.375416,
+        35.937496
+      ]
+    },
+    {
+      "id": "MMR",
+      "name": "Myanmar",
+      "culture": null,
+      "quality": [
+        0.6452847340548574,
+        0.5671148335904783,
+        0.5818996415770609
+      ],
+      "english": 0.0445,
+      "temperature": 13.05,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        95.95622,
+        21.913965
+      ]
+    },
+    {
+      "id": "MNE",
+      "name": "Montenegro",
+      "culture": [
+        88.0,
+        24.0,
+        48.0,
+        90.0,
+        75.0,
+        20.0
+      ],
+      "quality": [
+        0.6660008187751297,
+        0.8225699801631035,
+        0.8379928315412185
+      ],
+      "english": null,
+      "temperature": 10.55,
+      "sunshine": 6.8,
+      "continent": "Europe",
+      "location": [
+        19.37439,
+        42.70868
+      ]
+    },
+    {
+      "id": "MNG",
+      "name": "Mongolia",
+      "culture": null,
+      "quality": [
+        0.39426364595691166,
+        0.7406876790830945,
+        0.8487455197132615
+      ],
+      "english": null,
+      "temperature": 1.7,
+      "sunshine": 7.65,
+      "continent": "Asia",
+      "location": [
+        103.84666,
+        46.862495
+      ]
+    },
+    {
+      "id": "MNP",
+      "name": "Northern Mariana Islands",
+      "culture": null,
+      "quality": null,
+      "english": 0.8333,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        145.38469,
+        17.33083
+      ]
+    },
+    {
+      "id": "MOZ",
+      "name": "Mozambique",
+      "culture": [
+        85.0,
+        15.0,
+        38.0,
+        44.0,
+        11.0,
+        80.0
+      ],
+      "quality": [
+        0.7120493271112489,
+        0.5319594445668945,
+        0.7234767025089605
+      ],
+      "english": null,
+      "temperature": 23.8,
+      "sunshine": 7.78,
+      "continent": "Africa",
+      "location": [
+        35.529564,
+        -18.665695
+      ]
+    },
+    {
+      "id": "MRT",
+      "name": "Mauritania",
+      "culture": null,
+      "quality": [
+        0.5585527848160549,
+        0.5135552126956139,
+        0.5818996415770609
+      ],
+      "english": null,
+      "temperature": 27.65,
+      "sunshine": 9.13,
+      "continent": "Africa",
+      "location": [
+        -10.940835,
+        21.00789
+      ]
+    },
+    {
+      "id": "MSR",
+      "name": "Montserrat",
+      "culture": null,
+      "quality": null,
+      "english": 0.678,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -62.187366,
+        16.742498
+      ]
+    },
+    {
+      "id": "MTQ",
+      "name": "Martinique",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -61.024174,
+        14.641528
+      ]
+    },
+    {
+      "id": "MUS",
+      "name": "Mauritius",
+      "culture": null,
+      "quality": [
+        0.8302096392869028,
+        0.8313863786643156,
+        0.8487455197132615
+      ],
+      "english": 0.1597,
+      "temperature": 22.4,
+      "sunshine": null,
+      "continent": "Africa",
+      "location": [
+        57.55215,
+        -20.348404
+      ]
+    },
+    {
+      "id": "MWI",
+      "name": "Malawi",
+      "culture": null,
+      "quality": [
+        0.6237200987795267,
+        0.5983028432885167,
+        0.7532258064516127
+      ],
+      "english": 0.0388,
+      "temperature": 21.9,
+      "sunshine": 7.66,
+      "continent": "Africa",
+      "location": [
+        34.301525,
+        -13.254308
+      ]
+    },
+    {
+      "id": "MYS",
+      "name": "Malaysia",
+      "culture": [
+        100.0,
+        26.0,
+        50.0,
+        36.0,
+        41.0,
+        57.0
+      ],
+      "quality": [
+        0.6726133496967632,
+        0.8163985012122549,
+        0.7261648745519712
+      ],
+      "english": 0.5734,
+      "temperature": 25.4,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        101.97577,
+        4.210484
+      ]
+    },
+    {
+      "id": "MYT",
+      "name": "Mayotte",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        45.166245,
+        -12.8275
+      ]
+    },
+    {
+      "id": "NAM",
+      "name": "Namibia",
+      "culture": null,
+      "quality": [
+        0.5931448363677528,
+        0.6832708838439497,
+        0.814516129032258
+      ],
+      "english": 0.1724,
+      "temperature": 19.95,
+      "sunshine": 10.24,
+      "continent": "Africa",
+      "location": [
+        18.49041,
+        -22.95764
+      ]
+    },
+    {
+      "id": "NCL",
+      "name": "New Caledonia",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        165.61804,
+        -20.904305
+      ]
+    },
+    {
+      "id": "NER",
+      "name": "Niger",
+      "culture": null,
+      "quality": [
+        0.6663316835839139,
+        0.4754242891778709,
+        0.6740143369175625
+      ],
+      "english": null,
+      "temperature": 27.15,
+      "sunshine": 8.78,
+      "continent": "Africa",
+      "location": [
+        8.081666,
+        17.607788
+      ]
+    },
+    {
+      "id": "NFK",
+      "name": "Norfolk Island",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        167.95471,
+        -29.040834
+      ]
+    },
+    {
+      "id": "NGA",
+      "name": "Nigeria",
+      "culture": [
+        80.0,
+        30.0,
+        60.0,
+        55.0,
+        13.0,
+        84.0
+      ],
+      "quality": [
+        0.550105711010391,
+        0.5837557857615164,
+        0.6499999999999999
+      ],
+      "english": 0.6064,
+      "temperature": 27.0,
+      "sunshine": 7.58,
+      "continent": "Africa",
+      "location": [
+        8.675277,
+        9.081999
+      ]
+    },
+    {
+      "id": "NIC",
+      "name": "Nicaragua",
+      "culture": null,
+      "quality": [
+        0.8893944792498539,
+        0.6637646021600176,
+        0.7041218637992831
+      ],
+      "english": null,
+      "temperature": 24.9,
+      "sunshine": 7.56,
+      "continent": "North America",
+      "location": [
+        -85.20723,
+        12.865416
+      ]
+    },
+    {
+      "id": "NIU",
+      "name": "Niue",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -169.86723,
+        -19.054445
+      ]
+    },
+    {
+      "id": "NLD",
+      "name": "Netherlands",
+      "culture": [
+        38.0,
+        80.0,
+        14.0,
+        53.0,
+        67.0,
+        68.0
+      ],
+      "quality": [
+        0.8854589889987211,
+        0.9804937183160679,
+        0.9417562724014336
+      ],
+      "english": 0.9094,
+      "temperature": 9.25,
+      "sunshine": 4.55,
+      "continent": "Europe",
+      "location": [
+        5.291266,
+        52.132633
+      ]
+    },
+    {
+      "id": "NOR",
+      "name": "Norway",
+      "culture": [
+        31.0,
+        69.0,
+        8.0,
+        50.0,
+        35.0,
+        55.0
+      ],
+      "quality": [
+        0.8198066359200814,
+        1.0,
+        0.9421146953405017
+      ],
+      "english": 0.876,
+      "temperature": 2.17,
+      "sunshine": 3.47,
+      "continent": "Europe",
+      "location": [
+        8.468946,
+        60.472023
+      ]
+    },
+    {
+      "id": "NPL",
+      "name": "Nepal",
+      "culture": null,
+      "quality": [
+        0.8549419499602022,
+        0.6545073837337448,
+        0.7501792114695339
+      ],
+      "english": 0.03,
+      "temperature": 8.1,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        84.12401,
+        28.394857
+      ]
+    },
+    {
+      "id": "NRU",
+      "name": "Nauru",
+      "culture": null,
+      "quality": null,
+      "english": 0.9667,
+      "temperature": null,
+      "sunshine": null,
+      "continent": "Oceania",
+      "location": [
+        166.9315,
+        -0.522778
+      ]
+    },
+    {
+      "id": "NZL",
+      "name": "New Zealand",
+      "culture": [
+        22.0,
+        79.0,
+        58.0,
+        49.0,
+        33.0,
+        75.0
+      ],
+      "quality": [
+        0.9255034991207163,
+        0.9616486665197268,
+        0.975448028673835
+      ],
+      "english": 0.9782,
+      "temperature": 19.53,
+      "sunshine": 5.56,
+      "continent": "Oceania",
+      "location": [
+        174.88597,
+        -40.90056
+      ]
+    },
+    {
+      "id": "OMN",
+      "name": "Oman",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 25.6,
+      "sunshine": 9.57,
+      "continent": "Asia",
+      "location": [
+        55.923256,
+        21.512583
+      ]
+    },
+    {
+      "id": "PAK",
+      "name": "Pakistan",
+      "culture": [
+        55.0,
+        14.0,
+        50.0,
+        70.0,
+        50.0,
+        0.0
+      ],
+      "quality": [
+        0.7268324402672451,
+        0.5655719638527662,
+        0.5853046594982079
+      ],
+      "english": 0.4891,
+      "temperature": 20.2,
+      "sunshine": 8.31,
+      "continent": "Asia",
+      "location": [
+        69.345116,
+        30.37532
+      ]
+    },
+    {
+      "id": "PAN",
+      "name": "Panama",
+      "culture": null,
+      "quality": [
+        0.9335232892317499,
+        0.8157372713246639,
+        0.857706093189964
+      ],
+      "english": 0.14,
+      "temperature": 25.4,
+      "sunshine": 4.78,
+      "continent": "North America",
+      "location": [
+        -80.78213,
+        8.537981
+      ]
+    },
+    {
+      "id": "PCN",
+      "name": "Pitcairn",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": null
+    },
+    {
+      "id": "PER",
+      "name": "Peru",
+      "culture": [
+        64.0,
+        16.0,
+        42.0,
+        87.0,
+        25.0,
+        46.0
+      ],
+      "quality": [
+        0.9006723377866184,
+        0.7791492175446331,
+        0.825268817204301
+      ],
+      "english": null,
+      "temperature": 19.6,
+      "sunshine": 6.25,
+      "continent": "South America",
+      "location": [
+        -75.01515,
+        -9.189967
+      ]
+    },
+    {
+      "id": "PHL",
+      "name": "Philippines",
+      "culture": [
+        94.0,
+        32.0,
+        64.0,
+        44.0,
+        27.0,
+        42.0
+      ],
+      "quality": [
+        0.9201655133228276,
+        0.7434428036147234,
+        0.7281362007168458
+      ],
+      "english": 0.5821,
+      "temperature": 25.55,
+      "sunshine": 5.76,
+      "continent": "Asia",
+      "location": [
+        121.77402,
+        12.879721
+      ]
+    },
+    {
+      "id": "PLW",
+      "name": "Palau",
+      "culture": null,
+      "quality": null,
+      "english": 0.925,
+      "temperature": 27.6,
+      "sunshine": null,
+      "continent": "Oceania",
+      "location": [
+        134.58252,
+        7.51498
+      ]
+    },
+    {
+      "id": "PNG",
+      "name": "Papua New Guinea",
+      "culture": null,
+      "quality": null,
+      "english": 0.7043,
+      "temperature": 25.25,
+      "sunshine": 6.75,
+      "continent": "Oceania",
+      "location": [
+        143.95555,
+        -6.314993
+      ]
+    },
+    {
+      "id": "POL",
+      "name": "Poland",
+      "culture": [
+        68.0,
+        60.0,
+        64.0,
+        93.0,
+        38.0,
+        29.0
+      ],
+      "quality": [
+        0.7254976004671349,
+        0.8835133348027332,
+        0.8578853046594981
+      ],
+      "english": 0.4906,
+      "temperature": 7.85,
+      "sunshine": 4.3,
+      "continent": "Europe",
+      "location": [
+        19.145136,
+        51.919437
+      ]
+    },
+    {
+      "id": "PRI",
+      "name": "Puerto Rico",
+      "culture": [
+        68.0,
+        27.0,
+        56.0,
+        38.0,
+        0.0,
+        90.0
+      ],
+      "quality": null,
+      "english": 0.4861,
+      "temperature": null,
+      "sunshine": 8.12,
+      "continent": "North America",
+      "location": [
+        -66.59015,
+        18.220833
+      ]
+    },
+    {
+      "id": "PRK",
+      "name": "North Korea",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 5.7,
+      "sunshine": 6.83,
+      "continent": "Asia",
+      "location": [
+        127.51009,
+        40.33985
+      ]
+    },
+    {
+      "id": "PRT",
+      "name": "Portugal",
+      "culture": [
+        63.0,
+        27.0,
+        31.0,
+        99.0,
+        28.0,
+        33.0
+      ],
+      "quality": [
+        0.7454843370467046,
+        0.9339872162221733,
+        0.9258064516129031
+      ],
+      "english": 0.273,
+      "temperature": 15.15,
+      "sunshine": 7.69,
+      "continent": "Europe",
+      "location": [
+        -8.224454,
+        39.39987
+      ]
+    },
+    {
+      "id": "PRY",
+      "name": "Paraguay",
+      "culture": [
+        70.0,
+        12.0,
+        40.0,
+        85.0,
+        20.0,
+        56.0
+      ],
+      "quality": [
+        0.7670791800879965,
+        0.7599735508044964,
+        0.789605734767025
+      ],
+      "english": null,
+      "temperature": 23.55,
+      "sunshine": 7.68,
+      "continent": "South America",
+      "location": [
+        -58.443832,
+        -23.442503
+      ]
+    },
+    {
+      "id": "PSE",
+      "name": "Palestine",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": null
+    },
+    {
+      "id": "PYF",
+      "name": "French Polynesia",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -149.40685,
+        -17.679743
+      ]
+    },
+    {
+      "id": "QAT",
+      "name": "Qatar",
+      "culture": null,
+      "quality": [
+        0.3919998947132168,
+        0.7325325104694732,
+        0.6351254480286738
+      ],
+      "english": null,
+      "temperature": 27.15,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        51.183884,
+        25.354826
+      ]
+    },
+    {
+      "id": "REU",
+      "name": "Réunion",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        55.536385,
+        -21.11514
+      ]
+    },
+    {
+      "id": "ROU",
+      "name": "Romania",
+      "culture": [
+        90.0,
+        30.0,
+        42.0,
+        90.0,
+        52.0,
+        20.0
+      ],
+      "quality": [
+        0.7446680281760655,
+        0.8473661009477629,
+        0.8840501792114694
+      ],
+      "english": 0.3098,
+      "temperature": 8.8,
+      "sunshine": 5.79,
+      "continent": "Europe",
+      "location": [
+        24.96676,
+        45.94316
+      ]
+    },
+    {
+      "id": "RUS",
+      "name": "Russia",
+      "culture": [
+        93.0,
+        39.0,
+        36.0,
+        95.0,
+        81.0,
+        20.0
+      ],
+      "quality": [
+        0.5627847946602937,
+        0.7933656601278378,
+        0.6557347670250896
+      ],
+      "english": 0.035,
+      "temperature": -5.35,
+      "sunshine": 5.81,
+      "continent": "Asia",
+      "location": [
+        105.318756,
+        61.52401
+      ]
+    },
+    {
+      "id": "RWA",
+      "name": "Rwanda",
+      "culture": null,
+      "quality": [
+        0.6322273907197031,
+        0.5750495922415694,
+        0.6673835125448028
+      ],
+      "english": 0.15,
+      "temperature": 17.85,
+      "sunshine": null,
+      "continent": "Africa",
+      "location": [
+        29.873888,
+        -1.940278
+      ]
+    },
+    {
+      "id": "SAU",
+      "name": "Saudi Arabia",
+      "culture": [
+        72.0,
+        48.0,
+        43.0,
+        64.0,
+        27.0,
+        14.0
+      ],
+      "quality": [
+        0.6705407460195074,
+        0.7040996253030637,
+        0.4887096774193547
+      ],
+      "english": null,
+      "temperature": 24.65,
+      "sunshine": 8.87,
+      "continent": "Asia",
+      "location": [
+        45.079163,
+        23.885942
+      ]
+    },
+    {
+      "id": "SDN",
+      "name": "Sudan",
+      "culture": null,
+      "quality": [
+        0.6381678351859352,
+        0.5004408199250606,
+        0.4111827956989247
+      ],
+      "english": null,
+      "temperature": 26.9,
+      "sunshine": 9.75,
+      "continent": "Africa",
+      "location": [
+        30.217636,
+        12.862807
+      ]
+    },
+    {
+      "id": "SEN",
+      "name": "Senegal",
+      "culture": null,
+      "quality": [
+        0.8249630799123612,
+        0.635882741899934,
+        0.7370967741935482
+      ],
+      "english": null,
+      "temperature": 27.85,
+      "sunshine": 8.62,
+      "continent": "Africa",
+      "location": [
+        -14.452362,
+        14.497401
+      ]
+    },
+    {
+      "id": "SGP",
+      "name": "Singapore",
+      "culture": [
+        74.0,
+        20.0,
+        48.0,
+        8.0,
+        72.0,
+        46.0
+      ],
+      "quality": [
+        0.7339840614211842,
+        0.9230769230769232,
+        0.8403225806451612
+      ],
+      "english": 0.9643,
+      "temperature": 26.45,
+      "sunshine": 5.54,
+      "continent": "Asia",
+      "location": [
+        103.81984,
+        1.352083
+      ]
+    },
+    {
+      "id": "SGS",
+      "name": "South Georgia and the South Sandwich Islands",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": "South America",
+      "location": [
+        -36.58791,
+        -54.42958
+      ]
+    },
+    {
+      "id": "SHN",
+      "name": "Saint Helena, Ascension and Tristan da Cunha",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": null
+    },
+    {
+      "id": "SJM",
+      "name": "Svalbard and Jan Mayen",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        23.670273,
+        77.553604
+      ]
+    },
+    {
+      "id": "SLB",
+      "name": "Solomon Islands",
+      "culture": null,
+      "quality": null,
+      "english": 0.3168,
+      "temperature": 25.65,
+      "sunshine": 6.38,
+      "continent": "Oceania",
+      "location": [
+        160.15619,
+        -9.64571
+      ]
+    },
+    {
+      "id": "SLE",
+      "name": "Sierra Leone",
+      "culture": null,
+      "quality": [
+        0.46757789410615025,
+        0.5563147454264933,
+        0.6953405017921147
+      ],
+      "english": 0.8353,
+      "temperature": 26.05,
+      "sunshine": null,
+      "continent": "Africa",
+      "location": [
+        -11.779889,
+        8.460555
+      ]
+    },
+    {
+      "id": "SLV",
+      "name": "El Salvador",
+      "culture": [
+        66.0,
+        19.0,
+        40.0,
+        94.0,
+        20.0,
+        89.0
+      ],
+      "quality": [
+        0.9076506191987663,
+        0.7099404893101169,
+        0.782258064516129
+      ],
+      "english": null,
+      "temperature": 24.45,
+      "sunshine": 8.1,
+      "continent": "North America",
+      "location": [
+        -88.89653,
+        13.794185
+      ]
+    },
+    {
+      "id": "SMR",
+      "name": "San Marino",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 11.85,
+      "sunshine": null,
+      "continent": "Europe",
+      "location": [
+        12.457777,
+        43.94236
+      ]
+    },
+    {
+      "id": "SOM",
+      "name": "Somalia",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 27.05,
+      "sunshine": 8.5,
+      "continent": "Africa",
+      "location": [
+        46.199615,
+        5.152149
+      ]
+    },
+    {
+      "id": "SPM",
+      "name": "Saint Pierre and Miquelon",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": 3.91,
+      "continent": null,
+      "location": [
+        -56.27111,
+        46.941936
+      ]
+    },
+    {
+      "id": "SRB",
+      "name": "Serbia",
+      "culture": [
+        86.0,
+        25.0,
+        43.0,
+        92.0,
+        52.0,
+        28.0
+      ],
+      "quality": [
+        0.8575234578578025,
+        0.8353537579898611,
+        0.8008960573476701
+      ],
+      "english": null,
+      "temperature": 10.55,
+      "sunshine": 5.63,
+      "continent": "Europe",
+      "location": [
+        21.00586,
+        44.01652
+      ]
+    },
+    {
+      "id": "SSD",
+      "name": "South Sudan",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": 7.78,
+      "continent": "Africa",
+      "location": null
+    },
+    {
+      "id": "STP",
+      "name": "Sao Tome and Principe",
+      "culture": [
+        75.0,
+        37.0,
+        24.0,
+        70.0,
+        32.0,
+        41.0
+      ],
+      "quality": null,
+      "english": null,
+      "temperature": 23.75,
+      "sunshine": null,
+      "continent": "Africa",
+      "location": [
+        6.613081,
+        0.18636
+      ]
+    },
+    {
+      "id": "SUR",
+      "name": "Suriname",
+      "culture": null,
+      "quality": null,
+      "english": 0.8709,
+      "temperature": 25.7,
+      "sunshine": null,
+      "continent": "South America",
+      "location": [
+        -56.027782,
+        3.919305
+      ]
+    },
+    {
+      "id": "SVK",
+      "name": "Slovakia",
+      "culture": [
+        100.0,
+        52.0,
+        100.0,
+        51.0,
+        77.0,
+        28.0
+      ],
+      "quality": [
+        0.750501957160918,
+        0.8958562927044303,
+        0.882258064516129
+      ],
+      "english": 0.2594,
+      "temperature": 6.8,
+      "sunshine": 5.58,
+      "continent": "Europe",
+      "location": [
+        19.699024,
+        48.669025
+      ]
+    },
+    {
+      "id": "SVN",
+      "name": "Slovenia",
+      "culture": [
+        71.0,
+        27.0,
+        19.0,
+        88.0,
+        49.0,
+        48.0
+      ],
+      "quality": [
+        0.7716151622847044,
+        0.9278157372713247,
+        0.8883512544802866
+      ],
+      "english": 0.5902,
+      "temperature": 8.9,
+      "sunshine": 5.41,
+      "continent": "Europe",
+      "location": [
+        14.995463,
+        46.15124
+      ]
+    },
+    {
+      "id": "SWE",
+      "name": "Sweden",
+      "culture": [
+        31.0,
+        71.0,
+        5.0,
+        29.0,
+        53.0,
+        78.0
+      ],
+      "quality": [
+        0.8137690688663788,
+        0.9854529424729999,
+        0.9521505376344085
+      ],
+      "english": 0.89,
+      "temperature": 1.75,
+      "sunshine": 4.88,
+      "continent": "Europe",
+      "location": [
+        18.643501,
+        60.128162
+      ]
+    },
+    {
+      "id": "SWZ",
+      "name": "Eswatini",
+      "culture": null,
+      "quality": [
+        0.5695572666320801,
+        0.5420983028432885,
+        0.6025089605734767
+      ],
+      "english": 0.482,
+      "temperature": 21.4,
+      "sunshine": null,
+      "continent": null,
+      "location": null
+    },
+    {
+      "id": "SXM",
+      "name": "Sint Maarten (Dutch part)",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": null
+    },
+    {
+      "id": "SYC",
+      "name": "Seychelles",
+      "culture": null,
+      "quality": null,
+      "english": 0.3793,
+      "temperature": 27.15,
+      "sunshine": null,
+      "continent": "Africa",
+      "location": [
+        55.491978,
+        -4.679574
+      ]
+    },
+    {
+      "id": "SYR",
+      "name": "Syria",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 17.75,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        38.996815,
+        34.802074
+      ]
+    },
+    {
+      "id": "TCA",
+      "name": "Turks and Caicos Islands",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -71.79793,
+        21.694025
+      ]
+    },
+    {
+      "id": "TCD",
+      "name": "Chad",
+      "culture": null,
+      "quality": [
+        0.4892682512280165,
+        0.3823010800088164,
+        0.5770609318996415
+      ],
+      "english": null,
+      "temperature": 26.55,
+      "sunshine": 9.19,
+      "continent": "Africa",
+      "location": [
+        18.732206,
+        15.454166
+      ]
+    },
+    {
+      "id": "TGO",
+      "name": "Togo",
+      "culture": null,
+      "quality": [
+        0.601222791841374,
+        0.5684372933656602,
+        0.6817204301075268
+      ],
+      "english": null,
+      "temperature": 27.15,
+      "sunshine": 7.07,
+      "continent": "Africa",
+      "location": [
+        0.824782,
+        8.619543
+      ]
+    },
+    {
+      "id": "THA",
+      "name": "Thailand",
+      "culture": [
+        64.0,
+        20.0,
+        34.0,
+        64.0,
+        32.0,
+        45.0
+      ],
+      "quality": [
+        0.8525075007160566,
+        0.7692307692307693,
+        0.6924731182795698
+      ],
+      "english": 0.2716,
+      "temperature": 26.3,
+      "sunshine": 6.18,
+      "continent": "Asia",
+      "location": [
+        100.99254,
+        15.870032
+      ]
+    },
+    {
+      "id": "TJK",
+      "name": "Tajikistan",
+      "culture": null,
+      "quality": [
+        0.8887391872049676,
+        0.6176989199911836,
+        0.5815412186379928
+      ],
+      "english": null,
+      "temperature": 6.4,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        71.27609,
+        38.861034
+      ]
+    },
+    {
+      "id": "TKL",
+      "name": "Tokelau",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -171.85588,
+        -8.967363
+      ]
+    },
+    {
+      "id": "TKM",
+      "name": "Turkmenistan",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 15.1,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        59.55628,
+        38.96972
+      ]
+    },
+    {
+      "id": "TLS",
+      "name": "East Timor",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 25.25,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        125.72754,
+        -8.874217
+      ]
+    },
+    {
+      "id": "TON",
+      "name": "Tonga",
+      "culture": null,
+      "quality": null,
+      "english": 0.3,
+      "temperature": 25.25,
+      "sunshine": null,
+      "continent": "Oceania",
+      "location": [
+        -175.19824,
+        -21.178986
+      ]
+    },
+    {
+      "id": "TTO",
+      "name": "Trinidad and Tobago",
+      "culture": [
+        47.0,
+        16.0,
+        58.0,
+        55.0,
+        13.0,
+        80.0
+      ],
+      "quality": [
+        0.5094110561622628,
+        0.8329292484020278,
+        0.8186379928315412
+      ],
+      "english": 0.8774,
+      "temperature": 25.75,
+      "sunshine": null,
+      "continent": "South America",
+      "location": [
+        -61.222504,
+        10.691803
+      ]
+    },
+    {
+      "id": "TUN",
+      "name": "Tunisia",
+      "culture": null,
+      "quality": [
+        0.7077709830189132,
+        0.7689001542869738,
+        0.6840501792114694
+      ],
+      "english": null,
+      "temperature": 19.2,
+      "sunshine": 8.36,
+      "continent": "Africa",
+      "location": [
+        9.537499,
+        33.886917
+      ]
+    },
+    {
+      "id": "TUR",
+      "name": "Turkey",
+      "culture": [
+        66.0,
+        37.0,
+        45.0,
+        85.0,
+        46.0,
+        49.0
+      ],
+      "quality": [
+        0.6652268225630648,
+        0.7338549702446552,
+        0.6297491039426523
+      ],
+      "english": 0.1496,
+      "temperature": 9.9,
+      "sunshine": 6.39,
+      "continent": "Asia",
+      "location": [
+        35.24332,
+        38.963745
+      ]
+    },
+    {
+      "id": "TUV",
+      "name": "Tuvalu",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 27.65,
+      "sunshine": null,
+      "continent": "Oceania",
+      "location": [
+        177.64932,
+        -7.109535
+      ]
+    },
+    {
+      "id": "TWN",
+      "name": "Taiwan",
+      "culture": [
+        58.0,
+        17.0,
+        45.0,
+        69.0,
+        93.0,
+        49.0
+      ],
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": 5.6,
+      "continent": "Asia",
+      "location": [
+        120.96052,
+        23.69781
+      ]
+    },
+    {
+      "id": "TZA",
+      "name": "Tanzania",
+      "culture": [
+        70.0,
+        25.0,
+        40.0,
+        50.0,
+        34.0,
+        38.0
+      ],
+      "quality": [
+        0.5955494085067417,
+        0.6046947322018955,
+        0.6965949820788531
+      ],
+      "english": 0.0989,
+      "temperature": 22.35,
+      "sunshine": 8.19,
+      "continent": "Africa",
+      "location": [
+        34.88882,
+        -6.369028
+      ]
+    },
+    {
+      "id": "UGA",
+      "name": "Uganda",
+      "culture": null,
+      "quality": [
+        0.7214228108116035,
+        0.5437513775622659,
+        0.67168458781362
+      ],
+      "english": 0.899,
+      "temperature": 22.8,
+      "sunshine": 6.31,
+      "continent": "Africa",
+      "location": [
+        32.290276,
+        1.373333
+      ]
+    },
+    {
+      "id": "UKR",
+      "name": "Ukraine",
+      "culture": [
+        92.0,
+        25.0,
+        27.0,
+        95.0,
+        86.0,
+        14.0
+      ],
+      "quality": [
+        0.6591108294377369,
+        0.8173903460436412,
+        0.7129032258064516
+      ],
+      "english": null,
+      "temperature": 8.3,
+      "sunshine": 5.36,
+      "continent": "Europe",
+      "location": [
+        31.16558,
+        48.379433
+      ]
+    },
+    {
+      "id": "UMI",
+      "name": "United States Minor Outlying Islands",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": null
+    },
+    {
+      "id": "URY",
+      "name": "Uruguay",
+      "culture": [
+        61.0,
+        36.0,
+        38.0,
+        98.0,
+        26.0,
+        53.0
+      ],
+      "quality": [
+        0.9270432720778278,
+        0.8846153846153846,
+        0.8910394265232974
+      ],
+      "english": 0.24,
+      "temperature": 17.55,
+      "sunshine": 6.8,
+      "continent": "South America",
+      "location": [
+        -55.765835,
+        -32.522778
+      ]
+    },
+    {
+      "id": "USA",
+      "name": "United States",
+      "culture": [
+        40.0,
+        91.0,
+        62.0,
+        46.0,
+        26.0,
+        68.0
+      ],
+      "quality": [
+        0.6034030486536546,
+        0.9328851664095218,
+        0.9385304659498207
+      ],
+      "english": 0.955,
+      "temperature": 8.55,
+      "sunshine": 7.49,
+      "continent": "North America",
+      "location": [
+        -95.71289,
+        37.09024
+      ]
+    },
+    {
+      "id": "UZB",
+      "name": "Uzbekistan",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": 12.05,
+      "sunshine": 7.74,
+      "continent": "Asia",
+      "location": [
+        64.58526,
+        41.37749
+      ]
+    },
+    {
+      "id": "VAT",
+      "name": "Vatican City",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": "Europe",
+      "location": [
+        12.453389,
+        41.902916
+      ]
+    },
+    {
+      "id": "VCT",
+      "name": "Saint Vincent and the Grenadines",
+      "culture": null,
+      "quality": null,
+      "english": 0.95,
+      "temperature": 26.8,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -61.287228,
+        12.984305
+      ]
+    },
+    {
+      "id": "VEN",
+      "name": "Venezuela",
+      "culture": [
+        81.0,
+        12.0,
+        73.0,
+        76.0,
+        16.0,
+        100.0
+      ],
+      "quality": [
+        0.7886324024090645,
+        0.6460216001763279,
+        0.44301075268817197
+      ],
+      "english": null,
+      "temperature": 25.35,
+      "sunshine": 7.93,
+      "continent": "South America",
+      "location": [
+        -66.58973,
+        6.42375
+      ]
+    },
+    {
+      "id": "VGB",
+      "name": "British Virgin Islands",
+      "culture": null,
+      "quality": null,
+      "english": 0.8696,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -64.63997,
+        18.420694
+      ]
+    },
+    {
+      "id": "VIR",
+      "name": "United States Virgin Islands",
+      "culture": null,
+      "quality": null,
+      "english": 0.8037,
+      "temperature": null,
+      "sunshine": null,
+      "continent": "North America",
+      "location": [
+        -64.89633,
+        18.335766
+      ]
+    },
+    {
+      "id": "VNM",
+      "name": "Vietnam",
+      "culture": [
+        70.0,
+        20.0,
+        40.0,
+        30.0,
+        57.0,
+        35.0
+      ],
+      "quality": [
+        0.7806398426664842,
+        0.7513775622658145,
+        0.6100358422939067
+      ],
+      "english": null,
+      "temperature": 24.45,
+      "sunshine": 6.05,
+      "continent": "Asia",
+      "location": [
+        108.2772,
+        14.058324
+      ]
+    },
+    {
+      "id": "VUT",
+      "name": "Vanuatu",
+      "culture": null,
+      "quality": null,
+      "english": 0.8355,
+      "temperature": 23.95,
+      "sunshine": null,
+      "continent": "Oceania",
+      "location": [
+        166.95915,
+        -15.376706
+      ]
+    },
+    {
+      "id": "WLF",
+      "name": "Wallis and Futuna",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": null,
+      "location": [
+        -177.1561,
+        -13.768752
+      ]
+    },
+    {
+      "id": "WSM",
+      "name": "Samoa",
+      "culture": null,
+      "quality": null,
+      "english": 0.4986,
+      "temperature": 26.7,
+      "sunshine": null,
+      "continent": "Oceania",
+      "location": [
+        -172.10463,
+        -13.759029
+      ]
+    },
+    {
+      "id": "XKX",
+      "name": "Kosovo",
+      "culture": null,
+      "quality": null,
+      "english": null,
+      "temperature": null,
+      "sunshine": null,
+      "continent": "Europe",
+      "location": [
+        20.902977,
+        42.602634
+      ]
+    },
+    {
+      "id": "YEM",
+      "name": "Yemen",
+      "culture": null,
+      "quality": [
+        0.7191458888904214,
+        0.43068106678421864,
+        0.4406810035842293
+      ],
+      "english": 0.09,
+      "temperature": 23.85,
+      "sunshine": null,
+      "continent": "Asia",
+      "location": [
+        48.516388,
+        15.552727
+      ]
+    },
+    {
+      "id": "ZAF",
+      "name": "South Africa",
+      "culture": [
+        49.0,
+        65.0,
+        63.0,
+        49.0,
+        34.0,
+        63.0
+      ],
+      "quality": [
+        0.5834143264978499,
+        0.7708838439497466,
+        0.7743727598566307
+      ],
+      "english": 0.31,
+      "temperature": 17.75,
+      "sunshine": 8.69,
+      "continent": "Africa",
+      "location": [
+        22.937506,
+        -30.559483
+      ]
+    },
+    {
+      "id": "ZMB",
+      "name": "Zambia",
+      "culture": [
+        60.0,
+        35.0,
+        40.0,
+        50.0,
+        30.0,
+        42.0
+      ],
+      "quality": [
+        0.5544999744355851,
+        0.5738373374476526,
+        0.7211469534050178
+      ],
+      "english": 0.1602,
+      "temperature": 21.4,
+      "sunshine": 8.04,
+      "continent": "Africa",
+      "location": [
+        27.849333,
+        -13.133897
+      ]
+    },
+    {
+      "id": "ZWE",
+      "name": "Zimbabwe",
+      "culture": null,
+      "quality": [
+        0.4615101710126648,
+        0.5749393872603042,
+        0.6098566308243727
+      ],
+      "english": 0.8207,
+      "temperature": 21.0,
+      "sunshine": 8.4,
+      "continent": "Africa",
+      "location": [
+        29.154858,
+        -19.015438
+      ]
+    }
+  ]
+}

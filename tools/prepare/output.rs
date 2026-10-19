@@ -7,7 +7,11 @@ pub(super) fn output(
     value: &impl serde::Serialize,
     check: bool,
 ) -> Result<()> {
-    let text = serde_json::to_string(value)? + "\n";
+    let text = if name == "assets/countries.json" {
+        serde_json::to_string_pretty(value)?
+    } else {
+        serde_json::to_string(value)?
+    } + "\n";
     let path = root.join(name);
     if check {
         if fs::read_to_string(&path)? != text {
