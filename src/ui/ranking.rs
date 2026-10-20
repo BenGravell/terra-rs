@@ -126,7 +126,7 @@ pub(super) fn show(
                     .min_col_width(0.)
                     .spacing(egui::vec2(column_gap, if compact { 2. } else { 8. }))
                     .min_row_height(18.)
-                    .striped(true)
+                    .striped(false)
                     .show(ui, |ui| {
                         for s in scores.iter().filter(|s| s.matches) {
                             let row_top = ui.cursor().top();

@@ -216,15 +216,19 @@ pub(super) fn show(
     if mobile {
         let button = egui::Rect::from_min_size(
             egui::pos2(rect.right() - 98., rect.top() + 6.),
-            egui::vec2(92., 100.),
+            egui::vec2(92., 64.),
         );
-        let response = ui.put(
-            button,
-            egui::Button::selectable(show_legend, "Color scale").min_size(button.size()),
-        );
+        let mut toggle =
+            egui::Button::selectable(show_legend, "Color scale").min_size(button.size());
+        if !show_legend {
+            toggle = toggle
+                .stroke(Stroke::new(1., super::theme::ACCENT))
+                .fill(SURFACE.gamma_multiply(0.8));
+        }
+        let response = ui.put(button, toggle);
         legend_rect = egui::Rect::from_min_max(
             egui::pos2(rect.left() + 6., response.rect.top()),
-            egui::pos2(response.rect.left() - 6., response.rect.bottom()),
+            egui::pos2(response.rect.left() - 6., response.rect.top() + 64.),
         );
         if response.clicked() {
             show_legend = !show_legend;
@@ -241,8 +245,8 @@ pub(super) fn show(
         if let Some((min, max)) = range {
             let bar = if mobile {
                 egui::Rect::from_min_max(
-                    rect.min + egui::vec2(24., 28.),
-                    egui::pos2(rect.right() - 24., rect.top() + 42.),
+                    rect.min + egui::vec2(24., 8.),
+                    egui::pos2(rect.right() - 24., rect.top() + 18.),
                 )
             } else {
                 egui::Rect::from_min_max(
@@ -250,13 +254,15 @@ pub(super) fn show(
                     egui::pos2(rect.right() - 64., rect.bottom() - 62.),
                 )
             };
-            painter.text(
-                egui::pos2(bar.left(), rect.top() + 8.),
-                egui::Align2::LEFT_TOP,
-                "Score",
-                egui::FontId::proportional(12.),
-                ui.visuals().text_color(),
-            );
+            if !mobile {
+                painter.text(
+                    egui::pos2(bar.left(), rect.top() + 8.),
+                    egui::Align2::LEFT_TOP,
+                    "Score",
+                    egui::FontId::proportional(12.),
+                    ui.visuals().text_color(),
+                );
+            }
             let mut mesh = egui::Mesh::default();
             for i in 0..=64 {
                 let t = i as f32 / 64.;
@@ -514,7 +520,20 @@ mod tests {
             assert!((legend.right() + 6. - button.left()).abs() < 1.);
             assert_eq!(legend.top(), button.top());
             assert_eq!(legend.bottom(), button.bottom());
+            assert_eq!(legend.height(), 64.);
             assert!(legend.contains_rect(bar));
+            for shape in &h.output().shapes {
+                if let egui::Shape::Text(text) = &shape.shape
+                    && matches!(text.galley.job.text.as_str(), "Infeasible" | "Missing data")
+                {
+                    assert!(
+                        legend
+                            .contains_rect(
+                                egui::Rect::from_min_size(text.pos, text.galley.size(),)
+                            )
+                    );
+                }
+            }
             assert_eq!(h.get_by_label("Country map").rect(), map);
             h.get_by_label("Color scale").click();
             h.run();
