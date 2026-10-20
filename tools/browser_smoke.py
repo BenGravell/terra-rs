@@ -110,7 +110,7 @@ def main():
                     case "reload":
                         page.reload()
                         ready()
-                        assert settings() == step["settings"]
+                        assert settings() == step["settings"], f"Reload: expected {step['settings']}, got {settings()}"
                     case "resize":
                         page.set_viewport_size({"width": step["width"], "height": step["height"]})
                         page.wait_for_timeout(400)

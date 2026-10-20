@@ -1,4 +1,4 @@
-use crate::model::Settings;
+use crate::model::{Overall, Settings};
 use bevy_egui::egui;
 use egui_kittest::{
     Harness,
@@ -6,141 +6,114 @@ use egui_kittest::{
 };
 
 #[test]
-fn importances_are_independent_and_only_the_last_nonzero_value_stops_at_one() {
-    let mut h = Harness::builder()
-        .with_size(egui::vec2(400., 800.))
-        .build_ui_state(
-            |ui, state| {
-                super::show(ui, state);
-            },
-            Settings::default(),
-        );
-    h.run();
-    h.get_by_label("Culture Fit").focus();
-    h.run();
-    h.key_press(egui::Key::ArrowRight);
-    h.run();
-    assert_eq!(h.state().overall_importances.values(), [6., 5.]);
-    for (label, expected) in [("Culture Fit", [0., 5.]), ("Quality of Life", [0., 1.])] {
-        h.query_all_by_label(label)
-            .find(|node| node.accesskit_node().numeric_value().is_some())
-            .expect("importance slider")
-            .focus();
-        h.run();
-        for _ in 0..12 {
-            h.key_press(egui::Key::ArrowLeft);
-            h.run();
-            h.state().validate().unwrap();
-        }
-        assert_eq!(h.state().overall_importances.values(), expected);
-    }
-    for (label, expected) in [
-        ("Happy Planet", [0., 5., 5.]),
-        ("Social Progress", [0., 0., 5.]),
-        ("Human Freedom", [0., 0., 1.]),
-    ] {
-        h.query_all_by_label(label)
-            .find(|node| node.accesskit_node().numeric_value().is_some())
-            .expect("importance slider")
-            .focus();
-        h.run();
-        for _ in 0..12 {
-            h.key_press(egui::Key::ArrowLeft);
-            h.run();
-            h.state().validate().unwrap();
-        }
-        assert_eq!(h.state().quality_importances.values(), expected);
-    }
-    h.get_by_label("Happy Planet").focus();
-    h.run();
-    for _ in 0..12 {
-        h.key_press(egui::Key::ArrowRight);
-        h.run();
-    }
-    assert_eq!(h.state().quality_importances.values(), [10., 0., 1.]);
-    h.get_by_label("Human Freedom").focus();
-    h.run();
-    h.key_press(egui::Key::ArrowLeft);
-    h.run();
-    assert_eq!(h.state().quality_importances.values(), [10., 0., 0.]);
-}
-
-#[test]
-fn knob_positions_stay_stable_when_peers_reach_zero() {
+fn balance_keyboard_steps_reach_both_extremes_and_reset() {
     let mut h = Harness::builder()
         .with_size(egui::vec2(400., 800.))
         .build_ui_state(
             |ui, settings| {
-                ui.visuals_mut().handle_shape = egui::style::HandleShape::Circle;
                 super::show(ui, settings);
             },
             Settings::default(),
         );
     h.run();
-    let knobs = |h: &Harness<'_, Settings>| {
-        ["Culture Fit", "Happy Planet"].map(|label| {
-            let rect = h.get_by_label(label).rect();
-            h.output()
-                .shapes
-                .iter()
-                .find_map(|shape| {
-                    if let egui::Shape::Circle(circle) = &shape.shape
-                        && rect.contains(circle.center)
-                    {
-                        return Some(circle.center);
-                    }
-                    None
-                })
-                .expect("slider knob")
-        })
-    };
-    let before = knobs(&h);
-    h.state_mut().overall_importances.quality = 0.;
-    h.state_mut().quality_importances.social_progress = 0.;
-    h.state_mut().quality_importances.human_freedom = 0.;
+    h.get_by_label(super::BALANCE_LABEL).focus();
     h.run();
-    assert_eq!(knobs(&h), before);
-    h.state_mut().overall_importances.quality = 5.;
-    h.state_mut().quality_importances.social_progress = 4.;
+    h.key_press(egui::Key::ArrowRight);
     h.run();
-    assert_eq!(knobs(&h), before);
+    assert_eq!(h.state().overall_importances.values(), [4., 6.]);
+    for (key, expected) in [
+        (egui::Key::ArrowLeft, [10., 0.]),
+        (egui::Key::ArrowRight, [0., 10.]),
+    ] {
+        for _ in 0..12 {
+            h.key_press(key);
+            h.run();
+            h.state().validate().unwrap();
+            assert_eq!(
+                h.state().overall_importances.values().iter().sum::<f64>(),
+                10.
+            );
+        }
+        assert_eq!(h.state().overall_importances.values(), expected);
+    }
+    assert_eq!(
+        h.state().quality_importances,
+        Settings::default().quality_importances
+    );
+    h.get_by_label("Reset Weights").click_accesskit();
+    h.run();
+    assert_eq!(h.state(), &Settings::default());
 }
 
 #[test]
-fn importance_help_opens_in_narrow_layout_without_changing_values() {
-    let settings = Settings::default();
+fn saved_overall_weights_keep_their_ratio_until_edited() {
+    let settings = Settings {
+        overall_importances: Overall {
+            culture: 2.,
+            quality: 5.,
+        },
+        ..Settings::default()
+    };
     let mut h = Harness::builder()
-        .with_size(egui::vec2(320., 800.))
+        .with_size(egui::vec2(400., 800.))
         .build_ui_state(
-            |ui, state| {
-                super::show(ui, state);
+            |ui, settings| {
+                super::content(ui, settings);
             },
             settings.clone(),
         );
     h.run();
-    for (name, target) in [
-        ("Culture Fit", "overall"),
-        ("Quality of Life", "overall"),
-        ("Happy Planet", "Quality of Life"),
-        ("Social Progress", "Quality of Life"),
-        ("Human Freedom", "Quality of Life"),
-    ] {
-        let help = super::importance_help(name, target);
-        assert!(h.query_by_label(&help).is_none());
-        let help_label = format!("Help: {name}");
-        let button = h.get_by_label(&help_label);
-        let rect = button.rect();
-        assert!(rect.right() <= 320.);
-        assert!(rect.width() < 32.);
-        assert!((rect.width() - rect.height()).abs() < 1.);
-        button.click();
+    assert_eq!(h.state(), &settings);
+    let value = h
+        .get_by_label(super::BALANCE_LABEL)
+        .accesskit_node()
+        .numeric_value()
+        .unwrap();
+    assert!((value - 50. / 7.).abs() < 1e-6);
+    h.get_by_label(super::BALANCE_LABEL).focus();
+    h.run();
+    h.key_press(egui::Key::ArrowLeft);
+    h.run();
+    assert_eq!(h.state().overall_importances.values(), [4., 6.]);
+    assert_eq!(
+        Settings::decode(&serde_json::to_string(h.state()).unwrap()).unwrap(),
+        *h.state(),
+    );
+}
+
+#[test]
+fn endpoint_annotations_fit_narrow_layouts_and_select_extremes() {
+    for width in [320., 390., 1400.] {
+        let mut h = Harness::builder()
+            .with_size(egui::vec2(width, 900.))
+            .build_ui_state(
+                |ui, settings| {
+                    super::content(ui, settings);
+                },
+                Settings::default(),
+            );
         h.run();
-        let popup = h.get_by_label(&help).rect();
-        assert!(popup.left() >= 0. && popup.right() <= 320.);
-        assert_eq!(h.state().overall_importances, settings.overall_importances);
-        assert_eq!(h.state().quality_importances, settings.quality_importances);
-        h.key_press(egui::Key::Escape);
-        h.run();
-        assert!(h.query_by_label(&help).is_none());
+        let track = h.get_by_label(super::BALANCE_LABEL).rect();
+        assert!(track.left() >= 0. && track.right() <= width);
+        for (name, expected, left) in [
+            ("Culture Fit", [10., 0.], true),
+            ("Quality of Life", [0., 10.], false),
+        ] {
+            let endpoint = h
+                .query_all_by_label(name)
+                .find(|node| node.accesskit_node().role() == egui::accesskit::Role::Button)
+                .unwrap();
+            let rect = endpoint.rect();
+            assert!(rect.left() >= 0. && rect.right() <= width);
+            assert!(if left {
+                rect.right() <= track.center().x
+            } else {
+                rect.left() >= track.center().x
+            });
+            endpoint.click_accesskit();
+            h.run();
+            assert_eq!(h.state().overall_importances.values(), expected);
+            h.state().validate().unwrap();
+        }
     }
 }

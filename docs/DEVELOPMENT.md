@@ -162,10 +162,16 @@ The Quality of Life breakdown shows its three internal weighted terms; applying 
 would also require multiplying by `w_ql`.
 Display rounding never affects calculations.
 
-Importance controls accept integers from 0 to 10 without adjusting peers.
+The overall balance slider stores complementary integer weights from 0 to 10, totaling 10 after an edit.
+Existing saved overall weights are displayed proportionally without rewriting them.
+The Quality of Life triangle snaps pointer and arrow-key edits to the nearest barycentric grid intersection, storing
+integer weights with a constant total.
+Existing saved weights are displayed proportionally without rewriting them.
+Drags outside the triangle snap to the nearest grid intersection on its boundary.
 Validation rejects all-zero groups; scoring divides each importance by its group's sum.
 Culture controls display integer 0–10 values, converted to the underlying 0–100 scale when edited.
-Regression cases live in [src/ui/weights_test.rs](../src/ui/weights_test.rs).
+Regression cases live in [src/ui/weights_test.rs](../src/ui/weights_test.rs) and
+[src/ui/quality_triangle_test.rs](../src/ui/quality_triangle_test.rs).
 
 Semantics:
 

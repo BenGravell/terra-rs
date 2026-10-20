@@ -36,10 +36,18 @@ The two areas scroll independently.
 - **Start from a country:** copy a reference country's cultural preferences or quality-of-life minimums.
 - **Reset:** restore all default settings.
 
-Importances are independent integers from 0 to 10.
-Changing one leaves the others unchanged.
-Each group must have at least one nonzero importance; the last nonzero slider stops at 1.
-The scoring model normalizes each group internally (for example, 2/3/5 becomes 20%/30%/50%).
+The overall balance slider runs from 100% Culture Fit on the left to 100% Quality of Life on the right.
+It adjusts both shares in 10% steps; the midpoint gives each 50%.
+The endpoint icons and labels also select their respective extremes.
+For Quality of Life, drag the point inside the triangle: Happy Planet is at the top, Social Progress at the lower left,
+and Human Freedom at the lower right.
+Each corner gives that preference 100%; the center gives all three equal shares.
+Grid lines mark 10% steps, and the highlighted lines show the selected shares, constant along lines parallel to the
+opposite edge.
+Dragging snaps to the nearest grid intersection, keeping the shares in 10% increments and totaling 100%.
+Click a corner label to select that extreme, or focus the triangle and use arrow keys (Shift for larger steps).
+Home restores equal shares.
+The scoring model normalizes each group internally; existing saved importances retain their proportions.
 
 Active minimum constraints require a value strictly above the minimum.
 Active temperature and sunshine ranges require values strictly inside the bounds.

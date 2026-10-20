@@ -14,6 +14,7 @@ mod icons;
 mod layout;
 mod map;
 mod persistence;
+mod quality_triangle;
 mod ranking;
 mod reference;
 mod results_summary;

@@ -1,6 +1,8 @@
 use crate::model::Settings;
 use bevy_egui::egui;
 
+const BALANCE_LABEL: &str = "Culture Fit vs Quality of Life";
+
 pub(super) fn show(ui: &mut egui::Ui, settings: &mut Settings) -> bool {
     super::icons::section("Weights", true)
         .show(ui, |ui| {
@@ -17,64 +19,55 @@ pub(super) fn show(ui: &mut egui::Ui, settings: &mut Settings) -> bool {
 
 pub(super) fn content(ui: &mut egui::Ui, settings: &mut Settings) {
     ui.label("Overall Score");
-    let overall = &mut settings.overall_importances;
-    weight_slider(
-        ui,
-        "Culture Fit",
-        "overall",
-        &mut overall.culture,
-        &mut [&mut overall.quality],
-    );
-    weight_slider(
-        ui,
-        "Quality of Life",
-        "overall",
-        &mut overall.quality,
-        &mut [&mut overall.culture],
-    );
+    let share = settings.quality_weight();
+    let mut quality = if share.is_finite() {
+        (share * 10.).clamp(0., 10.)
+    } else {
+        5.
+    };
+    let slider = ui
+        .scope(|ui| {
+            ui.spacing_mut().slider_width = ui.available_width();
+            ui.add(
+                egui::Slider::new(&mut quality, 0. ..=10.)
+                    .integer()
+                    .clamping(egui::SliderClamping::Edits)
+                    .show_value(false)
+                    .handle_shape(egui::style::HandleShape::Circle),
+            )
+        })
+        .inner
+        .on_hover_text("Left: only Culture Fit. Right: only Quality of Life.");
+    slider.widget_info(|| egui::WidgetInfo::slider(ui.is_enabled(), quality, BALANCE_LABEL));
+    if slider.changed() {
+        settings.overall_importances.culture = 10. - quality;
+        settings.overall_importances.quality = quality;
+    }
+    let (labels, _) =
+        ui.allocate_exact_size(egui::vec2(ui.available_width(), 40.), egui::Sense::hover());
+    let size = egui::vec2((labels.width() / 2.).min(140.), 40.);
+    for (name, rect, share, value) in [
+        (
+            "Culture Fit",
+            egui::Rect::from_min_size(labels.min, size),
+            1. - quality / 10.,
+            0.,
+        ),
+        (
+            "Quality of Life",
+            egui::Rect::from_min_size(labels.right_top() - egui::vec2(size.x, 0.), size),
+            quality / 10.,
+            10.,
+        ),
+    ] {
+        if super::icons::preference(ui, rect, name, share).clicked() {
+            settings.overall_importances.culture = 10. - value;
+            settings.overall_importances.quality = value;
+        }
+    }
     ui.separator();
     ui.label("Quality of Life");
-    let quality = &mut settings.quality_importances;
-    weight_slider(
-        ui,
-        "Happy Planet",
-        "Quality of Life",
-        &mut quality.happy_planet,
-        &mut [&mut quality.social_progress, &mut quality.human_freedom],
-    );
-    weight_slider(
-        ui,
-        "Social Progress",
-        "Quality of Life",
-        &mut quality.social_progress,
-        &mut [&mut quality.happy_planet, &mut quality.human_freedom],
-    );
-    weight_slider(
-        ui,
-        "Human Freedom",
-        "Quality of Life",
-        &mut quality.human_freedom,
-        &mut [&mut quality.happy_planet, &mut quality.social_progress],
-    );
-}
-
-fn weight_slider(
-    ui: &mut egui::Ui,
-    name: &str,
-    target: &str,
-    selected: &mut f64,
-    peers: &mut [&mut f64],
-) {
-    let help = importance_help(name, target);
-    if super::slider::row(ui, name, &help, selected, 0.0..=10.0, "", false).changed()
-        && peers.iter().all(|value| **value == 0.)
-    {
-        *selected = selected.max(1.);
-    }
-}
-
-fn importance_help(name: &str, target: &str) -> String {
-    format!("How much {name} contributes to the {target} score.")
+    super::quality_triangle::show(ui, &mut settings.quality_importances);
 }
 
 pub(super) fn reset(settings: &mut Settings) {

@@ -79,10 +79,10 @@ fn browser_smoke_contract() {
     reload(&mut h, &mut steps);
     click(&mut h, &mut steps, "Reset Culture", false);
     assert_eq!(h.state().settings, initial);
-    click(&mut h, &mut steps, "Culture Fit", true);
+    click(&mut h, &mut steps, "Culture Fit vs Quality of Life", true);
     let weights = &h.state().settings.overall_importances;
-    assert!(weights.culture > 5.);
-    assert_eq!(weights.quality, initial.overall_importances.quality);
+    assert!(weights.quality > 5.);
+    assert_eq!(weights.culture + weights.quality, 10.);
     assert!(
         [weights.culture, weights.quality]
             .iter()
@@ -91,6 +91,19 @@ fn browser_smoke_contract() {
     reload(&mut h, &mut steps);
     click(&mut h, &mut steps, "Culture", false);
     assert!(h.query_by_label("Power Distance").is_none());
+    click(
+        &mut h,
+        &mut steps,
+        "Quality of Life weights triangle",
+        false,
+    );
+    assert!(
+        h.state().settings.quality_importances.happy_planet
+            > h.state().settings.quality_importances.social_progress
+    );
+    steps.push(Step::Screenshot { name: "triangle" });
+    reload(&mut h, &mut steps);
+    click(&mut h, &mut steps, "Culture", false);
     click(&mut h, &mut steps, "Reset Weights", false);
     assert_eq!(h.state().settings, initial);
     resize(&mut h, &mut steps, 390, 844);
@@ -100,6 +113,18 @@ fn browser_smoke_contract() {
     steps.push(Step::Screenshot {
         name: "narrow-settings",
     });
+    click(&mut h, &mut steps, "Weights", false);
+    click(&mut h, &mut steps, "Table", false);
+    click(
+        &mut h,
+        &mut steps,
+        "Quality of Life weights triangle",
+        false,
+    );
+    steps.push(Step::Screenshot {
+        name: "narrow-triangle",
+    });
+    reload(&mut h, &mut steps);
     if let Some(path) = std::env::var_os("TERRA_SMOKE_PLAN") {
         std::fs::write(path, serde_json::to_vec_pretty(&steps).unwrap()).unwrap();
     }
