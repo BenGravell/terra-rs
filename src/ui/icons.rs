@@ -48,8 +48,15 @@ pub(super) fn preference(
     name: &str,
     share: f64,
 ) -> egui::Response {
-    let text = format!("{name}\n{:.0}%", share * 100.);
-    let icon = preference_icon(name, ui.visuals().text_color());
+    let compact = rect.width() < 120.;
+    let label = if compact {
+        name.replace(' ', "\n")
+    } else {
+        name.to_owned()
+    };
+    let text = format!("{label}\n{:.0}%", share * 100.);
+    let icon = preference_icon(name, ui.visuals().text_color())
+        .fit_to_exact_size(egui::Vec2::splat(if compact { 16. } else { 32. }));
     let response = ui
         .put(
             rect,

@@ -96,7 +96,6 @@ pub(super) fn settings(root: &mut egui::Ui, app: &mut TerraApp) {
         let (mut tab, mut open) = root
             .ctx()
             .data_mut(|data| data.get_temp::<(usize, bool)>(id).unwrap_or((0, true)));
-        let height = (root.available_height() * 0.48).min(420.);
         egui::Panel::bottom("settings_tabs")
             .resizable(false)
             .show(root, |ui| {
@@ -116,8 +115,13 @@ pub(super) fn settings(root: &mut egui::Ui, app: &mut TerraApp) {
             data.get_temp::<bool>(egui::Id::new("mobile_results_open"))
                 .unwrap_or(true)
         });
+        let available_height = root.available_height();
+        let split_id = egui::Id::new("mobile_settings_split");
+        let mut split = root
+            .ctx()
+            .data_mut(|data| data.get_temp::<f32>(split_id).unwrap_or(0.65));
         let drawer_height = if results_open {
-            (height - 60.).max(0.)
+            available_height * split
         } else {
             root.available_height()
         };
@@ -125,6 +129,41 @@ pub(super) fn settings(root: &mut egui::Ui, app: &mut TerraApp) {
             .exact_size(drawer_height)
             .resizable(false)
             .show_collapsible(root, &mut open, |ui| {
+                if results_open {
+                    let (rect, response) = ui.allocate_exact_size(
+                        egui::vec2(ui.available_width(), 24.),
+                        egui::Sense::drag(),
+                    );
+                    let response = response.on_hover_cursor(egui::CursorIcon::ResizeVertical);
+                    response.widget_info(|| {
+                        egui::WidgetInfo::labeled(
+                            egui::WidgetType::Slider,
+                            ui.is_enabled(),
+                            "Resize settings and results",
+                        )
+                    });
+                    let keyboard_delta = if response.has_focus() {
+                        ui.input(|input| {
+                            (input.num_presses(egui::Key::ArrowDown) as f32
+                                - input.num_presses(egui::Key::ArrowUp) as f32)
+                                * 20.
+                        })
+                    } else {
+                        0.
+                    };
+                    let delta = response.drag_delta().y + keyboard_delta;
+                    if delta != 0. {
+                        split = (split - delta / available_height.max(1.)).clamp(0.25, 0.8);
+                        ui.ctx().data_mut(|data| data.insert_temp(split_id, split));
+                        ui.ctx().request_repaint();
+                    }
+                    let visuals = ui.style().interact(&response);
+                    ui.painter().rect_filled(
+                        egui::Rect::from_center_size(rect.center(), egui::vec2(40., 4.)),
+                        2.,
+                        visuals.fg_stroke.color,
+                    );
+                }
                 settings::mobile_content(
                     ui,
                     &app.data.countries,

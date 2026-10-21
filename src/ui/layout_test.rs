@@ -509,7 +509,9 @@ fn mobile_table_fills_results_height() {
             })
             .unwrap();
         assert!(
-            table_bottom >= height * 0.5 - 24. && table_bottom <= settings_top,
+            table_bottom >= height * 0.25
+                && table_bottom <= height * 0.5
+                && table_bottom <= settings_top,
             "table bottom {table_bottom}, settings top {settings_top} at {width}x{height}"
         );
     }
@@ -629,4 +631,32 @@ fn mobile_landing_is_centered_only_when_both_drawers_are_closed() {
         h.run();
         assert!(h.query_by_label(prompt).is_none());
     }
+}
+
+#[test]
+fn mobile_split_can_be_dragged_and_survives_tab_changes() {
+    let mut h = harness(390.);
+    h.run();
+    let label = "Resize settings and results";
+    let start = h.get_by_label(label).rect().center();
+    let target = start + egui::vec2(0., 80.);
+    h.hover_at(start);
+    h.run();
+    h.drag_at(start);
+    h.run();
+    h.hover_at(target);
+    h.run();
+    h.drop_at(target);
+    h.run();
+    let moved = h.get_by_label(label).rect().center().y;
+    assert!((moved - start.y - 80.).abs() < 2.);
+    h.get_by_label("Map").click();
+    h.run();
+    assert!((h.get_by_label(label).rect().center().y - moved).abs() < 2.);
+    h.get_by_label("Map").click();
+    h.run();
+    assert!(h.query_by_label(label).is_none());
+    h.get_by_label("Map").click();
+    h.run();
+    assert!((h.get_by_label(label).rect().center().y - moved).abs() < 2.);
 }

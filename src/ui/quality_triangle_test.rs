@@ -90,6 +90,24 @@ fn pointer_keyboard_corners_and_reset_update_persistable_weights() {
     let plot = h.get_by_label(LABEL).rect();
     assert!(plot.left() >= 0. && plot.right() <= 320.);
     let vertices = vertices(plot);
+    assert!(plot.height() < 180.);
+    for (index, name) in super::super::theme::QUALITY_NAMES
+        .iter()
+        .enumerate()
+        .skip(1)
+    {
+        let label = h.get_by_label(name).rect();
+        assert!((0. ..=12.).contains(&(vertices[index].y - label.bottom())));
+        let side = vertices[0].lerp(
+            vertices[index],
+            (label.bottom() - vertices[0].y) / (vertices[index].y - vertices[0].y),
+        );
+        if index == 1 {
+            assert!(label.right() < side.x);
+        } else {
+            assert!(label.left() > side.x);
+        }
+    }
     let target = position(vertices, [0.23, 0.28, 0.49]);
     h.hover_at(target);
     h.run();

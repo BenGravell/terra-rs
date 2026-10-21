@@ -5,15 +5,23 @@ const LABEL: &str = "Quality of Life weights triangle";
 const HELP: &str = "Drag the point to balance your preferences in 10% steps. Each corner is 100% of that preference. Lines parallel to the opposite edge have a constant share. Use arrow keys to move the point; Home restores equal shares.";
 
 pub(super) fn show(ui: &mut egui::Ui, quality: &mut Quality) {
-    let width = ui.available_width().min(300.);
+    let mobile = ui.ctx().content_rect().width() < 850.;
+    let area_width = ui.available_width().min(300.);
+    let width = if mobile {
+        (area_width - 180.).max(80.)
+    } else {
+        area_width
+    };
+    let top = 42.;
+    let padding = if mobile { 58. } else { 100. };
     let height = (width - 16.) * 3_f32.sqrt() / 2.;
     let (slot, _) = ui.allocate_exact_size(
-        egui::vec2(ui.available_width(), height + 100.),
+        egui::vec2(ui.available_width(), height + padding),
         egui::Sense::hover(),
     );
-    let area = Rect::from_center_size(slot.center(), egui::vec2(width, height + 100.));
+    let area = Rect::from_center_size(slot.center(), egui::vec2(area_width, height + padding));
     let plot = Rect::from_min_size(
-        area.min + egui::vec2(0., 42.),
+        egui::pos2(area.center().x - width / 2., area.top() + top),
         egui::vec2(width, height + 16.),
     );
     let vertices = vertices(plot);
@@ -66,19 +74,28 @@ pub(super) fn show(ui: &mut egui::Ui, quality: &mut Quality) {
     }
 
     let colors = super::theme::quality_colors();
-    let label_width = (width / 2.).min(140.);
+    let label_width = if mobile {
+        90.
+    } else {
+        (area_width / 2.).min(140.)
+    };
+    let side_label_top = if mobile {
+        vertices[1].y - 56.
+    } else {
+        plot.bottom()
+    };
     let label_rects = [
         Rect::from_center_size(
             egui::pos2(area.center().x, area.top() + 20.),
-            egui::vec2(label_width, 40.),
+            egui::vec2((area_width / 2.).min(140.), 40.),
         ),
         Rect::from_min_size(
-            egui::pos2(area.left(), plot.bottom()),
-            egui::vec2(label_width, 40.),
+            egui::pos2(area.left(), side_label_top),
+            egui::vec2(label_width, if mobile { 48. } else { 40. }),
         ),
         Rect::from_min_size(
-            egui::pos2(area.right() - label_width, plot.bottom()),
-            egui::vec2(label_width, 40.),
+            egui::pos2(area.right() - label_width, side_label_top),
+            egui::vec2(label_width, if mobile { 48. } else { 40. }),
         ),
     ];
     for (i, name) in super::theme::QUALITY_NAMES.iter().enumerate() {
