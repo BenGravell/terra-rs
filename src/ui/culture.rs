@@ -1,13 +1,19 @@
-use crate::model::Culture;
+use crate::model::{Country, Culture, Settings};
 use bevy_egui::egui;
 
-pub(super) fn show(ui: &mut egui::Ui, culture: &mut Culture) -> bool {
+pub(super) fn show(
+    ui: &mut egui::Ui,
+    countries: &[Country],
+    settings: &mut Settings,
+    reference: &mut Option<usize>,
+    revision: &mut u64,
+) -> bool {
     super::icons::section("Culture", true)
         .show(ui, |ui| {
-            content(ui, culture);
-            let clicked = super::settings::reset_button(ui, "Culture");
+            content(ui, &mut settings.culture);
+            let clicked = actions(ui, countries, settings, reference, revision);
             if clicked {
-                reset(culture);
+                reset(&mut settings.culture);
             }
             clicked
         })
@@ -65,3 +71,18 @@ pub(super) fn reset(culture: &mut Culture) {
 #[cfg(test)]
 #[path = "culture_test.rs"]
 mod tests;
+
+pub(super) fn actions(
+    ui: &mut egui::Ui,
+    countries: &[Country],
+    settings: &mut Settings,
+    reference: &mut Option<usize>,
+    revision: &mut u64,
+) -> bool {
+    super::settings::action_row(ui, "Culture", |ui| {
+        if super::reference::content(ui, countries, reference, "Copy culture from country…") {
+            settings.use_culture(&countries[reference.unwrap()]);
+            *revision += 1;
+        }
+    })
+}

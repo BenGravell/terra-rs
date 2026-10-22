@@ -100,11 +100,9 @@ pub(super) fn settings(root: &mut egui::Ui, app: &mut TerraApp) {
             .resizable(false)
             .show(root, |ui| {
                 let mut selected = if open { tab } else { usize::MAX };
-                if let Some(clicked) = tab_selector(
-                    ui,
-                    &mut selected,
-                    &["Culture", "Weights", "Filters", "Presets"],
-                ) {
+                if let Some(clicked) =
+                    tab_selector(ui, &mut selected, &["Culture", "Weights", "Filters"])
+                {
                     open = !open || clicked != tab;
                     tab = clicked;
                 }
@@ -131,7 +129,7 @@ pub(super) fn settings(root: &mut egui::Ui, app: &mut TerraApp) {
             .show_collapsible(root, &mut open, |ui| {
                 if results_open {
                     let (rect, response) = ui.allocate_exact_size(
-                        egui::vec2(ui.available_width(), 24.),
+                        egui::vec2(ui.available_width(), 8.),
                         egui::Sense::drag(),
                     );
                     let response = response.on_hover_cursor(egui::CursorIcon::ResizeVertical);

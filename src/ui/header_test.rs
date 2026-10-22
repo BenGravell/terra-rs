@@ -83,9 +83,7 @@ fn tab_icons_fit_to_the_left_of_labels_on_small_screens() {
     for width in [320., 390., 844.] {
         let mut h = harness(width);
         h.run();
-        for label in [
-            "Table", "Map", "About", "Culture", "Weights", "Filters", "Presets",
-        ] {
+        for label in ["Table", "Map", "About", "Culture", "Weights", "Filters"] {
             let button = h.get_by_label(label).rect();
             let text = h
                 .output()

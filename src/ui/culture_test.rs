@@ -8,7 +8,7 @@ fn culture_help_opens_on_click_in_narrow_layout() {
         .with_size(egui::vec2(320., 800.))
         .build_ui_state(
             |ui, state| {
-                super::show(ui, state);
+                super::content(ui, state);
             },
             culture,
         );
@@ -63,7 +63,7 @@ fn help_buttons_are_small_and_beside_labels() {
             .build_ui_state(
                 |ui, culture| {
                     crate::ui::theme::apply(ui.ctx());
-                    super::show(ui, culture);
+                    super::content(ui, culture);
                 },
                 crate::model::Settings::default().culture,
             );
@@ -114,7 +114,7 @@ fn culture_sliders_use_integer_minus_five_to_five_values() {
         .with_size(egui::vec2(400., 800.))
         .build_ui_state(
             |ui, state| {
-                super::show(ui, state);
+                super::content(ui, state);
             },
             crate::model::Settings::default().culture,
         );

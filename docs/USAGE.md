@@ -33,7 +33,9 @@ The two areas scroll independently.
   Social Progress, and Human Freedom within Quality of Life.
 - **Constraints:** set minimum scores, a minimum English-speaking ratio, temperature and sunshine ranges, and allowed
   continents.
-- **Start from a country:** copy a reference country's cultural preferences or quality-of-life minimums.
+- **Start from a country:** use **Copy culture from country…** beside Reset Culture or **Copy minimums from country…**
+  beside Reset Filters.
+  Search and select a country to apply its values immediately.
 - **Reset:** restore all default settings.
 
 The overall balance slider runs from 100% Culture Fit on the left to 100% Quality of Life on the right.

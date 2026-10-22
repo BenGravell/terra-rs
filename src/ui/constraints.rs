@@ -1,11 +1,17 @@
-use crate::model::Settings;
+use crate::model::{Country, Settings};
 use bevy_egui::egui;
 
-pub(super) fn show(ui: &mut egui::Ui, settings: &mut Settings) -> bool {
+pub(super) fn show(
+    ui: &mut egui::Ui,
+    countries: &[Country],
+    settings: &mut Settings,
+    reference: &mut Option<usize>,
+    revision: &mut u64,
+) -> bool {
     super::icons::section("Filters", false)
         .show(ui, |ui| {
             content(ui, settings);
-            let clicked = super::settings::reset_button(ui, "Filters");
+            let clicked = actions(ui, countries, settings, reference, revision);
             if clicked {
                 reset(settings);
             }
@@ -16,19 +22,24 @@ pub(super) fn show(ui: &mut egui::Ui, settings: &mut Settings) -> bool {
 }
 
 pub(super) fn content(ui: &mut egui::Ui, settings: &mut Settings) {
-    let minimums = &mut settings.minimums;
     ui.label("Overall Score");
     for (label, value) in [
-        ("Culture Fit Minimum", &mut minimums.culture),
-        ("Quality of Life Minimum", &mut minimums.quality),
+        ("Culture Fit Minimum", &mut settings.minimums.culture),
+        ("Quality of Life Minimum", &mut settings.minimums.quality),
     ] {
         percentage(ui, label, value);
     }
     ui.label("Quality of Life");
     for (label, value) in [
-        ("Happy Planet Minimum", &mut minimums.happy_planet),
-        ("Social Progress Minimum", &mut minimums.social_progress),
-        ("Human Freedom Minimum", &mut minimums.human_freedom),
+        ("Happy Planet Minimum", &mut settings.minimums.happy_planet),
+        (
+            "Social Progress Minimum",
+            &mut settings.minimums.social_progress,
+        ),
+        (
+            "Human Freedom Minimum",
+            &mut settings.minimums.human_freedom,
+        ),
     ] {
         percentage(ui, label, value);
     }
@@ -92,4 +103,19 @@ pub(super) fn reset(settings: &mut Settings) {
     settings.temperature = defaults.temperature;
     settings.sunshine = defaults.sunshine;
     settings.continents = defaults.continents;
+}
+
+pub(super) fn actions(
+    ui: &mut egui::Ui,
+    countries: &[Country],
+    settings: &mut Settings,
+    reference: &mut Option<usize>,
+    revision: &mut u64,
+) -> bool {
+    super::settings::action_row(ui, "Filters", |ui| {
+        if super::reference::content(ui, countries, reference, "Copy minimums from country…") {
+            settings.use_quality_thresholds(&countries[reference.unwrap()]);
+            *revision += 1;
+        }
+    })
 }

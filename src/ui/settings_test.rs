@@ -1,7 +1,7 @@
 use crate::model::Settings;
 use crate::ui::test_support::harness;
 use bevy_egui::egui;
-use egui_kittest::kittest::Queryable;
+use egui_kittest::kittest::{NodeT, Queryable};
 
 #[test]
 fn settings_changes_update_results_and_reset_restores_defaults() {
@@ -27,11 +27,11 @@ fn mobile_tabs_fill_bottom_row_and_switch_sections() {
         h.set_size(egui::vec2(width, height));
         h.run();
         let first = h.get_by_label("Culture").rect();
-        let last = h.get_by_label("Presets").rect();
+        let last = h.get_by_label("Filters").rect();
         assert!(first.left() <= 10.);
         assert!(last.right() >= width - 10.);
         assert!(last.bottom() >= height - 10. && last.bottom() <= height);
-        for label in ["Weights", "Filters", "Presets"] {
+        for label in ["Weights", "Filters"] {
             let rect = h.get_by_label(label).rect();
             assert!(
                 (rect.width() - first.width()).abs() <= 1.,
@@ -47,10 +47,8 @@ fn mobile_tabs_fill_bottom_row_and_switch_sections() {
         h.get_by_label("Filters").click();
         h.run();
         assert!(h.query_by_label("Culture Fit Minimum").is_some());
-        assert_eq!(h.get_by_label("Presets").rect(), last);
-        h.get_by_label("Presets").click();
-        h.run();
-        assert!(h.query_by_label("Use Culture Preferences").is_some());
+        assert_eq!(h.get_by_label("Filters").rect(), last);
+        assert!(h.query_by_value("Copy minimums from country…").is_some());
         h.get_by_label("Culture").click();
         h.run();
         assert!(h.query_by_label("Power Distance").is_some());
@@ -60,7 +58,7 @@ fn mobile_tabs_fill_bottom_row_and_switch_sections() {
 #[test]
 fn resets_only_change_their_own_section_on_mobile_and_desktop() {
     for width in [390., 1400.] {
-        for section in ["Culture", "Weights", "Filters", "Presets"] {
+        for section in ["Culture", "Weights", "Filters"] {
             let mut h = harness(width);
             h.run();
             let mut changed = Settings::default();
@@ -73,7 +71,8 @@ fn resets_only_change_their_own_section_on_mobile_and_desktop() {
             changed.sunshine.min = 5.;
             changed.continents = vec!["Europe".into()];
             h.state_mut().settings = changed.clone();
-            h.state_mut().reference = Some(0);
+            h.state_mut().reference.culture = Some(0);
+            h.state_mut().reference.quality = Some(1);
             h.run();
             if width < 850. {
                 if section != "Culture" {
@@ -81,8 +80,6 @@ fn resets_only_change_their_own_section_on_mobile_and_desktop() {
                 }
             } else if section == "Filters" {
                 h.get_by_label("Filters").click_accesskit();
-            } else if section == "Presets" {
-                h.get_by_label("Presets").click_accesskit();
             }
             h.run();
             h.get_by_label(&format!("Reset {section}"))
@@ -105,10 +102,8 @@ fn resets_only_change_their_own_section_on_mobile_and_desktop() {
                 _ => {}
             }
             assert_eq!(h.state().settings, changed, "{section} at {width}");
-            assert_eq!(
-                h.state().reference,
-                if section == "Presets" { None } else { Some(0) }
-            );
+            assert_eq!(h.state().reference.culture, Some(0));
+            assert_eq!(h.state().reference.quality, Some(1));
         }
     }
 }
@@ -131,21 +126,36 @@ fn local_reset_discards_focused_numeric_edits() {
 }
 
 #[test]
-fn mobile_reset_is_full_width_and_pinned_above_tabs() {
+fn mobile_actions_share_a_row_and_stay_pinned_above_tabs() {
     for (width, height) in [(320., 568.), (390., 844.)] {
         let mut h = harness(width);
         h.set_size(egui::vec2(width, height));
         h.run();
-        for section in ["Culture", "Weights", "Filters", "Presets"] {
+        for section in ["Culture", "Weights", "Filters"] {
             if section != "Culture" {
                 h.get_by_label(section).click();
             }
             h.run();
             let reset = h.get_by_label(&format!("Reset {section}")).rect();
             let first_tab = h.get_by_label("Culture").rect();
-            let last_tab = h.get_by_label("Presets").rect();
-            assert!((reset.left() - first_tab.left()).abs() < 1.);
-            assert!((reset.right() - last_tab.right()).abs() < 1.);
+            let last_tab = h.get_by_label("Filters").rect();
+            if section == "Weights" {
+                assert!((reset.left() - first_tab.left()).abs() < 1.);
+            } else {
+                let prompt = if section == "Culture" {
+                    "Copy culture from country…"
+                } else {
+                    "Copy minimums from country…"
+                };
+                let copy = h.get_by_value(prompt).rect();
+                assert!((copy.left() - first_tab.left()).abs() < 1.);
+                assert!(copy.right() < reset.left());
+                assert!(copy.top() < reset.bottom() && reset.top() < copy.bottom());
+            }
+            assert!(
+                (reset.right() - last_tab.right()).abs() < 1.,
+                "{section} {width} reset {reset:?} tab {last_tab:?}"
+            );
             assert!((0. ..=24.).contains(&(first_tab.top() - reset.bottom())));
         }
     }
@@ -156,7 +166,7 @@ fn desktop_sections_use_mobile_names_and_icons() {
     let mut h = harness(1400.);
     h.set_size(egui::vec2(1400., 1600.));
     h.run();
-    for label in ["Culture", "Weights", "Filters", "Presets"] {
+    for label in ["Culture", "Weights", "Filters"] {
         let header = h.get_by_label(label).rect();
         assert!(
             h.output().shapes.iter().any(|shape| {
@@ -178,7 +188,7 @@ fn mobile_settings_tabs_toggle_drawer() {
     assert!(h.query_by_label("Power Distance").is_none());
     assert!(h.query_by_label("Reset Culture").is_none());
     assert_eq!(h.get_by_label("Culture").rect(), tabs);
-    for section in ["Culture", "Weights", "Filters", "Presets"] {
+    for section in ["Culture", "Weights", "Filters"] {
         h.get_by_label(section).click();
         h.run();
         assert!(h.query_by_label(&format!("Reset {section}")).is_some());
@@ -186,5 +196,66 @@ fn mobile_settings_tabs_toggle_drawer() {
         h.run();
         assert!(h.query_by_label(&format!("Reset {section}")).is_none());
         assert_eq!(h.get_by_label("Culture").rect(), tabs);
+    }
+}
+
+#[test]
+fn country_shortcuts_apply_from_their_sections() {
+    for width in [390., 1400.] {
+        let mut h = harness(width);
+        h.set_size(egui::vec2(width, 2400.));
+        h.run();
+        assert!(h.query_by_label("Presets").is_none());
+        let index = h
+            .state()
+            .data
+            .countries
+            .iter()
+            .position(|c| c.name == "Sweden")
+            .unwrap();
+        let country = h.state().data.countries[index].clone();
+        let mut expected = Settings::default();
+        expected.use_culture(&country);
+        h.get_by_value("Copy culture from country…").click();
+        h.run();
+        h.event(egui::Event::Text("Sweden".into()));
+        h.run();
+        h.query_all_by_label("Sweden")
+            .find(|node| node.accesskit_node().role() == egui::accesskit::Role::Button)
+            .unwrap()
+            .click();
+        h.run();
+        assert_eq!(h.state().settings, expected);
+        h.get_by_label("Filters").click_accesskit();
+        h.run();
+        let germany = h
+            .state()
+            .data
+            .countries
+            .iter()
+            .find(|c| c.name == "Germany")
+            .unwrap()
+            .clone();
+        expected.use_quality_thresholds(&germany);
+        h.get_by_value("Copy minimums from country…").click();
+        h.run();
+        h.event(egui::Event::Text("Germany".into()));
+        h.run();
+        h.query_all_by_label("Germany")
+            .find(|node| node.accesskit_node().role() == egui::accesskit::Role::Button)
+            .unwrap()
+            .click();
+        h.run();
+        assert_eq!(h.state().settings, expected);
+        if width >= 850. {
+            h.get_by_label("Filters").click_accesskit();
+            h.run();
+        }
+        assert!(h.query_by_value("Copy minimums from country…").is_some());
+        if width < 850. {
+            h.get_by_label("Culture").click();
+            h.run();
+        }
+        assert!(h.query_by_value("Copy culture from country…").is_some());
     }
 }

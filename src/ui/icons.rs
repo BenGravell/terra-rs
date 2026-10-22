@@ -8,7 +8,6 @@ pub(super) fn tab(label: &str, color: egui::Color32, size: f32) -> egui::Image<'
         "Culture" => egui::include_image!("../../assets/icons/lucide/users.svg"),
         "Weights" => egui::include_image!("../../assets/icons/lucide/sliders-horizontal.svg"),
         "Filters" => egui::include_image!("../../assets/icons/lucide/list-filter.svg"),
-        "Presets" => egui::include_image!("../../assets/icons/lucide/bookmark.svg"),
         _ => unreachable!("unknown tab: {label}"),
     };
     egui::Image::new(source)
@@ -55,8 +54,7 @@ pub(super) fn preference(
         name.to_owned()
     };
     let text = format!("{label}\n{:.0}%", share * 100.);
-    let icon = preference_icon(name, ui.visuals().text_color())
-        .fit_to_exact_size(egui::Vec2::splat(if compact { 16. } else { 32. }));
+    let icon = preference_icon(name, ui.visuals().text_color());
     let response = ui
         .put(
             rect,
